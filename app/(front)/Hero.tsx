@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from "./SearchBar"
+import TransitionText from './TransitionText';
 
 const HeroSection= () => {
   return (
@@ -12,6 +13,9 @@ const HeroSection= () => {
           <p className="lg:text-2xl lg:text-start text-sm text-center">
              Simply create an account to find a doctor <br/> that is just a stone throw away
           </p>
+           <button className="bg-blue-800  hover:bg-blue-700 mt-6 text-white font-sm py-2 px-4 rounded-md">
+               Get Started
+            </button>
           <div className='xl:mr-[250px] mt-10'>
             <SearchBar  />
           </div>

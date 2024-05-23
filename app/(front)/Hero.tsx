@@ -19,7 +19,21 @@ const HeroSection= () => {
           <div className='xl:mr-[250px] mt-10'>
             <SearchBar  />
           </div>
-
+          <div className='flex items-center gap-6 pt-6 '>
+          <div className='py-4 flex gap-4'>
+              <div className='flex flex-col'>
+                 <span className='font-bold text-gray-50 text-center'> 165 </span>
+                 <span className='font-bold text-gray-300'> Active Specialists </span>
+              </div>
+          </div>
+          <div className='py-4 flex gap-4'>
+              <div className='flex flex-col'>
+                 <span className='font-bold text-gray-50 text-center'> 1000 </span>
+                 <span className='font-bold text-gray-300'> Active Patients </span>
+              </div>
+          </div>
+          </div>
+          
         </div>
         <div className="mt-10">
           <img

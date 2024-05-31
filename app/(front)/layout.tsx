@@ -6,10 +6,12 @@ export default function Layout ({children}:{children:React.ReactNode}) {
   return (
     <div> 
        <Navbar />
-       <div className="max-w-5xl mx-auto py-3">
+       <div className="max-w-5xl mx-auto py-2 fixed top-20 left-3 z-50">
            <MegaMenu  />
          </div>
-        {children}
+        <div className='mt-[150px]'>
+          {children}
+        </div>
      </div>
   )
 }

@@ -141,12 +141,12 @@ const topMenu =[
 
 export default function MegaMenu() {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="bg-opacity-5">
       <NavigationMenuList className="space-x-4">
         {
             topMenu.map((item, i)=>{
                 return (
-                <NavigationMenuItem  className="mr-3" key={i}>
+                <NavigationMenuItem  className="mr-3 " key={i}>
                 <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
                 <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">

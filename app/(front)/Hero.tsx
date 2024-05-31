@@ -4,7 +4,7 @@ import TransitionText from './TransitionText';
 
 const HeroSection= () => {
   return (
-    <div className="bg-yellow-600 " >
+    <div className="bg-yellow-600  xl:mt-[150px] " >
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 min-h-lvh   lg:py-14 lg:px-14 p-8  ">
         <div className="text-white mt-10 ">
           <p className="lg:text-5xl lg:text-start text-3xl text-center font-bold">
@@ -13,7 +13,7 @@ const HeroSection= () => {
           <p className="lg:text-2xl lg:text-start text-sm text-center">
              Simply create an account to find a doctor <br/> that is just a stone throw away
           </p>
-           <button className="bg-blue-800  hover:bg-blue-700 mt-6 text-white font-sm py-2 px-4 rounded-md">
+           <button className="bg-yellow-800  hover:bg-yellow-700 mt-6 text-white font-sm py-2 px-4 rounded-md">
                Get Started
             </button>
           <div className='xl:mr-[250px] mt-10'>

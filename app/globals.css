@@ -75,3 +75,10 @@
       min-height: 100vh;
     }
   }
+
+  .linear-bg{
+    background-image: linear-gradient(to right,brown,chocolate,transparent),url("https://img.freepik.com/premium-photo/flat-icons-medicine-healthcare-design-flyers-poster-banner_169016-45424.jpg?w=740");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }

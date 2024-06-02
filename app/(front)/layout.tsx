@@ -7,9 +7,9 @@ export default function Layout ({children}:{children:React.ReactNode}) {
     <div> 
        <Navbar />
        <div className="max-w-5xl mx-auto py-2 fixed top-20 left-3 z-50">
-           <MegaMenu  />
+           {/* <MegaMenu  /> */}
          </div>
-        <div className='mt-[150px]'>
+        <div className='mt-[85px]'>
           {children}
         </div>
      </div>

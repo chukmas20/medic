@@ -5,17 +5,38 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
+import { createUser } from "@/actions/users";
+import { UserRole } from "@prisma/client";
+import toast from "react-hot-toast";
 
-export default function RegisterForm() {
+export default function RegisterForm({role = "USER"}:{role?:UserRole}) {
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
   } = useForm<RegisterInputProps>()
   async function onSubmit(data: RegisterInputProps){
-    console.log(data)
+    // console.log(data);
+    setIsLoading(true);
+    data.role = role
+    try {
+      const user = await createUser(data)
+      if(user && user.status === 200){
+        console.log("User Created Successfully")
+        reset();
+        setIsLoading(false)
+        toast.success("Account created Successfully");
+        console.log(user.data)
+      }else{
+        console.log(user.error)
+      }
+     
+    } catch (error) {
+      console.log(error)
+    }
   }
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

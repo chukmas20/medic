@@ -36,7 +36,7 @@ export async function createUser(formData: RegisterInputProps){
     const userToken = generateToken();
     const newUser = await prismaClient.user.create({
       data: {
-        name:lastName + firstName,
+        name:lastName + " " +" " + firstName,
         email,
         phone,
         password: hashedPassword,

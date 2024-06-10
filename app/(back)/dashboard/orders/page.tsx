@@ -1,10 +1,10 @@
-import DashBoard from '@/components/dashboard/DashBoard'
+import Orders from '@/components/dashboard/orders/Orders'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <DashBoard />
+         <Orders  />
     </div>
   )
 }

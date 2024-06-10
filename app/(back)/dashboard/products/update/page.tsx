@@ -1,10 +1,10 @@
-import DashBoard from '@/components/dashboard/DashBoard'
+import EditProduct from '@/components/dashboard/products/EditProducts'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <DashBoard />
+         <EditProduct  />
     </div>
   )
 }

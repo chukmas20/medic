@@ -2,7 +2,8 @@
  
 import React from "react";
 import Image from "next/image";
-import { Avatar, Dropdown } from "flowbite-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 import {
   Card,
   CardContent,
@@ -25,9 +26,16 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import ModeToggle from "../ModeToggle";
+import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
  
-export default function Navbar() {
+export default function Navbar({session}: {session: Session}) {
+  const user = session.user;
   const router = useRouter();
+  async function handleLogout(){
+    await signOut();
+    router.push("/login")
+  }
   
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -125,16 +133,28 @@ export default function Navbar() {
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon" className="rounded-full">
           <CircleUser className="h-5 w-5" />
+          <Avatar>
+
+          {user.image ? (
+            <AvatarImage src="https://github.com/shadcn.png" />
+          ):(
+            <AvatarFallback>CN</AvatarFallback>
+          )}
+         </Avatar>
+
+
           <span className="sr-only">Toggle user menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={()=>handleLogout()}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   </header>

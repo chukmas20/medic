@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
  
-export default async function SideBar() {
+export default  function SideBar() {
   const pathname = usePathname();
   const sideBarLinks = [
     {

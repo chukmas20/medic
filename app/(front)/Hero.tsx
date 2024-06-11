@@ -1,10 +1,11 @@
 import React from 'react';
-import SearchBar from "./SearchBar"
+// import SearchBar from "./SearchBar"
 import TransitionText from './TransitionText';
+import { CommandMenu } from '@/components/command-menu';
 
 const HeroSection= () => {
   return (
-    <div className="bg-yellow-600  xl:mt-[150px] " >
+    <div className="bg-yellow-600  xl:mt-[10px] " >
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 min-h-lvh   lg:py-14 lg:px-14 p-8  ">
         <div className="text-white mt-10 ">
           <p className="lg:text-5xl lg:text-start text-3xl text-center font-bold">
@@ -17,7 +18,7 @@ const HeroSection= () => {
                Get Started
             </button>
           <div className='xl:mr-[250px] mt-10'>
-            <SearchBar  />
+            <CommandMenu  />
           </div>
           <div className='flex items-center gap-6 pt-6 '>
           <div className='py-4 flex gap-4'>

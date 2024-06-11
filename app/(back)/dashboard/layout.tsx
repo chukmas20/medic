@@ -1,14 +1,22 @@
 
 import Navbar from '@/components/dashboard/Navbar'
 import SideBar from '@/components/dashboard/SideBar'
+import { authOptions } from '@/lib/auth'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 import React, { ReactNode } from 'react'
 
-export default function Layout({children}:{children : React.ReactNode}) {
+export default async function Layout({children}:{children : React.ReactNode}) {
+  const session = await  getServerSession(authOptions)
+  if(!session){
+    redirect("/login")
+  }
+  const user = session.user
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
     <SideBar  />
    <div className="flex flex-col">
-      <Navbar />
+      <Navbar session={session} />
       <div className='flex min-h-screen w-full flex-col'>
        {children}
       </div>

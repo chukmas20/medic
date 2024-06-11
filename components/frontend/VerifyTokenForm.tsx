@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { Loader } from "lucide-react";
 import { updateUserById } from "@/actions/users";
 import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
@@ -33,7 +34,7 @@ const FormSchema = z.object({
   }),
 });
  
-export default function VerifyTokenForm({
+export default  function VerifyTokenForm({
   userToken,
   id,
 }: {
@@ -72,6 +73,8 @@ export default function VerifyTokenForm({
     }
     console.log(data);
   }
+
+
  
   return (
     <Form {...form}>
@@ -81,7 +84,7 @@ export default function VerifyTokenForm({
           <Alert color="failure" icon={HiInformationCircle}>
             <span className="font-medium text-red-800">Wrong Token!</span> 
             <span className="text-red-800">Please Check the
-            token and Enter again</span> 
+            token and Enter again</span>
           </Alert>
           </div>
           

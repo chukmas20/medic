@@ -155,7 +155,7 @@ export default function Footer (){
                                 className="space-y-4 text-gray-600"
                                 key={idx}
                             >
-                                <h4 className="text-gray-800 font-semibold sm:pb-2">
+                                <h4 className="text-gray-800 font-semibold sm:pb-2 dark:text-gray-300">
                                     {item.label}
                                 </h4>
                                 {

@@ -9,7 +9,11 @@ const FixedBookButton = () => {
                 <p className='font-semibold text-xl'> ₦ 5000</p>
                 <p className='font-bold text-sm'>Fri, May 31 - 10:00 am</p>
             </div>
-            <Button className='py-3 px-6 w-full bg-yellow-800'>Book</Button>
+            <Button 
+              className='py-3 px-6 w-full bg-yellow-800 dark:text-slate-100 hover:bg-yellow-900 dark:hover:bg-yellow-800'
+              >
+                Book
+              </Button>
         </div>
     </div>
   )

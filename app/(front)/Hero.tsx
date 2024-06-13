@@ -5,7 +5,7 @@ import { CommandMenu } from '@/components/command-menu';
 
 const HeroSection= () => {
   return (
-    <div className="bg-yellow-600  xl:mt-[10px] " >
+    <div className="bg-yellow-600  xl:mt-[10px] dark:bg-slate-950 " >
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 min-h-lvh   lg:py-14 lg:px-14 p-8  ">
         <div className="text-white mt-10 ">
           <p className="lg:text-5xl lg:text-start text-3xl text-center font-bold">

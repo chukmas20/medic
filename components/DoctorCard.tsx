@@ -34,11 +34,11 @@ const DoctorCard = ({isInperson = false}:{isInperson?: boolean}) => {
      },
   ]
   return (
-    <div
+        <div
      className="border border-gray-200
       bg-white py-8 rounded-md inline-flex 
       flex-col items-start justify-start px-3
-       hover:border-yellow-600 duration-500 transition-all" 
+       hover:border-yellow-600 duration-500 transition-all dark:bg-slate-800  " 
      >
         <Link href="#">
         <h2 className='uppercase font-bold text-2xl tracking-widest'>Odilon kossonou, PA-C</h2>
@@ -67,7 +67,7 @@ const DoctorCard = ({isInperson = false}:{isInperson?: boolean}) => {
                         <Stethoscope  className='w-4 h-4 mr-2 flex-shrink-0' />
                         <span> Family Medicine</span>
                     </p>
-                    <p className='bg-green-200 py-3 px-6 uppercase'>
+                    <p className='bg-green-200 py-3 px-6 uppercase dark:text-slate-900'>
                         Available Today
                     </p>
                 </div>
@@ -76,7 +76,7 @@ const DoctorCard = ({isInperson = false}:{isInperson?: boolean}) => {
        
         <div className="pt-8 border-t border-yellow-600">
             <h3 className='flex gap-4 justify-between items-center'>
-               <span className='text-gray-600' >Tues, May 28</span> price<span className='font-bold'>₦5000</span>
+               <span className='text-gray-600 dark:text-gray-400' >Tues, May 28</span> price<span className='font-bold'>₦5000</span>
             </h3>
             <div className='py-3 grid grid-cols-3 gap-2'>
                      {timeStamps.slice(0,5).map((item,i)=>{
@@ -94,6 +94,7 @@ const DoctorCard = ({isInperson = false}:{isInperson?: boolean}) => {
                  </div>
         </div>
     </div>
+    
   )
 }
 

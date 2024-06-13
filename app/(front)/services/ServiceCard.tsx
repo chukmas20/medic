@@ -5,7 +5,7 @@ import React from 'react'
 const ServiceCard = ({service}:{service:ServiceProps}) => {
   return (
     <Link href={`/services/${service.slug}`}
-      className='rounded-md bg-yellow-600 overflow-hidden hover:bg-yellow-700 duration-300 flex gap-4'>
+      className='rounded-md bg-yellow-600 overflow-hidden dark:bg-slate-700 hover:bg-yellow-700 duration-300 flex gap-4'>
          <img
            src={service.image}
              alt={service.title}

@@ -1,7 +1,6 @@
 "use client";
  
 import React from "react";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import {
@@ -138,7 +137,7 @@ export default function Navbar({session}: {session: Session}) {
           {user.image ? (
             <AvatarImage src="https://github.com/shadcn.png" />
           ):(
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>DA</AvatarFallback>
           )}
          </Avatar>
 

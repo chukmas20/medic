@@ -5,9 +5,11 @@ import Link from 'next/link'
 import DoctorCard from './DoctorCard'
 import { Map } from 'lucide-react'
 import DoctorsListCarousel from './DoctorsListCarousel'
+import { Button } from './ui/button'
 
 const DoctorsList = (
-   {title = "TeleHealth Visit",isInperson, className="bg-yellow-100 py-8 lg:py-24"}:{title?:string,isInperson?:boolean,className?:string}) => {
+   {title = "TeleHealth Visit",isInperson, 
+    className="bg-yellow-100 py-8 lg:py-24 dark:bg-yellow-800"}:{title?:string,isInperson?:boolean,className?:string}) => {
     const doctors = [
        {
          name:"John"
@@ -38,7 +40,11 @@ const DoctorsList = (
              ):(
               <ToggleButton  />
              )}
-              <Link href="#" className='py-3 px-6 border border-yellow-600 bg-white'> See All</Link>
+             <Button asChild>
+               <Link href="#" className=''>
+                  Expand
+                </Link>
+             </Button>
           </div>
           <div className="py-6">
               <DoctorsListCarousel doctors={doctors}  isInperson={isInperson} />

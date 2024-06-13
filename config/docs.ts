@@ -6,28 +6,33 @@ interface DocsConfig {
 }
 
 export const docsConfig: DocsConfig = {
-  mainNav: [
+   mainNav : [
     {
-      title: "Documentation",
-      href: "/docs",
+    title:"Home",
+    href:"/"
     },
     {
-      title: "Components",
-      href: "/docs/components/accordion",
+    title:"Find Doctor",
+    href:"/find-doctor"
     },
     {
-      title: "Themes",
-      href: "/themes",
+    title:"Telehealth",
+    href:"/tele-health"
     },
     {
-      title: "Examples",
-      href: "/examples",
+    title:"Inperson Visit",
+    href:"/inperson"
     },
     {
-      title: "Blocks",
-      href: "/blocks",
+    title:"Doctors",
+    href:"/doctors"
     },
-  ],
+    {
+    title:"About",
+    href:"/about"
+    },
+ ],
+
   sidebarNav: [
     {
       title: "Getting Started",

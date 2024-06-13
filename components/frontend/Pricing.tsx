@@ -5,6 +5,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
   } from "@/components/ui/tooltip"
+import Link from "next/link";
 
 export default function Pricing (){
 
@@ -25,6 +26,8 @@ export default function Pricing (){
                 "Duis non diam vel tortor",
 
             ],
+            getStarted:"/register?role=DOCTOR&plan=free"
+
         },
         {
             name: "Startup",
@@ -41,6 +44,7 @@ export default function Pricing (){
                 "Praesent quis venenatis ipsum",
                 "Duis non diam vel tortor",
             ],
+            getStarted:"/register?role=DOCTOR&plan=professional"
         },
         {
             name: "Enterprise",
@@ -57,6 +61,8 @@ export default function Pricing (){
                 "Praesent quis venenatis ipsum",
                 "Duis non diam vel tortor",
             ],
+            getStarted:"/register?role=DOCTOR&plan=enterprise"
+
         },
     ];
 
@@ -106,11 +112,13 @@ export default function Pricing (){
                                             </TooltipContent>
                                         </Tooltip>
                                         </TooltipProvider>
+                                    </div> 
+                                    <div className="mt-4">
+                                    <Link href={item.getStarted} className='px-3 py-3 rounded-lg w-full font-semibold text-sm duration-150 text-white bg-yellow-600 hover:bg-yellow-800 active:bg-yellow-600'>
+                                        Get Started
+                                    </Link>
                                     </div>
                                     
-                                    <button className='px-3 py-3 rounded-lg w-full font-semibold text-sm duration-150 text-white bg-yellow-600 hover:bg-yellow-800 active:bg-yellow-600'>
-                                        Get Started
-                                    </button>
                                 </div>
                                 <ul className='p-8 space-y-3'>
                                     <li className="pb-2 text-gray-800 font-medium">

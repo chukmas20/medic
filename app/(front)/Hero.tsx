@@ -2,6 +2,7 @@ import React from 'react';
 // import SearchBar from "./SearchBar"
 import TransitionText from './TransitionText';
 import { CommandMenu } from '@/components/command-menu';
+import Link from 'next/link';
 
 const HeroSection= () => {
   return (
@@ -14,9 +15,12 @@ const HeroSection= () => {
           <p className="lg:text-2xl lg:text-start text-sm text-center">
              Simply create an account to find a doctor <br/> that is just a stone throw away
           </p>
-           <button className="bg-yellow-800  hover:bg-yellow-700 mt-6 text-white font-sm py-2 px-4 rounded-md">
+           <div className='flex flex-col items-center lg:items-start'>
+           <Link href="/" className="bg-yellow-800  hover:bg-yellow-700  mt-6 text-white font-sm py-2 px-4 rounded-md">
                Get Started
-            </button>
+            </Link>
+           </div>
+           
           <div className='xl:mr-[250px] mt-10'>
             <CommandMenu  />
           </div>

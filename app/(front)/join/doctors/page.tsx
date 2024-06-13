@@ -76,7 +76,7 @@ const page = () => {
         
     ]
   return (
-    <div className='mt-[100px] min-h-screen '>
+    <div className=' min-h-screen '>
          <section className='py-12 px-4'>
            <div className=' max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4'>
              <div >

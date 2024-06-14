@@ -1,7 +1,13 @@
 import RegisterForm from '@/components/Auth/RegisterForm'
 import React from 'react'
 
-const page = () => {
+const page = ({
+    searchParams,
+}:{
+    searchParams: {[key: string]: string | string[] | undefined}
+}) => {
+    const {role, plan} = searchParams;
+    console.log(role,plan)
     return (
         <div className='bg-yellow-100 min-h-screen py-8'>
             <div className="grid md:grid-cols-2 grid-cols-1 w-full  bg-white border border-gray-200 
@@ -10,7 +16,7 @@ const page = () => {
                     {/* image */}
                 </div>
                 <div className=''>
-                    <RegisterForm  />
+                    <RegisterForm role={role} plan={plan} />
                 </div>
             </div>
         </div>

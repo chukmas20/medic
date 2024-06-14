@@ -8,9 +8,18 @@ import { useState } from "react";
 import { createUser } from "@/actions/users";
 import { UserRole } from "@prisma/client";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function RegisterForm({role = "USER"}:{role?:UserRole}) {
+export default function RegisterForm(
+   {
+    role = "USER",
+    plan = "",
+  }:{
+    role?:string | string[] | undefined;
+    plan?:string | string[] | undefined
+  }
+  ) {
+   
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter();
   const {
@@ -23,7 +32,8 @@ export default function RegisterForm({role = "USER"}:{role?:UserRole}) {
   async function onSubmit(data: RegisterInputProps){
     // console.log(data);
     setIsLoading(true);
-    data.role = role
+    data.role = role;
+    data.plan = plan;
     try {
       const user = await createUser(data)
       if(user && user.status === 200){

@@ -71,12 +71,12 @@ const OnboardingForm = ({id}:{id:string}) => {
              {steps.map((step, i)=>{
               const icon = Icon;
                 return(
-             <Link href={`/onboarding/${id}?page=${step.page}`}
+             <Link   key={i}  href={`/onboarding/${id}?page=${step.page}`}
                className={cn(" block py-3  px-4 bg-yellow-200 font-semibold text-slate-800 border uppercase text-sm border-slate-200",
                  step.page === page?"bg-yellow-600 text-slate-200 font-semibold border-slate-200 ":"" )
                 }
               >
-                <p key={i} 
+                <p 
                  className="flex items-center justify-between "> 
                   {step.title}
                   {<step.icon />}
@@ -87,7 +87,7 @@ const OnboardingForm = ({id}:{id:string}) => {
              })}
          </div>
          <div className='sm:col-span-9 col-span-full bg-yellow-100 p-4'>
-              {currentStep?.component}
+                {currentStep?.component}
          </div>
     </div>
   )

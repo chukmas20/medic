@@ -17,3 +17,16 @@ export type LoginInputProps = {
     password: string;  
 }
 
+export type BioDataFormProps ={
+    firstName: string;
+    lastName: string;
+    middleName?: string;
+    dob?: string;
+    gender: string;
+    profilePicture?: string;
+    bio: string;
+    medicalLicense: string;
+    medicalLicenseExpiry?: string;
+
+}
+

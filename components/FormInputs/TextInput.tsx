@@ -6,8 +6,9 @@ type  TextInputProps ={
   name: string;
   errors: any;
   type?: string;
+  className?: string
 }
-const TextInput = ({label, register, name, errors,  type="text", }:TextInputProps) => {
+const TextInput = ({label, register, name, errors,  type="text",className="col-span-full" }:TextInputProps) => {
   return (
         <div>
               <label htmlFor={`${name}`} 

@@ -21,12 +21,17 @@ export type BioDataFormProps ={
     firstName: string;
     lastName: string;
     middleName?: string;
-    dob?: string;
+    dob?: Date;
     gender: string;
     profilePicture?: string;
     bio: string;
+    page: string;
     medicalLicense: string;
-    medicalLicenseExpiry?: string;
+    medicalLicenseExpiry?: Date;
 
+}
+
+export type SelectFormInputProps = {
+    name: string;
 }
 

@@ -8,27 +8,41 @@ import BiodataForm from "./BiodataForm";
 import ContactInfo from "./ContactInfo";
 import Profession from "./Profession";
 import Education from "./Education";
+import ProfileInfoForm from "./ProfileInfoForm";
 
 const OnboardingForm = ({id}:{id:string}) => {
+  const params = useSearchParams();
+     const page = params.get("page")??"bio-data";
      const steps =[
         {
             title: "BIO-DATA",
             page: "bio-data",
-            component: <BiodataForm  />,
+            component: <BiodataForm title="Bio Data" description="Please fill in your Bio details" page={page}  />,
             icon: User
        },
+       {
+        title: "Profile Information",
+        page: "profile",
+        component: <ProfileInfoForm 
+                    title="Profile Information" 
+                    description="Please fill in your profile details" page={page} 
+                     />,
+        icon: User
+   },
         
         {
             title: "Contact Information",
             page: "contact",
-            component: <ContactInfo  />,
+            component: <ContactInfo title="Contact  Information" 
+            description="Please fill in your profile details" page={page}  />,
             icon: Contact
 
         },
         {
             title: "Profession Information",
             page: "profession",
-            component:<Profession />,
+            component:<Profession  title="Professional Info" 
+            description="Please fill in your professional details" page={page} />,
             icon: Stethoscope  
 
         },
@@ -60,10 +74,11 @@ const OnboardingForm = ({id}:{id:string}) => {
         },
 
      ]
-    const params = useSearchParams();
-    const page = params.get("page") ?? 1;
-    const currentStep = steps.find((step)=> step.page === page)   
-   console.log(currentStep);
+
+     
+     const currentStep = steps.find((step)=> step.page === page)   
+    console.log(currentStep);
+   
   return (
     <div className='grid grid-cols-12 mx-auto rounded-lg shadow-md overflow-hidden min-h-screen bg-yellow-100'>
          <div className=' col-span-full sm:col-span-3  '>

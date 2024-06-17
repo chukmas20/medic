@@ -10,7 +10,7 @@ export default function Footer (){
             items: [
                 {
                     href: '/join/doctors',
-                    name: 'List your service',
+                    name: 'Register as A Doctor',
                 },
                 {
                     href: 'javascript:void()',

@@ -14,11 +14,20 @@ import TextAreaInput from "../FormInputs/TextAreaInput";
 import RadioInput from "../FormInputs/RadioInput";
 import ImageInput from "../FormInputs/ImageInput";
 
-export default function ContactInfo(
-    {page, title,description}:{page:string,title:string, description: string}
+export default function ProfileInfoForm(
+    {
+     page,
+     title,
+     description
+    }:{
+        page:string;
+        title: string;
+        description: string
+    }
   ) {
    
   const [isLoading, setIsLoading] = useState(false)
+  const [expiry, setExpiry] = useState<Date>()
   const [profileImage, setProfileImage] = useState("https://e7.pngegg.com/pngimages/644/838/png-clipart-physician-patient-cartoon-doctor-doctor-cartoon-character-child-thumbnail.png")
 
   const genderOptions = [
@@ -45,11 +54,19 @@ export default function ContactInfo(
     watch,
     formState: { errors },
   } = useForm<BioDataFormProps>()
-
   async function onSubmit(data: BioDataFormProps){
+    
+     if(!expiry){
+        toast.error("License expiry date is required")
+        return;
+     }
+
+     data.medicalLicenseExpiry  = expiry
      data.page = page
      console.log(data);
-    setIsLoading(true);  
+    setIsLoading(true);
+   
+    
   }
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-full">
@@ -58,44 +75,37 @@ export default function ContactInfo(
                  <p className="text-sm text max-w-6xl">{description}</p>
              </div>
              <form onSubmit={handleSubmit(onSubmit)} className="space-y-2" >
-               <TextInput 
-                 label="Email Address" 
-                 name="email"
-                 register={register}
-                 errors={errors}
-                 />
-                 <TextInput 
-                 label="Phone" 
-                 name="phone"
-                 register={register}
-                 errors={errors}
-                 />
-              <TextInput 
-                 label="Country" 
-                 name="country"
-                 register={register}
-                 errors={errors}
-                 /> 
-                 <TextInput 
-                 label="City" 
-                 name="city"
-                 register={register}
-                 errors={errors}
-                 /> 
-                 <TextInput 
-                 label="State" 
-                 name="state"
-                 register={register}
-                 errors={errors}
-                 /> 
-                
+                   {/* Also known as BIO */}
+                    <TextAreaInput 
+                    label="Summary" 
+                    name="bio"
+                    register={register}
+                    errors={errors}
+                    />
+                    <TextInput 
+                    label="Medical License" 
+                    name="medicalLicense"
+                    type="tel"
+                    register={register}
+                    errors={errors}
+                    />
+                 <DatePickerInput
+                   date={expiry}  
+                   setDate={setExpiry} 
+                   title="Medical License Expiry"  
+                  />
+                     <ImageInput 
+                     label = "Profile Photo"
+                     imageUrl = {profileImage}
+                     setImageUrl={setProfileImage}
+                     endpoint = "doctorProfileImage"
+                  />
                  
-                  
-              <div>
+                 <div>
                    <SubmitButton 
                      title="Save and Continue" 
                      buttonType="submit" loadingTitle="Please Wait..." isLoading={isLoading}   />
-              </div>
+                </div>
             </form>
             {/* <p className="mt-10 text-center text-sm text-gray-500">
                Already have an account?{' '}

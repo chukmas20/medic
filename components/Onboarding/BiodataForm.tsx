@@ -10,14 +10,28 @@ import { UserRole } from "@prisma/client";
 import toast from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import DatePickerInput from "../FormInputs/DatePickerInput";
-import TextAreaInput from "../FormInputs/TextAreaInput";
 import RadioInput from "../FormInputs/RadioInput";
-import ImageInput from "../FormInputs/ImageInput";
+import { Button } from "flowbite-react";
+import { generateTrackingNumber } from "@/lib/generateTracking";
+import { createDoctorProfile } from "@/actions/onboarding";
 
-export default function BiodataForm(
-    {page, title,description}:{page:string,title:string, description: string}
-  ) {
-   
+
+
+export type StepFormProps ={
+  page: string;
+  title: string;
+  description: string;
+  userId?: string;
+  nextPage?: string;
+  
+}
+export default function BiodataForm({
+  page, 
+  title,
+  description,
+  nextPage,
+  userId,
+ }:StepFormProps ){
   const [isLoading, setIsLoading] = useState(false)
   const [dob, setDob] = useState<Date>()
   const [profileImage, setProfileImage] = useState("https://e7.pngegg.com/pngimages/644/838/png-clipart-physician-patient-cartoon-doctor-doctor-cartoon-character-child-thumbnail.png")
@@ -46,19 +60,30 @@ export default function BiodataForm(
     watch,
     formState: { errors },
   } = useForm<BioDataFormProps>()
+   
   async function onSubmit(data: BioDataFormProps){
-    
+      setIsLoading(true);
      if(!dob){
         toast.error("Date of birth is required")
         return;
      }
     
-
-     data.dob = dob
-     data.page = page
-     console.log(data);
-    setIsLoading(true);
-   
+      data.userId = userId
+      data.dob = dob
+      data.trackingNumber = generateTrackingNumber()
+      data.page = page
+      console.log(data);
+    try {
+      const newProfile   = await createDoctorProfile(data)
+      setIsLoading(false)
+      router.push(
+        `/onboarding/${userId}?page=${nextPage}&&tracking=${data.trackingNumber}`
+      )
+      console.log(newProfile);
+    } catch (error) {
+       setIsLoading(false)
+      console.log(error)
+    }
     
   }
     return (
@@ -75,9 +100,10 @@ export default function BiodataForm(
                  errors={errors}
                  />
                  <TextInput 
-                 label="Middle Name" 
+                 label="Other Names" 
                  name="middleName"
                  register={register}
+                 isRequired={false}
                  errors={errors}
                  />
               <TextInput 
@@ -94,11 +120,10 @@ export default function BiodataForm(
                  
                   <RadioInput 
                    errors={errors}
-                    name="Gender" 
-                    register={register} title="gender"
+                    name="gender" 
+                    register={register} title="Gender"
                     radioOptions={genderOptions}
                     />
-                  
               <div>
                    <SubmitButton 
                      title="Save and Continue" 

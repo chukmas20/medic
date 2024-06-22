@@ -1,5 +1,5 @@
 "use client"
-import { BioDataFormProps, RegisterInputProps } from "@/types/type";
+import { BioDataFormProps, PractiseFormProps, ProfileInfoFormProps, RegisterInputProps } from "@/types/type";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
@@ -13,18 +13,15 @@ import DatePickerInput from "../FormInputs/DatePickerInput";
 import TextAreaInput from "../FormInputs/TextAreaInput";
 import RadioInput from "../FormInputs/RadioInput";
 import ImageInput from "../FormInputs/ImageInput";
+import { StepFormProps } from "./BiodataForm";
 
 export default function ProfileInfoForm(
     {
      page,
      title,
      description
-    }:{
-        page:string;
-        title: string;
-        description: string
-    }
-  ) {
+    }:
+    StepFormProps) {
    
   const [isLoading, setIsLoading] = useState(false)
   const [expiry, setExpiry] = useState<Date>()
@@ -53,15 +50,12 @@ export default function ProfileInfoForm(
     reset,
     watch,
     formState: { errors },
-  } = useForm<BioDataFormProps>()
-  async function onSubmit(data: BioDataFormProps){
+  } = useForm<PractiseFormProps>()
+  async function onSubmit(data: PractiseFormProps){
     
-     if(!expiry){
-        toast.error("License expiry date is required")
-        return;
-     }
+   
 
-     data.medicalLicenseExpiry  = expiry
+    
      data.page = page
      console.log(data);
     setIsLoading(true);
@@ -85,7 +79,13 @@ export default function ProfileInfoForm(
                     <TextInput 
                     label="Medical License" 
                     name="medicalLicense"
-                    type="tel"
+                    register={register}
+                    errors={errors}
+                    />
+                     <TextInput 
+                    label="Years of Experience" 
+                    name="yearsOfExperience"
+                    type="number"
                     register={register}
                     errors={errors}
                     />

@@ -25,7 +25,8 @@ export default function ContactInfo(
     console.log(tags);
   const [isLoading, setIsLoading] = useState(false)
  
-  const [docs, setDocs] = useState([])
+  const [docs, setDocs] = useState([
+  ])
   console.log(docs);
 
 
@@ -70,8 +71,9 @@ export default function ContactInfo(
                    errors={errors}  
                    />
                   <ArrayItemsInput setItems={setTags} items={tags} itemTitle=" More" />
-                   <MultipleFileUpload  label="Upload Certificates (Maximum 4)" imageUrls={docs} 
-                    setImageUrls={setDocs}
+
+                   <MultipleFileUpload  label="Upload Certificates (Maximum 4)" 
+                    setFiles={setDocs} files={docs} endpoint="doctorProfessionalDocs"
                    />
                    
                   

@@ -1,5 +1,5 @@
 "use client"
-import {  EducationFormProps } from "@/types/type";
+import { AdditionalFormProps } from "@/types/type";
 import { useForm} from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
@@ -10,24 +10,21 @@ import { useRouter, useSearchParams } from "next/navigation";
 import SelectInput from "../FormInputs/SelectInput";
 import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
 import MultipleFileUpload from "../FormInputs/MultipleFileUpload";
+import TextAreaInput from "../FormInputs/TextAreaInput";
 import { StepFormProps } from "./BiodataForm";
 
-export default function Education(
+export default function AdditionalInfo(
   {
     page,
      title,
      description,
      nextPage
     }:StepFormProps)
-
    {
     const [otherSpecialties, setOtherSpecialties] = useState([]);
     console.log(otherSpecialties);
   const [isLoading, setIsLoading] = useState(false)
- 
-  const [docs, setDocs] = useState([
-  ])
-  console.log(docs);
+  const [additionalDocs, setAdditionalDocs] = useState([])
 
 
   const router = useRouter();
@@ -37,8 +34,8 @@ export default function Education(
     reset,
     watch,
     formState: { errors },
-  } = useForm<EducationFormProps>()
-  async function onSubmit(data: EducationFormProps){
+  } = useForm<AdditionalFormProps>()
+  async function onSubmit(data: AdditionalFormProps){
      data.page = page
      console.log(data);
     setIsLoading(true);
@@ -52,35 +49,36 @@ export default function Education(
                  <p className="text-sm text max-w-6xl">{description}</p>
              </div>
              <form onSubmit={handleSubmit(onSubmit)} className="space-y-2" >
-               <TextInput 
-                 label="Medical School" 
-                 name="medicalSchool"
-                 register={register}
-                 errors={errors}
-                 />
+                   <TextAreaInput 
+                    label="Education History" 
+                    name="educationHistory"
+                    register={register}
+                    errors={errors}
+                    /> 
                  <TextInput 
-                 label="Graduation Year" 
-                 name="graduationYear"
+                 label="Research or Published Works" 
+                 name="research"
                  register={register}
                  errors={errors}
                  />
-                 <SelectInput
-                  label="Select Primary Specialization" 
-                  register={register}
-                  name="primarySpecialization"
-                   errors={errors}
+                  <TextAreaInput 
+                    label="Accomplishments" 
+                    name="accomplishment"
+                    register={register}
+                    errors={errors}
+                    /> 
+                <MultipleFileUpload
+                    label="Add Additional Documents (Maximum of 4 documents)" 
+                    setFiles={setAdditionalDocs}
+                     files={additionalDocs} 
+                     endpoint="additionalDocs"
                    />
+
                   <ArrayItemsInput
                     setItems={setOtherSpecialties} 
                      items={otherSpecialties}
                      itemTitle=" More Specialties"
-                      />
-
-                   <MultipleFileUpload  label="Upload Certificates (Maximum of 4 documents)" 
-                    setFiles={setDocs} files={docs} endpoint="doctorProfessionalDocs"
-                   />
-                   
-                  
+                      />   
               <div>
                    <SubmitButton 
                      title="Save and Continue" 

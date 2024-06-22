@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Book, Contact, GraduationCap, Icon, Stethoscope, User } from "lucide-react";
+import {  Calendar, Contact, GraduationCap, Icon,Info,Plus,StethoscopeIcon, User } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import BiodataForm from "./BiodataForm";
@@ -9,6 +9,10 @@ import ContactInfo from "./ContactInfo";
 import Profession from "./Profession";
 import Education from "./Education";
 import ProfileInfoForm from "./ProfileInfoForm";
+import PractiseInfoForm from "./PractiseInfoForm";
+import AdditionalInfo from "./AdditionalInfo";
+import Availability from "./Availability";
+import { HiInformationCircle } from "react-icons/hi";
 
 const OnboardingForm = ({id}:{id:string}) => {
   const params = useSearchParams();
@@ -17,15 +21,23 @@ const OnboardingForm = ({id}:{id:string}) => {
         {
             title: "BIO-DATA",
             page: "bio-data",
-            component: <BiodataForm title="Bio Data" description="Please fill in your Bio details" page={page}  />,
-            icon: User
+            component: 
+              <BiodataForm title="Bio Data"
+                userId = {id}
+                description="Please fill in your Bio details"
+                 page={page}
+                 nextPage="profile"
+                />,
+            icon: Info
        },
        {
         title: "Profile Information",
         page: "profile",
         component: <ProfileInfoForm 
                     title="Profile Information" 
-                    description="Please fill in your profile details" page={page} 
+                    description="Please fill in your profile details" 
+                    page={page} 
+                    nextPage="contact"
                      />,
         icon: User
    },
@@ -34,43 +46,48 @@ const OnboardingForm = ({id}:{id:string}) => {
             title: "Contact Information",
             page: "contact",
             component: <ContactInfo title="Contact  Information" 
-            description="Please fill in your profile details" page={page}  />,
+            description="Please fill in your profile details" page={page}  
+            nextPage="education"
+             />,
             icon: Contact
 
         },
-        {
-            title: "Profession Information",
-            page: "profession",
-            component:<Profession  title="Professional Info" 
-            description="Please fill in your professional details" page={page} />,
-            icon: Stethoscope  
-
-        },
-    
+      
         {
             title: "Education",
             page: "education",
-            component:<Education />,
-            icon: GraduationCap
+            component: <Education title="Education Details" 
+            description="Please fill in your Education details"
+             page={page}
+             nextPage="practise"
+              />,
+           
+            icon: GraduationCap,
+
         },
         {
             title: "Practise Information",
             page: "practise",
-            component:<></>,
-            icon: GraduationCap
+            component:<PractiseInfoForm  title="Practise Information" 
+            description="Please fill in your Practise details" page={page}
+            nextPage="additional" />,
+            icon: StethoscopeIcon
+
 
         },
         {
             title: "Additional Information",
             page:"additional",
-            component:<></>,
-            icon: GraduationCap
+            component:<AdditionalInfo  title="Additional Information" 
+            description="Please fill Additional details" page={page} nextPage="availability"/>,
+            icon: Plus
         },
         {
             title: "Availability",
             page: "availability",
-            component:<></>,
-            icon: GraduationCap
+            component:<Availability  title="Availability Information" 
+            description="Please fill Additional details" page={page} />,
+            icon: Calendar
         },
 
      ]

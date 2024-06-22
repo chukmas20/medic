@@ -1,5 +1,5 @@
 "use client"
-import { BioDataFormProps, RegisterInputProps } from "@/types/type";
+import { BioDataFormProps, ContactInfoFormProps, RegisterInputProps } from "@/types/type";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
@@ -13,10 +13,16 @@ import DatePickerInput from "../FormInputs/DatePickerInput";
 import TextAreaInput from "../FormInputs/TextAreaInput";
 import RadioInput from "../FormInputs/RadioInput";
 import ImageInput from "../FormInputs/ImageInput";
+import { StepFormProps } from "./BiodataForm";
 
 export default function ContactInfo(
-    {page, title,description}:{page:string,title:string, description: string}
-  ) {
+    {
+      page, 
+      title,
+      description,
+      nextPage
+    }:
+      StepFormProps) {
    
   const [isLoading, setIsLoading] = useState(false)
   const [profileImage, setProfileImage] = useState("https://e7.pngegg.com/pngimages/644/838/png-clipart-physician-patient-cartoon-doctor-doctor-cartoon-character-child-thumbnail.png")
@@ -44,9 +50,9 @@ export default function ContactInfo(
     reset,
     watch,
     formState: { errors },
-  } = useForm<BioDataFormProps>()
+  } = useForm<ContactInfoFormProps>()
 
-  async function onSubmit(data: BioDataFormProps){
+  async function onSubmit(data: ContactInfoFormProps){
      data.page = page
      console.log(data);
     setIsLoading(true);  

@@ -22,7 +22,7 @@ const SubmitButton = ({title, buttonType="submit",loadingTitle,isLoading=false}:
            text-sm font-semibold leading-6 text-white shadow-sm
             hover:bg-yellow-800 focus-visible:outline focus-visible:outline-2
              items-center
-             focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+             focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-[120px]"
           >
            <Loader className='w-4 h-4 mr-2 flex-shrink-0 animate-spin' /> {loadingTitle}
        </button>

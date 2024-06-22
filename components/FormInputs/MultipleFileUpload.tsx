@@ -1,28 +1,35 @@
+import { File, Pencil, XCircle } from 'lucide-react';
 import { UploadDropzone } from '@/utils/uploadthing';
-import { Pencil, XCircle } from 'lucide-react';
+
+import { title } from 'process';
 import React from 'react'
 import toast from 'react-hot-toast';
 
 type  MultipleImageInputProps ={
     label: string;
-    imageUrls: string[];
-    setImageUrls: any;
+    files: File[];
+    setFiles: any;
     className?: string;
     endpoint?: any
 }
+export type File = {
+    title: string;
+    size: number;
+    url: string;
+}
 const MultipleFileUpload = ({
    label,
-   imageUrls,
-   setImageUrls,
+   files,
+   setFiles,
    className,
    endpoint
 }:MultipleImageInputProps) => {
 
-    function handleImageRemove(imageIndex: any){
-        const updatedImages = imageUrls.filter(
-            (image, index) => index !== imageIndex
+    function handleImageRemove(fileIndex: any){
+        const updatedFiles = files.filter(
+            (file, index) => index !== fileIndex
         )
-        setImageUrls(updatedImages)
+        setFiles(updatedFiles)
     }
   return (
      <div className={className}>
@@ -32,26 +39,34 @@ const MultipleFileUpload = ({
             >
                 {label}
             </label>
-             {imageUrls.length > 0 ? (
+            { files  && (
+                <button className='text-sm' onClick={()=>setFiles([])}
+                >
+                    <Pencil className='w-5 h-5 '   />
+                    <span> Change</span>
+                </button>
+            )}
+             {files.length > 0 ? (
                 <div 
-                   className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
+                   className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4'
                    >
-                    {imageUrls.map((imageUrl,i)=>{
+                    {files.map((file,i)=>{
                         return(
                             <div key={i} className='relative mb-6'>
                                <button
+                                type='button'
                                 onClick={()=> handleImageRemove(i)}
                                 className='absolute -top-4 -right-2 bg-slate-100 text-slate-900 rounded-full'
                                 >
                                    <XCircle className='' />
                                </button>
-                               <img
-                                  src={imageUrl}
-                                  alt='Item image'
-                                  width={500}
-                                  height={500}
-                                  className='w-full h-32 object-cover'
-                               />
+                               <div className='py-3 px-6 rounded-md flex items-center bg-slate-200 dark:bg-slate-800  text-slate-800 dark:text-slate-200 '>
+                                     <File className='w-6 h-6 flex-shrink-0 mr-2'  />
+                                     <div className=" flex flex-col items-center">
+                                        <span className='line-clamp-1'>{file.title}</span>
+                                        <span className='text-xs'>{(file.size /1000).toFixed(2)} {" "} kbs</span>
+                                     </div>
+                               </div>
                             </div>
                         )
                     })}
@@ -59,13 +74,23 @@ const MultipleFileUpload = ({
              ):(
                 <UploadDropzone
                   endpoint={endpoint}
-                onClientUploadComplete={(res)=>{
+                onClientUploadComplete={(res) => {
                   console.log(res);
-                   const urls = res.map((item)=> item.url)
-                   setImageUrls(urls);
+                   const urls = res.map((item)=>{
+                      return {
+                        url: item.url,
+                        title: item.name,
+                        size:item.size
+                      }     
+                   })
+                   setFiles(urls);
                    console.log(urls);
                    console.log("Upload completed")
                 }}
+                 onUploadError={(error)=>{
+                    toast.error("Unable to Upload Image, Try Again")
+                    console.log(`Error! ${error.message},`, error)
+                 }}
               />
              )}
          </div>

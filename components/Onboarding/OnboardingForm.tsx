@@ -13,10 +13,13 @@ import PractiseInfoForm from "./PractiseInfoForm";
 import AdditionalInfo from "./AdditionalInfo";
 import Availability from "./Availability";
 import { HiInformationCircle } from "react-icons/hi";
+import { useOnboardingContext } from "@/context/context";
 
 const OnboardingForm = ({id}:{id:string}) => {
   const params = useSearchParams();
      const page = params.get("page")??"bio-data";
+     const {trackingNumber, doctorProfileId } = useOnboardingContext()
+
      const steps =[
         {
             title: "BIO-DATA",
@@ -27,6 +30,7 @@ const OnboardingForm = ({id}:{id:string}) => {
                 description="Please fill in your Bio details"
                  page={page}
                  nextPage="profile"
+                 formId={doctorProfileId}
                 />,
             icon: Info
        },
@@ -38,6 +42,8 @@ const OnboardingForm = ({id}:{id:string}) => {
                     description="Please fill in your profile details" 
                     page={page} 
                     nextPage="contact"
+                    userId = {id}
+                    formId={doctorProfileId}
                      />,
         icon: User
    },
@@ -48,6 +54,8 @@ const OnboardingForm = ({id}:{id:string}) => {
             component: <ContactInfo title="Contact  Information" 
             description="Please fill in your profile details" page={page}  
             nextPage="education"
+            formId={doctorProfileId}
+            userId = {id}
              />,
             icon: Contact
 
@@ -60,6 +68,9 @@ const OnboardingForm = ({id}:{id:string}) => {
             description="Please fill in your Education details"
              page={page}
              nextPage="practise"
+             formId={doctorProfileId}
+             userId = {id}
+
               />,
            
             icon: GraduationCap,
@@ -70,7 +81,11 @@ const OnboardingForm = ({id}:{id:string}) => {
             page: "practise",
             component:<PractiseInfoForm  title="Practise Information" 
             description="Please fill in your Practise details" page={page}
-            nextPage="additional" />,
+            nextPage="additional" 
+            formId={doctorProfileId}
+            userId = {id}
+
+            />,
             icon: StethoscopeIcon
 
 
@@ -79,14 +94,21 @@ const OnboardingForm = ({id}:{id:string}) => {
             title: "Additional Information",
             page:"additional",
             component:<AdditionalInfo  title="Additional Information" 
-            description="Please fill Additional details" page={page} nextPage="availability"/>,
+            description="Please fill Additional details"
+             page={page} nextPage="availability"
+             formId={doctorProfileId}
+             userId = {id}
+             />,
             icon: Plus
         },
         {
             title: "Availability",
             page: "availability",
             component:<Availability  title="Availability Information" 
-            description="Please fill Additional details" page={page} />,
+            description="Please fill Additional details" page={page} 
+            formId={doctorProfileId}
+            userId = {id}
+            />,
             icon: Calendar
         },
 
@@ -119,7 +141,13 @@ const OnboardingForm = ({id}:{id:string}) => {
              })}
          </div>
          <div className='sm:col-span-9 col-span-full bg-yellow-100 p-4'>
-                {currentStep?.component}
+          {trackingNumber && (
+               <p className="bg-yellow-600 text-slate-200 w-90 rounded-md text-sm px-4 py-2">
+               Use the unique Unique Code - {trackingNumber} to resume registration or check status
+             </p> 
+            )}
+              
+              {currentStep?.component}
          </div>
     </div>
   )

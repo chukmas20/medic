@@ -37,18 +37,14 @@ const page = () => {
         "Interact with patients online",
         "Take notes and prescribe drugs",
         "Have a face to face interaction with patients online",
-    ]
-    // const steps =[
-    //   "Build your business.",
-    // "Control your pricing and availability. Get paid upfront every week.",
-    //   "No provider fees or other costs. Access our integrated provider e-prescribing and note-taking tools for free."
-    // ]
+    ];
+
     const cards =[
         {
             title:" Begin your journey",
              description:"Start a new application to join our network",
             image:"https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=600",
-            link: "/",
+            link: "/register?role=DOCTOR&plan=free",
             linkTitle:"Start Application"
         },
        
@@ -56,7 +52,7 @@ const page = () => {
             title:" Resume Application",
              description:"Complete your onboarding process",
             image:"https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=600",
-            link: "/",
+            link: "/onboarding/resume",
             linkTitle:"Continue your Application"
         },
         {

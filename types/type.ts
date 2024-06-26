@@ -72,7 +72,7 @@ export type PractiseFormProps = {
 }
 
 export type AdditionalFormProps = {
-    educationalHistory: string;
+    educationalHistory?: string;
     research?: string;
     accomplishments?: string;
     additionalDocs: string[];

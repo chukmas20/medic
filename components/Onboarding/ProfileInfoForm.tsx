@@ -1,5 +1,5 @@
 "use client"
-import { BioDataFormProps, PractiseFormProps, ProfileInfoFormProps, RegisterInputProps } from "@/types/type";
+import {  ProfileInfoFormProps, } from "@/types/type";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
@@ -14,19 +14,25 @@ import TextAreaInput from "../FormInputs/TextAreaInput";
 import RadioInput from "../FormInputs/RadioInput";
 import ImageInput from "../FormInputs/ImageInput";
 import { StepFormProps } from "./BiodataForm";
+import { useOnboardingContext } from "@/context/context";
+import { updateDoctorProfile } from "@/actions/onboarding";
 
 export default function ProfileInfoForm(
     {
      page,
      title,
-     description
+     description,
+     formId,
+     userId,
+     nextPage
     }:
     StepFormProps) {
    
   const [isLoading, setIsLoading] = useState(false)
   const [expiry, setExpiry] = useState<Date>()
+  const {trackingNumber, doctorProfileId } = useOnboardingContext();
   const [profileImage, setProfileImage] = useState("https://e7.pngegg.com/pngimages/644/838/png-clipart-physician-patient-cartoon-doctor-doctor-cartoon-character-child-thumbnail.png")
-
+ 
   const genderOptions = [
     {
       label:"Male",
@@ -50,21 +56,41 @@ export default function ProfileInfoForm(
     reset,
     watch,
     formState: { errors },
-  } = useForm<PractiseFormProps>()
-  async function onSubmit(data: PractiseFormProps){
-    
-   
-
-    
+  } = useForm<ProfileInfoFormProps>()
+  async function onSubmit(data: ProfileInfoFormProps){
+     setIsLoading(true);
+    if(!expiry){
+      toast.error("Please select license expiry date");
+      return;
+    }
+     data.medicalLicenseExpiry = expiry;
      data.page = page
+     data.yearsOfExperience = Number(data.yearsOfExperience)
+     data.profilePicture = profileImage
+    //  data.medicalLicense
+    //  data.yearsOfExperience
      console.log(data);
-    setIsLoading(true);
+    try {
+       const res = await updateDoctorProfile(formId, data)
+       if(res?.status === 201){
+        setIsLoading(false)
+        //extract the profile form data  from the updated profile
+        router.push( `/onboarding/${userId}?page=${nextPage}`);
+        console.log(res.data)
+       }else{
+        setIsLoading(false)
+        throw new Error("Something went wrong");
+       }
+    } catch (error) {
+      setIsLoading(false)
+    }
    
     
   }
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-full">
              <div className="text-center ">
+                 {/* <p>Tracking Number: {trackingNumber}</p> */}
                  <h1 className="font-bold text-2xl mb-2 max-w-6xl">{title}</h1>
                  <p className="text-sm text max-w-6xl">{description}</p>
              </div>

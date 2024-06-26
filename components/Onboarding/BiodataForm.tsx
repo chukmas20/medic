@@ -14,6 +14,7 @@ import RadioInput from "../FormInputs/RadioInput";
 import { Button } from "flowbite-react";
 import { generateTrackingNumber } from "@/lib/generateTracking";
 import { createDoctorProfile } from "@/actions/onboarding";
+import { useOnboardingContext } from "@/context/context";
 
 
 
@@ -23,6 +24,7 @@ export type StepFormProps ={
   description: string;
   userId?: string;
   nextPage?: string;
+ formId?: string;
   
 }
 export default function BiodataForm({
@@ -31,7 +33,11 @@ export default function BiodataForm({
   description,
   nextPage,
   userId,
+  formId = ""
  }:StepFormProps ){
+
+  //Get Context Data
+  const {trackingNumber, doctorProfileId,setTrackingNumber, setDoctorProfileId  } = useOnboardingContext()
   const [isLoading, setIsLoading] = useState(false)
   const [dob, setDob] = useState<Date>()
   const [profileImage, setProfileImage] = useState("https://e7.pngegg.com/pngimages/644/838/png-clipart-physician-patient-cartoon-doctor-doctor-cartoon-character-child-thumbnail.png")
@@ -60,6 +66,7 @@ export default function BiodataForm({
     watch,
     formState: { errors },
   } = useForm<BioDataFormProps>()
+  console.log(trackingNumber)
    
   async function onSubmit(data: BioDataFormProps){
       setIsLoading(true);
@@ -74,12 +81,18 @@ export default function BiodataForm({
       data.page = page
       console.log(data);
     try {
-      const newProfile   = await createDoctorProfile(data)
-      setIsLoading(false)
-      router.push(
-        `/onboarding/${userId}?page=${nextPage}&&tracking=${data.trackingNumber}`
-      )
-      console.log(newProfile);
+      const res   = await createDoctorProfile(data)
+      if(res.status === 201){
+        setIsLoading(false)
+        toast.success("Doctor Profile Created");
+        setTrackingNumber(res.data?.trackingNumber ?? "")
+        setDoctorProfileId(res.data?.id ?? "")
+        router.push( `/onboarding/${userId}?page=${nextPage}`);
+        console.log(res.data);
+      }else{
+        setIsLoading(false)
+        throw new Error("Something went wrong");
+       }  
     } catch (error) {
        setIsLoading(false)
       console.log(error)

@@ -5,20 +5,23 @@ import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 
 import SelectInput from "../FormInputs/SelectInput";
 import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
 import MultipleFileUpload from "../FormInputs/MultipleFileUpload";
 import TextAreaInput from "../FormInputs/TextAreaInput";
 import { StepFormProps } from "./BiodataForm";
+import { updateDoctorProfile } from "@/actions/onboarding";
 
 export default function AdditionalInfo(
   {
     page,
      title,
      description,
-     nextPage
+     nextPage,
+     formId,
+     userId
     }:StepFormProps)
    {
     const [otherSpecialties, setOtherSpecialties] = useState([]);
@@ -39,6 +42,27 @@ export default function AdditionalInfo(
      data.page = page
      console.log(data);
     setIsLoading(true);
+
+    // educationalHistory: string;
+    // research?: string;
+    // accomplishments?: string;
+    // additionalDocs: string[];
+
+    
+    try {
+      const res = await updateDoctorProfile(formId, data)
+      if(res?.status === 201){
+       setIsLoading(false)
+       //extract the profile form data  from the updated profile
+       router.push( `/onboarding/${userId}?page=${nextPage}`);
+       console.log(res.data)
+      }else{
+       setIsLoading(false)
+       throw new Error("Something went wrong");
+      }
+   } catch (error) {
+     setIsLoading(false)
+   }
    
     
   }
@@ -51,7 +75,7 @@ export default function AdditionalInfo(
              <form onSubmit={handleSubmit(onSubmit)} className="space-y-2" >
                    <TextAreaInput 
                     label="Education History" 
-                    name="educationHistory"
+                    name="educationalHistory"
                     register={register}
                     errors={errors}
                     /> 
@@ -63,7 +87,7 @@ export default function AdditionalInfo(
                  />
                   <TextAreaInput 
                     label="Accomplishments" 
-                    name="accomplishment"
+                    name="accomplishments"
                     register={register}
                     errors={errors}
                     /> 
@@ -74,11 +98,11 @@ export default function AdditionalInfo(
                      endpoint="additionalDocs"
                    />
 
-                  <ArrayItemsInput
+                  {/* <ArrayItemsInput
                     setItems={setOtherSpecialties} 
                      items={otherSpecialties}
                      itemTitle=" More Specialties"
-                      />   
+                      />    */}
               <div>
                    <SubmitButton 
                      title="Save and Continue" 

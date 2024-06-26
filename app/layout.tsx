@@ -7,6 +7,7 @@ import { siteConfig } from "@/config/site";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { OnboardingContextProvider } from "@/context/context";
  
 
 const inter = Inter({ subsets: ["latin"] });
@@ -75,7 +76,8 @@ export default function RootLayout({
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
         <Providers>
-        <ThemeProvider
+         <OnboardingContextProvider>
+         <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
@@ -83,6 +85,7 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
+         </OnboardingContextProvider>
         </Providers>
         </body>
     </html>

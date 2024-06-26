@@ -11,23 +11,51 @@ import SelectInput from "../FormInputs/SelectInput";
 import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
 import MultipleFileUpload from "../FormInputs/MultipleFileUpload";
 import { StepFormProps } from "./BiodataForm";
+import { updateDoctorProfile } from "@/actions/onboarding";
 
 export default function Education(
   {
     page,
      title,
      description,
-     nextPage
+     nextPage,
+     userId,
+     formId
     }:StepFormProps)
 
    {
-    const [otherSpecialties, setOtherSpecialties] = useState([]);
-    console.log(otherSpecialties);
-  const [isLoading, setIsLoading] = useState(false)
+    const [docs, setDocs] = useState([
+      {
+         size: 15634,
  
-  const [docs, setDocs] = useState([
-  ])
-  console.log(docs);
+         title: "namecheap-order-146554707.pdf",
+        
+          url: "https://utfs.io/f/d72b32ef-6be5-471d-9bff-2afc3cdbdc2d-y85f79.pdf"
+        },
+        {
+          size: 15992,
+  
+          title: "namecheap-order-146554670.pdf",
+         
+           url: "https://utfs.io/f/038992e7-a05e-4144-82db-66fa1221e65a-y85eme.pdf"
+         },
+         {
+          size: 16334,
+  
+          title: "namecheap-order-146554312.pdf",
+         
+           url: "https://utfs.io/f/72f79da4-d10d-4116-8e39-383981388ddd-y85c97.pdf"
+         },
+      ]);
+
+     
+    console.log(docs);
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [otherSpecialties, setOtherSpecialties] = useState([])
+
+ 
+ 
 
 
   const router = useRouter();
@@ -40,9 +68,32 @@ export default function Education(
   } = useForm<EducationFormProps>()
   async function onSubmit(data: EducationFormProps){
      data.page = page
+     data.otherSpecialties = otherSpecialties
+     data.boardCertificates =  docs.map((doc)=> doc.url);
+     data.graduationYear = Number(data.graduationYear)
      console.log(data);
-    setIsLoading(true);
-   
+      setIsLoading(true);
+
+    //  medicalSchool: string;
+    // graduationYear: number;
+    // primarySpecialization?: string;
+    // otherSpecialties?: string[];
+    // boardCertificates: string[];
+    try {
+      const res = await updateDoctorProfile(formId, data)
+      if(res?.status === 201){
+       setIsLoading(false)
+       //extract the profile form data  from the updated profile
+       router.push( `/onboarding/${userId}?page=${nextPage}`);
+       console.log(res.data)
+      }else{
+       setIsLoading(false)
+       throw new Error("Something went wrong");
+      }
+   } catch (error) {
+     setIsLoading(false)
+   }
+  
     
   }
     return (
@@ -59,17 +110,18 @@ export default function Education(
                  errors={errors}
                  />
                  <TextInput 
-                 label="Graduation Year" 
-                 name="graduationYear"
-                 register={register}
-                 errors={errors}
+                    label="Graduation Year" 
+                    name="graduationYear"
+                    type="number"
+                    register={register}
+                    errors={errors}
                  />
-                 <SelectInput
+                 {/* <SelectInput
                   label="Select Primary Specialization" 
                   register={register}
                   name="primarySpecialization"
                    errors={errors}
-                   />
+                   /> */}
                   <ArrayItemsInput
                     setItems={setOtherSpecialties} 
                      items={otherSpecialties}

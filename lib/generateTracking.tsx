@@ -1,6 +1,6 @@
 export function generateTrackingNumber(): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const trackingNumberLength = 8;
+    const trackingNumberLength = 10;
     let trackingNumber = '';
 
     for (let i = 0; i < trackingNumberLength; i++) {

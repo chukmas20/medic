@@ -1,48 +1,29 @@
 "use client"
-import { BioDataFormProps, ContactInfoFormProps, RegisterInputProps } from "@/types/type";
+import {  ContactInfoFormProps } from "@/types/type";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
-import { createUser } from "@/actions/users";
-import { UserRole } from "@prisma/client";
 import toast from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
-import DatePickerInput from "../FormInputs/DatePickerInput";
-import TextAreaInput from "../FormInputs/TextAreaInput";
-import RadioInput from "../FormInputs/RadioInput";
-import ImageInput from "../FormInputs/ImageInput";
 import { StepFormProps } from "./BiodataForm";
+import { updateDoctorProfile } from "@/actions/onboarding";
 
 export default function ContactInfo(
     {
       page, 
       title,
       description,
+      formId,
+      userId,
       nextPage
     }:
       StepFormProps) {
    
   const [isLoading, setIsLoading] = useState(false)
-  const [profileImage, setProfileImage] = useState("https://e7.pngegg.com/pngimages/644/838/png-clipart-physician-patient-cartoon-doctor-doctor-cartoon-character-child-thumbnail.png")
 
-  const genderOptions = [
-    {
-      label:"Male",
-       value:"male",
-     },
-     {
-      label:"FeMale",
-       value:"female",
-     },
-     {
-      label:"Prefer not to say",
-       value:"others",
-     },
-
-]
-
+ 
   const router = useRouter();
   const {
     register,
@@ -53,9 +34,30 @@ export default function ContactInfo(
   } = useForm<ContactInfoFormProps>()
 
   async function onSubmit(data: ContactInfoFormProps){
+     setIsLoading(true);
      data.page = page
      console.log(data);
-    setIsLoading(true);  
+    // setIsLoading(true);  
+    try {
+      const res = await updateDoctorProfile(formId, data)
+      if(res?.status === 201){
+       setIsLoading(false)
+       //extract the profile form data  from the updated profile
+       router.push( `/onboarding/${userId}?page=${nextPage}`);
+       console.log(res.data)
+      }else{
+       setIsLoading(false)
+       throw new Error("Something went wrong");
+      }
+   } catch (error) {
+     setIsLoading(false)
+   }
+  
+    // email: string;
+    // phone: string;
+    // country: string;
+    // city: string;
+    // state: string;
   }
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-full">

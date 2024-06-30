@@ -31,6 +31,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { getApplicationByTrack } from "@/actions/onboarding";
 import SubmitButton from "../FormInputs/SubmitButton";
+import { useOnboardingContext } from "@/context/context";
  
 const FormSchema = z.object({
    trackingNumber: z.string().min(2, {
@@ -43,6 +44,8 @@ const FormSchema = z.object({
 export default  function TrackingForm() {
   const [loading, setLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const {savedDbData, setSavedDbData} = useOnboardingContext()
+
   
 
   const router = useRouter();
@@ -60,6 +63,8 @@ export default  function TrackingForm() {
       try {
         //Make request
         const res = await getApplicationByTrack(data.trackingNumber)
+        //save this to the context
+        setSavedDbData(res?.data)
         if(res?.status === 404){
           setShowNotification(true)
           setLoading(false)

@@ -7,14 +7,10 @@ import { useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import SelectInput from "../FormInputs/SelectInput";
-import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
-import MultipleFileUpload from "../FormInputs/MultipleFileUpload";
+
 import RadioInput from "../FormInputs/RadioInput";
 import { Checkbox } from "../ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
 import { StepFormProps } from "./BiodataForm";

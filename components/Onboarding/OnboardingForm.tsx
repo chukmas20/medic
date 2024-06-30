@@ -1,24 +1,22 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import {  Calendar, Contact, GraduationCap, Icon,Info,Plus,StethoscopeIcon, User } from "lucide-react";
+import {  Contact, GraduationCap, Icon,Info,Plus,StethoscopeIcon, User } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import BiodataForm from "./BiodataForm";
 import ContactInfo from "./ContactInfo";
-import Profession from "./Profession";
 import Education from "./Education";
 import ProfileInfoForm from "./ProfileInfoForm";
 import PractiseInfoForm from "./PractiseInfoForm";
 import AdditionalInfo from "./AdditionalInfo";
 import Availability from "./Availability";
-import { HiInformationCircle } from "react-icons/hi";
 import { useOnboardingContext } from "@/context/context";
 
 const OnboardingForm = ({id}:{id:string}) => {
   const params = useSearchParams();
      const page = params.get("page")??"bio-data";
-     const {trackingNumber, doctorProfileId } = useOnboardingContext()
+     const {trackingNumber, doctorProfileId, savedDbData } = useOnboardingContext()
 
      const steps =[
         {
@@ -30,7 +28,7 @@ const OnboardingForm = ({id}:{id:string}) => {
                 description="Please fill in your Bio details"
                  page={page}
                  nextPage="profile"
-                 formId={doctorProfileId}
+                 formId={doctorProfileId ? doctorProfileId : savedDbData.id}
                 />,
             icon: Info
        },
@@ -43,7 +41,7 @@ const OnboardingForm = ({id}:{id:string}) => {
                     page={page} 
                     nextPage="contact"
                     userId = {id}
-                    formId={doctorProfileId}
+                    formId={doctorProfileId ? doctorProfileId : savedDbData.id}
                      />,
         icon: User
    },
@@ -54,7 +52,7 @@ const OnboardingForm = ({id}:{id:string}) => {
             component: <ContactInfo title="Contact  Information" 
             description="Please fill in your profile details" page={page}  
             nextPage="education"
-            formId={doctorProfileId}
+            formId={doctorProfileId ? doctorProfileId : savedDbData.id}
             userId = {id}
              />,
             icon: Contact
@@ -68,7 +66,7 @@ const OnboardingForm = ({id}:{id:string}) => {
             description="Please fill in your Education details"
              page={page}
              nextPage="practise"
-             formId={doctorProfileId}
+             formId={doctorProfileId ? doctorProfileId : savedDbData.id}
              userId = {id}
 
               />,
@@ -82,7 +80,7 @@ const OnboardingForm = ({id}:{id:string}) => {
             component:<PractiseInfoForm  title="Practise Information" 
             description="Please fill in your Practise details" page={page}
             nextPage="additional" 
-            formId={doctorProfileId}
+            formId={doctorProfileId ? doctorProfileId : savedDbData.id}
             userId = {id}
 
             />,
@@ -95,22 +93,22 @@ const OnboardingForm = ({id}:{id:string}) => {
             page:"additional",
             component:<AdditionalInfo  title="Additional Information" 
             description="Please fill Additional details"
-             page={page} nextPage="availability"
-             formId={doctorProfileId}
+             page={page} nextPage="final"
+             formId={doctorProfileId ? doctorProfileId : savedDbData.id}
              userId = {id}
              />,
             icon: Plus
         },
-        {
-            title: "Availability",
-            page: "availability",
-            component:<Availability  title="Availability Information" 
-            description="Please fill Additional details" page={page} 
-            formId={doctorProfileId}
-            userId = {id}
-            />,
-            icon: Calendar
-        },
+        // {
+        //     title: "Availability",
+        //     page: "availability",
+        //     component:<Availability  title="Availability Information" 
+        //     description="Please fill Additional details" page={page} 
+        //     formId={doctorProfileId}
+        //     userId = {id}
+        //     />,
+        //     icon: Calendar
+        // },
 
      ]
 
@@ -120,7 +118,7 @@ const OnboardingForm = ({id}:{id:string}) => {
    
   return (
     <div className='grid grid-cols-12 mx-auto rounded-lg shadow-md overflow-hidden min-h-screen bg-yellow-100'>
-         <div className=' col-span-full sm:col-span-3  '>
+         <div className=' col-span-full sm:col-span-3 dark:bg-slate-900  '>
            
              {steps.map((step, i)=>{
               const icon = Icon;
@@ -141,9 +139,9 @@ const OnboardingForm = ({id}:{id:string}) => {
              })}
          </div>
          <div className='sm:col-span-9 col-span-full bg-yellow-100 p-4'>
-          {trackingNumber && (
+          {trackingNumber || savedDbData.id && (
                <p className="bg-yellow-600 text-slate-200 w-90 rounded-md text-sm px-4 py-2">
-               Use the unique Unique Code - {trackingNumber} to resume registration or check status
+               Use the unique Unique Code - {trackingNumber ? trackingNumber: savedDbData.trackingNumber} to resume registration or check status
              </p> 
             )}
               

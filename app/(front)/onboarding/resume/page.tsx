@@ -3,7 +3,7 @@ import TrackingForm from "@/components/frontend/TrackingForm";
 import VerifyTokenForm from "@/components/frontend/VerifyTokenForm";
 // import VerifyTokenForm from "@/components/VerifyTokenForm";
  
-export default async function VerifyAccount({
+export default async function VerifyTrackingNumber({
   params: { id },
 }: {
   params: { id: string };

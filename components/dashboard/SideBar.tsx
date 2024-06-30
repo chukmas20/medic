@@ -1,9 +1,8 @@
 "use client";
-import { Badge, BarChart, Bell, Folder, Grid2X2, Home, LineChart, Package, Package2, Plus, Settings, ShoppingCart, Users } from "lucide-react";
+import { Badge, Bell,  Home, LineChart, Package, Package2, Settings, ShoppingCart, Telescope, Users } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import LogoutButton from "./LogoutButton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -43,6 +42,11 @@ export default  function SideBar() {
       name:"Analytics",
       path:"/dashboard/analytics",
       icon: LineChart
+    }, 
+    {
+      name:"Website",
+      path:"/",
+      icon: Telescope
     }, 
     {
       name:"Logout",

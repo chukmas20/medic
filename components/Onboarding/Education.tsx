@@ -5,13 +5,15 @@ import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 
 import SelectInput from "../FormInputs/SelectInput";
 import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
-import MultipleFileUpload from "../FormInputs/MultipleFileUpload";
+import MultipleFileUpload, { File } from "../FormInputs/MultipleFileUpload";
 import { StepFormProps } from "./BiodataForm";
 import { updateDoctorProfile } from "@/actions/onboarding";
+import toast from "react-hot-toast";
+import { useOnboardingContext } from "@/context/context";
 
 export default function Education(
   {
@@ -24,35 +26,22 @@ export default function Education(
     }:StepFormProps)
 
    {
-    const [docs, setDocs] = useState([
-      {
-         size: 15634,
- 
-         title: "namecheap-order-146554707.pdf",
-        
-          url: "https://utfs.io/f/d72b32ef-6be5-471d-9bff-2afc3cdbdc2d-y85f79.pdf"
-        },
-        {
-          size: 15992,
-  
-          title: "namecheap-order-146554670.pdf",
-         
-           url: "https://utfs.io/f/038992e7-a05e-4144-82db-66fa1221e65a-y85eme.pdf"
-         },
-         {
-          size: 16334,
-  
-          title: "namecheap-order-146554312.pdf",
-         
-           url: "https://utfs.io/f/72f79da4-d10d-4116-8e39-383981388ddd-y85c97.pdf"
-         },
-      ]);
+   
 
-     
-    console.log(docs);
-
+  const {educationData,savedDbData, setEducationData} = useOnboardingContext()
   const [isLoading, setIsLoading] = useState(false)
-  const [otherSpecialties, setOtherSpecialties] = useState([])
+  const initialSpecialities = educationData.otherSpecialties || savedDbData.otherSpecialities;
+  const [otherSpecialties, setOtherSpecialties] = useState(initialSpecialities)
+
+  const initialDocs = educationData.boardCertificates || savedDbData.boardCertificates;
+  const [docs, setDocs] = useState<File[]>(initialDocs); 
+  const defaultData = educationData || savedDbData
+
+  console.log(docs);
+
+
+
+
 
  
  
@@ -65,7 +54,15 @@ export default function Education(
     reset,
     watch,
     formState: { errors },
-  } = useForm<EducationFormProps>()
+  } = useForm<EducationFormProps>({
+    defaultValues: {
+       medicalSchool: educationData.medicalSchool || savedDbData.medicalSchool,
+       graduationYear: educationData.graduationYear || savedDbData.graduationYear,
+       primarySpecialization: educationData.primarySpecialization || savedDbData.primarySpecialization,
+       otherSpecialties: educationData.otherSpecialties || savedDbData.otherSpecialties ,
+       boardCertificates: educationData.boardCertificates || savedDbData.boardCertificates,
+    }
+  })
   async function onSubmit(data: EducationFormProps){
      data.page = page
      data.otherSpecialties = otherSpecialties
@@ -81,9 +78,11 @@ export default function Education(
     // boardCertificates: string[];
     try {
       const res = await updateDoctorProfile(formId, data)
+       setEducationData(data)
       if(res?.status === 201){
        setIsLoading(false)
        //extract the profile form data  from the updated profile
+       toast.success("Education information completed successfully")
        router.push( `/onboarding/${userId}?page=${nextPage}`);
        console.log(res.data)
       }else{

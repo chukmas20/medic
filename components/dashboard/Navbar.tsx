@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation";
-import { AlignJustify, Badge, Bell, CircleUser, Home, LineChart, Mail, Menu, Package, Package2, Search, ShoppingCart, Users } from "lucide-react";
+import { AlignJustify, Badge, Bell, CircleUser, Home, HomeIcon, LineChart, Mail, Menu, Package, Package2, Search, ShoppingCart, Users } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";

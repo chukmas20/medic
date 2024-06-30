@@ -1,19 +1,16 @@
 "use client"
-import { BioDataFormProps, RegisterInputProps } from "@/types/type";
+import { BioDataFormProps,} from "@/types/type";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
-import { createUser } from "@/actions/users";
-import { UserRole } from "@prisma/client";
 import toast from "react-hot-toast";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter,} from "next/navigation";
 import DatePickerInput from "../FormInputs/DatePickerInput";
 import RadioInput from "../FormInputs/RadioInput";
-import { Button } from "flowbite-react";
 import { generateTrackingNumber } from "@/lib/generateTracking";
-import { createDoctorProfile } from "@/actions/onboarding";
+import { createDoctorProfile, updateDoctorProfile } from "@/actions/onboarding";
 import { useOnboardingContext } from "@/context/context";
 
 
@@ -39,8 +36,15 @@ export default function BiodataForm({
   //Get Context Data
   const {trackingNumber, doctorProfileId,setTrackingNumber, setDoctorProfileId  } = useOnboardingContext()
   const [isLoading, setIsLoading] = useState(false)
-  const [dob, setDob] = useState<Date>()
-  const [profileImage, setProfileImage] = useState("https://e7.pngegg.com/pngimages/644/838/png-clipart-physician-patient-cartoon-doctor-doctor-cartoon-character-child-thumbnail.png")
+
+  // const [initialData, setInitialData] = useState<BioDataFormProps>()
+  const {bioData, savedDbData, setBioData} = useOnboardingContext()
+  const initialDateOfBirth = bioData.dob || savedDbData.dob;
+  const [dob, setDob] = useState<Date>(initialDateOfBirth)
+  const defaultData = bioData || savedDbData;
+
+
+
 
   const genderOptions = [
     {
@@ -65,34 +69,74 @@ export default function BiodataForm({
     reset,
     watch,
     formState: { errors },
-  } = useForm<BioDataFormProps>()
+  } = useForm<BioDataFormProps>({
+    defaultValues: {
+      firstName:bioData.firstName || savedDbData.firstName,
+      lastName:bioData.lastName || savedDbData.lastName,
+      middleName:bioData.middleName|| savedDbData.middleName,
+      trackingNumber:bioData.trackingNumber || savedDbData.trackingNumber,
+      gender:bioData.gender || savedDbData.gender,
+
+
+
+      // trackingNumber: ""
+    }
+  })
   console.log(trackingNumber)
    
   async function onSubmit(data: BioDataFormProps){
       setIsLoading(true);
      if(!dob){
         toast.error("Date of birth is required")
+        setIsLoading(false);
         return;
      }
     
-      data.userId = userId
+      data.userId = userId as string
       data.dob = dob
       data.trackingNumber = generateTrackingNumber()
       data.page = page
       console.log(data);
     try {
-      const res   = await createDoctorProfile(data)
-      if(res.status === 201){
-        setIsLoading(false)
-        toast.success("Doctor Profile Created");
-        setTrackingNumber(res.data?.trackingNumber ?? "")
-        setDoctorProfileId(res.data?.id ?? "")
-        router.push( `/onboarding/${userId}?page=${nextPage}`);
-        console.log(res.data);
+      if(formId){
+        const res   = await updateDoctorProfile(formId,data)
+        if(res && res.status === 201){
+          toast.success("Doctor Bio data updated successfully");
+          setIsLoading(false);
+          // const {data }= res
+          setTrackingNumber(res.data?.trackingNumber ?? "")
+          setDoctorProfileId(res.data?.id ?? "")
+         
+          //Route to next form
+          router.push( `/onboarding/${userId}?page=${nextPage}`);
+          console.log(res.data);
+        }else{
+          setIsLoading(false)
+          throw new Error("Something went wrong");
+         }  
       }else{
-        setIsLoading(false)
-        throw new Error("Something went wrong");
-       }  
+        const res   = await createDoctorProfile(data)
+        //Save data to context API
+        setBioData(data)
+        setIsLoading(true)
+        if(res.status === 201){
+          toast.success("Doctor Profile Created");
+          setIsLoading(false);
+          // const {data }= res
+          setTrackingNumber(res.data?.trackingNumber ?? "")
+          setDoctorProfileId(res.data?.id ?? "")
+         
+        
+          router.push( `/onboarding/${userId}?page=${nextPage}`);
+          console.log(res.data);
+        }else{
+          setIsLoading(false)
+          throw new Error("Something went wrong");
+         }  
+
+      }
+      //save data
+     
     } catch (error) {
        setIsLoading(false)
       console.log(error)

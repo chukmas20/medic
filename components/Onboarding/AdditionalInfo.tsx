@@ -7,12 +7,12 @@ import { useState } from "react";
 
 import { useRouter} from "next/navigation";
 
-import SelectInput from "../FormInputs/SelectInput";
-import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
 import MultipleFileUpload from "../FormInputs/MultipleFileUpload";
 import TextAreaInput from "../FormInputs/TextAreaInput";
 import { StepFormProps } from "./BiodataForm";
-import { updateDoctorProfile } from "@/actions/onboarding";
+import { completeProfile } from "@/actions/onboarding";
+import toast from "react-hot-toast";
+import { useOnboardingContext } from "@/context/context";
 
 export default function AdditionalInfo(
   {
@@ -24,10 +24,12 @@ export default function AdditionalInfo(
      userId
     }:StepFormProps)
    {
-    const [otherSpecialties, setOtherSpecialties] = useState([]);
-    console.log(otherSpecialties);
+    const {additionalData, savedDbData, setAdditionalData} = useOnboardingContext()
+
   const [isLoading, setIsLoading] = useState(false)
-  const [additionalDocs, setAdditionalDocs] = useState([])
+  const initialDocs = additionalData.additionalDocs || savedDbData.additionalDocs
+  const [additionalDocs, setAdditionalDocs] = useState<File[]>(initialDocs)
+  const defaultData = additionalData || savedDbData
 
 
   const router = useRouter();
@@ -37,25 +39,32 @@ export default function AdditionalInfo(
     reset,
     watch,
     formState: { errors },
-  } = useForm<AdditionalFormProps>()
+  } = useForm<AdditionalFormProps>({
+    defaultValues: {
+      educationalHistory: additionalData.educationalHistory || savedDbData.educationalHistory,
+      research: additionalData.research || savedDbData.research,
+      accomplishments: additionalData.accomplishments || savedDbData.accomplishments,
+      additionalDocs: additionalData.additionalDocs || savedDbData.additionalDocs
+    }
+  })
+
   async function onSubmit(data: AdditionalFormProps){
      data.page = page
      console.log(data);
     setIsLoading(true);
-
-    // educationalHistory: string;
-    // research?: string;
-    // accomplishments?: string;
-    // additionalDocs: string[];
-
-    
+ 
     try {
-      const res = await updateDoctorProfile(formId, data)
+      const res = await completeProfile(formId, data)
+      setAdditionalData(data);
       if(res?.status === 201){
        setIsLoading(false)
        //extract the profile form data  from the updated profile
-       router.push( `/onboarding/${userId}?page=${nextPage}`);
-       console.log(res.data)
+       //send a welcome Email
+
+       toast.success("Onboarding completed successfully")
+        // route to the login page
+       router.push("/login");
+      //  console.log(res.data)
       }else{
        setIsLoading(false)
        throw new Error("Something went wrong");
@@ -105,7 +114,7 @@ export default function AdditionalInfo(
                       />    */}
               <div>
                    <SubmitButton 
-                     title="Save and Continue" 
+                     title="Finish" 
                      buttonType="submit" loadingTitle="Please Wait..." isLoading={isLoading}   />
               </div>
             </form>

@@ -1,17 +1,14 @@
 "use client"
 import {  ProfileInfoFormProps, } from "@/types/type";
-import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
-import { createUser } from "@/actions/users";
-import { UserRole } from "@prisma/client";
+
 import toast from "react-hot-toast";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 import DatePickerInput from "../FormInputs/DatePickerInput";
 import TextAreaInput from "../FormInputs/TextAreaInput";
-import RadioInput from "../FormInputs/RadioInput";
 import ImageInput from "../FormInputs/ImageInput";
 import { StepFormProps } from "./BiodataForm";
 import { useOnboardingContext } from "@/context/context";
@@ -29,25 +26,15 @@ export default function ProfileInfoForm(
     StepFormProps) {
    
   const [isLoading, setIsLoading] = useState(false)
-  const [expiry, setExpiry] = useState<Date>()
-  const {trackingNumber, doctorProfileId } = useOnboardingContext();
-  const [profileImage, setProfileImage] = useState("https://e7.pngegg.com/pngimages/644/838/png-clipart-physician-patient-cartoon-doctor-doctor-cartoon-character-child-thumbnail.png")
- 
-  const genderOptions = [
-    {
-      label:"Male",
-       value:"male",
-     },
-     {
-      label:"FeMale",
-       value:"female",
-     },
-     {
-      label:"Prefer not to say",
-       value:"others",
-     },
+  // const {trackingNumber, doctorProfileId } = useOnboardingContext();
+  const {profileData, savedDbData, setProfileData} = useOnboardingContext()
+  const initialProfileImage = profileData.profilePicture || savedDbData.profilePicture
+  const [profileImage, setProfileImage] = useState(initialProfileImage)
+  const initilaExpiryDate = profileData.medicalLicenseExpiry || savedDbData.medicalLicenseExpiry;
+  const [expiry, setExpiry] = useState<Date>(initilaExpiryDate)
+  const defaultData = profileData || savedDbData
 
-]
+
 
   const router = useRouter();
   const {
@@ -56,11 +43,19 @@ export default function ProfileInfoForm(
     reset,
     watch,
     formState: { errors },
-  } = useForm<ProfileInfoFormProps>()
+  } = useForm<ProfileInfoFormProps>({
+    defaultValues: {
+      bio:profileData.bio || savedDbData.bio,
+      medicalLicense:profileData.medicalLicense || savedDbData.medicalLicense,
+      yearsOfExperience:profileData.yearsOfExperience || savedDbData.yearsOfExperience,
+
+    }
+  })
   async function onSubmit(data: ProfileInfoFormProps){
      setIsLoading(true);
     if(!expiry){
       toast.error("Please select license expiry date");
+      setIsLoading(false);
       return;
     }
      data.medicalLicenseExpiry = expiry;
@@ -71,10 +66,13 @@ export default function ProfileInfoForm(
     //  data.yearsOfExperience
      console.log(data);
     try {
-       const res = await updateDoctorProfile(formId, data)
+       const res = await updateDoctorProfile(`${formId?formId:savedDbData.id}`, data)
+       setProfileData(data);
        if(res?.status === 201){
         setIsLoading(false)
         //extract the profile form data  from the updated profile
+
+        toast.success("Profile Information completed successfully")
         router.push( `/onboarding/${userId}?page=${nextPage}`);
         console.log(res.data)
        }else{

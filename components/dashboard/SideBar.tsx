@@ -1,60 +1,98 @@
 "use client";
-import { Badge, Bell,  Home, LineChart, Package, Package2, Settings, ShoppingCart, Telescope, Users } from "lucide-react";
+import { Badge, Bell,  Book,  Calendar,  Home, LineChart, Mail, Package, Package2, Settings, ShoppingCart, Stethoscope, Telescope, User, Users, Users2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Session } from "next-auth";
 
  
-export default  function SideBar() {
+export default  function SideBar({session}:{session:Session}) {
+   const{user} = session;
+   const role = user?.role;
   const pathname = usePathname();
-  const sideBarLinks = [
-    {
-      name:"Dashboard",
-      path:"/dashboard",
-      icon: Home
-    },
+  const roles ={
+    USER:[
+      {title: "Dashboard", path:"/dashboard", icon: Home},
+      {
+        title: "My Appointments",
+       path:"/dashboard/user/appointments",
+        icon: Calendar
+      },
+      {
+        title: "Settings",
+       path:"/dashboard/user/settings",
+        icon: Settings
+      },
+    ],
+    ADMIN:[
+      {title: "Dashboard", path:"/dashboard", icon: Home},
+      {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
+      {title: "Patients", path:"/dashboard/patients", icon: Users2},
+      {title: "Appointments", path:"/dashboard/appointments", icon: Calendar},
+    ],
+     DOCTOR:[
+      {title: "Dashboard", path:"/dashboard", icon: Home},
+      {title: "Patients", path:"/dashboard/patients", icon: Users2},
+      {title: "Appointments", path:"/dashboard/appointments", icon: Calendar},
+      {title: "Tasks", path:"/dashboard/doctor/tasks", icon: Book},
+      {title: "Inbox", path:"/dashboard/doctor/inbox", icon: Mail},
+      {
+        title:"Settings",
+        path:"/dashboard/doctor/settings",
+        icon: Settings
+      }
+    ],
+  };
+  console.log(role)
+  let sideBarLinks = roles[role] || [];
+  // const sideBarLinks = [
+  //   {
+  //     name:"Dashboard",
+  //     path:"/dashboard",
+  //     icon: Home
+  //   },
    
-    {
-      name:"Products",
-      path:"/dashboard/products",
-      icon: Package
-    },
-    {
-      name:"Orders",
-      path:"/dashboard/orders",
-      icon: ShoppingCart,
-      badgeCount: 6
-    },
-    {
-      name:"Customers",
-      path:"/dashboard/customers",
-      icon: Users
-    },
-    {
-      name:"Settings",
-      path:"/dashboard/settings",
-      icon: Settings
-    },
-    {
-      name:"Analytics",
-      path:"/dashboard/analytics",
-      icon: LineChart
-    }, 
-    {
-      name:"Website",
-      path:"/",
-      icon: Telescope
-    }, 
-    {
-      name:"Logout",
-      path:"/dashboard/logout",
-      icon: Bell
-    },
+  //   {
+  //     name:"Products",
+  //     path:"/dashboard/products",
+  //     icon: Package
+  //   },
+  //   {
+  //     name:"Orders",
+  //     path:"/dashboard/orders",
+  //     icon: ShoppingCart,
+  //     badgeCount: 6
+  //   },
+  //   {
+  //     name:"Customers",
+  //     path:"/dashboard/customers",
+  //     icon: Users
+  //   },
+  //   {
+  //     name:"Settings",
+  //     path:"/dashboard/settings",
+  //     icon: Settings
+  //   },
+  //   {
+  //     name:"Analytics",
+  //     path:"/dashboard/analytics",
+  //     icon: LineChart
+  //   }, 
+  //   {
+  //     name:"Website",
+  //     path:"/",
+  //     icon: Telescope
+  //   }, 
+  //   {
+  //     name:"Logout",
+  //     path:"/dashboard/logout",
+  //     icon: Bell
+  //   },
    
-  ]
+  // ]
   return (
     <div className="hidden border-r bg-muted/40 md:block">
     <div className="flex h-full max-h-screen flex-col gap-2">
@@ -82,12 +120,12 @@ export default  function SideBar() {
                   )}
                    >
                   <Icon className="h-4 w-4" />
-                     {item.name}
-                     {item.badgeCount && (
+                     {item.title}
+                     {/* {item.badgeCount && (
                       <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                           {item.badgeCount}
                       </Badge>
-                     )}
+                     )} */}
                   
                 </Link>
                )

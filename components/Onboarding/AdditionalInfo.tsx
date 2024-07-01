@@ -100,12 +100,12 @@ export default function AdditionalInfo(
                     register={register}
                     errors={errors}
                     /> 
-                <MultipleFileUpload
+                {/* <MultipleFileUpload
                     label="Add Additional Documents (Maximum of 4 documents)" 
                     setFiles={setAdditionalDocs}
                      files={additionalDocs} 
                      endpoint="additionalDocs"
-                   />
+                   /> */}
 
                   {/* <ArrayItemsInput
                     setItems={setOtherSpecialties} 

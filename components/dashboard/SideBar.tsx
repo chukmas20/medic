@@ -35,8 +35,8 @@ export default  function SideBar({session}:{session:Session}) {
     ],
      DOCTOR:[
       {title: "Dashboard", path:"/dashboard", icon: Home},
-      {title: "Patients", path:"/dashboard/patients", icon: Users2},
-      {title: "Appointments", path:"/dashboard/appointments", icon: Calendar},
+      {title: "Patients", path:"/dashboard/doctor/patients", icon: Users2},
+      {title: "Appointments", path:"/dashboard/doctor/appointments", icon: Calendar},
       {title: "Tasks", path:"/dashboard/doctor/tasks", icon: Book},
       {title: "Inbox", path:"/dashboard/doctor/inbox", icon: Mail},
       {

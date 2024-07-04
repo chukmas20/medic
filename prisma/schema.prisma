@@ -66,6 +66,22 @@ model User {
   updatedAt     DateTime  @updatedAt
 }
 
+model Availability {
+ id   String  @id @default(auto()) @map("_id") @db.ObjectId
+ doctorProfileId      String    @db.ObjectId  @unique
+doctorProfile      DoctorProfile @relation(fields: [doctorProfileId], references:[id], onDelete:Cascade,onUpdate:Cascade)
+monday     String[]
+tuesday     String[]
+wednesday     String[]
+thursday     String[]
+friday     String[]
+saturday     String[]
+sunday     String[]
+
+  createdAt     DateTime  @default(now()) 
+  updatedAt     DateTime  @updatedAt
+}
+
 
  
  model DoctorProfile {
@@ -79,7 +95,7 @@ model User {
     dob DateTime?
     gender String
     page String
-
+    availability Availability?
     bio   String?
     medicalLicense   String?
     medicalLicenseExpiry    DateTime?

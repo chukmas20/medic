@@ -91,8 +91,8 @@ export function MobileNav() {
           onOpenChange={setOpen}
         >
              <img 
-         className="h-10 w-10"
-           src="https://freepngimg.com/thumb/health/22943-8-health-image-thumb.png" />
+         className="h-10 w-10 rounded-full"
+           src="https://utfs.io/f/f58b4f21-b50d-4710-9ff1-54dad8a7effc-zcjszo.png" />
            {/* <Icons.logo className="mr-2 h-4 w-4" />
           <span className="font-bold">{siteConfig.name}</span> */}
         </MobileLink>

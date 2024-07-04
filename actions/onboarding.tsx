@@ -2,7 +2,6 @@
 
 import WelcomeEmail from "@/components/Email/WelcomeEmail";
 import { prismaClient } from "@/lib/db";
-import { error } from "console";
 import {Resend} from "resend";
 
 export async function createDoctorProfile(formData: any){
@@ -48,6 +47,24 @@ export async function createDoctorProfile(formData: any){
     }
 }
 
+export async function createAvailability(data: any){
+  try {    
+  const newAvail = await prismaClient.availability.create({
+    data
+  });
+  console.log(newAvail);
+
+  return newAvail;
+  } catch (error) {
+      console.log(`Availabilty Create Error${error}`)
+      return {
+          data: null,
+          status: 500,
+          error: "Something went wrong"
+      }
+  }
+}
+
 export async function updateDoctorProfile(id: string | undefined, data: any){
   if(id){
     try {
@@ -69,6 +86,32 @@ export async function updateDoctorProfile(id: string | undefined, data: any){
             data: null,
             status: 500,
             error: "Profile Update Failed"
+        }
+    }
+  }
+}
+
+export async function updateAvailabilityById(id: string | undefined, data: any){
+  if(id){
+    try {
+       const updatedAva = await prismaClient.availability.update({
+           where:{
+              id 
+           },
+           data,
+       }) 
+       console.log(updatedAva)
+       return {
+        data: updatedAva,
+        status: 201,
+        error: null
+      }; 
+    } catch (error) {
+       console.log(error)
+        return {
+            data: null,
+            status: 500,
+            error: "Availability not updated"
         }
     }
   }
@@ -189,5 +232,34 @@ export async function completeProfile(id: string | undefined, data: any){
     }
   }
 }
+
+export async function getDoctorProfileById(userId: string | undefined ){
+  if(userId){
+    try {
+       const profile = await prismaClient.doctorProfile.findUnique({
+           where:{
+              userId
+           },
+           include:{
+            availability: true
+           }
+       }) 
+       console.log(profile)
+       return {
+        data: profile,
+        status: 200,
+        error: null
+      }; 
+    } catch (error) {
+       console.log(error)
+        return {
+            data: null,
+            status: 500,
+            error: "Profile was not found"
+        }
+    }
+  }
+}
+
 
 

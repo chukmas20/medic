@@ -1,6 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { Loader, Plus, X } from 'lucide-react'
 
+
+
+
 type SelectedProps = {
     // handleAddAll: ()=> void
     handleAddTime: (time:string)=> void;
@@ -34,7 +37,7 @@ export default function SelectedTimes({
                     <Plus className='h-3 w-3 ml-2'/>
                 </button> */}
             {
-                timesArray.map((time,i)=>{
+                timesArray?.map((time,i)=>{
                     return(
                       <button 
                        onClick={()=> handleAddTime(time)}

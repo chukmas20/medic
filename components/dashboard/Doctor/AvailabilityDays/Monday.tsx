@@ -10,7 +10,7 @@ const Monday = ({profile, day}:{profile:any,day:string}) => {
     const availability = profile?.availability || "";
     const initialData: string[] = profile?.availability[day] || [];
 
-    const timesArray = [
+    const timesArray: string[] | any = [
         "7:00 AM",
         "8:00 AM",
         "9:00 AM",
@@ -27,7 +27,7 @@ const Monday = ({profile, day}:{profile:any,day:string}) => {
     const [selectedTimes, setSelectedTimes] = useState<string[]>(initialData)
     const [loading, setLoading] = useState(false);
     console.log(selectedTimes)
-    function handleAddTime(time: string | any){
+    function handleAddTime(time: string){
         if(!selectedTimes.includes(time)){
             setSelectedTimes((prevTimes)=>[...prevTimes, time])
         }else{

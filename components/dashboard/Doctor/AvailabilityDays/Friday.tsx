@@ -4,8 +4,10 @@ import { Loader, Plus, X } from 'lucide-react'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 
-const Friday = ({profile}:{profile:any}) => {
-    const availability = profile?.availability || ""
+const Friday = ({profile, day}:{profile:any, day: string}) => {
+    const availability = profile?.availability || "";
+    const initialData: string[] = profile?.availability[day] || [];
+
     const timesArray = [
         "7:00 AM",
         "8:00 AM",
@@ -20,7 +22,7 @@ const Friday = ({profile}:{profile:any}) => {
          "5:00 PM",
          ,"6:00 PM"        
     ]
-    const [selectedTimes, setSelectedTimes] = useState(["8:00 AM", "9:00 AM"])
+    const [selectedTimes, setSelectedTimes] = useState<string[]>(initialData)
     const [loading, setLoading] = useState(false);
     console.log(selectedTimes)
     function handleAddTime(time: any){
@@ -113,8 +115,6 @@ const Friday = ({profile}:{profile:any}) => {
                     })
                 }
             </div>
-            {selectedTimes.length > 0 && (
-                <>
                    <div className="border-t border-yellow-50  pt-2 w-44 ">
                      {
                       loading ? <Button disabled={loading} className='bg-yellow-600 hover:bg-yellow-500'>
@@ -131,10 +131,8 @@ const Friday = ({profile}:{profile:any}) => {
                      className='flex mt-4 items-center justify-center  rounded-md py-2 px-2 text-sm border border-yellow-100'>
                      <span>Clear All</span>
                      <X className='h-3 w-3 ml-2'/>
-                  </button>
-                </>
-            )}     
-      </div>
+                  </button>     
+       </div>
     </div>
   )
 }

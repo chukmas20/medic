@@ -38,9 +38,9 @@ const Monday = ({profile, day}:{profile:any,day:string}) => {
        const updatedTime = selectedTimes.filter((_,i)=> i !== index)
        setSelectedTimes(updatedTime)
     }
-    // function handleAddAll(){
-    //     setSelectedTimes([...timesArray]) 
-    // }
+    function handleAddAll(){
+        setSelectedTimes([...timesArray]) 
+    }
     function clearAll(){
         setSelectedTimes([]) 
     }
@@ -81,6 +81,8 @@ const Monday = ({profile, day}:{profile:any,day:string}) => {
     handleSubmit = {handleSubmit}
     clearAll = {clearAll}
     handleRemoveTime = {handleRemoveTime}
+    handleAddAll={handleAddAll}
+    day={day}
     />
   )
 }

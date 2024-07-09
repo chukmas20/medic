@@ -5,25 +5,27 @@ import { Loader, Plus, X } from 'lucide-react'
 
 
 type SelectedProps = {
-    // handleAddAll: ()=> void
+     handleAddAll: ()=> void
     handleAddTime: (time:string)=> void;
     timesArray : string[];
     selectedTimes :string[];
     loading: boolean;
     handleSubmit: ()=> void;
     clearAll : ()=> void;
-    handleRemoveTime:(i: number)=> void
+    handleRemoveTime:(i: number)=> void;
+    day: string;
 }
 
 export default function SelectedTimes({
-    //   handleAddAll, 
+      handleAddAll, 
       handleAddTime,
       timesArray,
       selectedTimes,
       loading,
       handleSubmit,
       clearAll,
-      handleRemoveTime
+      handleRemoveTime,
+      day,
     }:SelectedProps) {
   return (
     <div className=' grid grid-cols-1 border border-yellow-500 sm:grid-cols-2 shadow-md rounded-md'>
@@ -33,7 +35,7 @@ export default function SelectedTimes({
              {/* <button 
                  onClick={handleAddAll}
                   className='flex items-center justify-center  rounded-md py-2 px-2 text-sm border border-yellow-100'>
-                   <span>Add All</span>
+                   <span>Add All</span>    
                     <Plus className='h-3 w-3 ml-2'/>
                 </button> */}
             {
@@ -53,7 +55,7 @@ export default function SelectedTimes({
         </div>
     </div>
     <div className='p-4'> 
-        <h2 className='font-semibold'>Here is your selected Time </h2>
+        <h2 className='font-semibold'>Here is your selected Time for {day} </h2>
         <div className='py-6 flex flex-wrap'>
             {
                 selectedTimes.map((time,i)=>{

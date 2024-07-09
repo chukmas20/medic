@@ -29,8 +29,9 @@ export default  function SideBar({session}:{session:Session}) {
     ],
     ADMIN:[
       {title: "Dashboard", path:"/dashboard", icon: Home},
-      {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
-      {title: "Patients", path:"/dashboard/patients", icon: Users2},
+      {title: "Services", path:"/dashboard/services", icon: Stethoscope},
+      {title: "Specialties", path:"/dashboard/specialties", icon: Stethoscope},
+      {title: "Symptoms", path:"/dashboard/symptoms", icon: Users2},
       {title: "Appointments", path:"/dashboard/appointments", icon: Calendar},
     ],
      DOCTOR:[

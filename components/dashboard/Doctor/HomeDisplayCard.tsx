@@ -9,7 +9,6 @@ const HomeDisplayCard = () => {
        <Calendar />
         <div className='py-3'>
         <p> 12 Patients are on your appointment list today</p>
-        <p> 5 new Patients, 3 follow ups, 4 annual physical visits</p>
         </div>
        
         <NewButton title='New Appointment'  href='#'/>

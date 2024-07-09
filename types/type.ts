@@ -1,7 +1,7 @@
 import { File } from "@/components/FormInputs/MultipleFileUpload";
 import { UserRole } from "@prisma/client";
 
-export  type ServiceProps = {title: string, image:string, slug:string}
+export  type ServiceProps = {title: string, imageUrl:string, slug:string}
 
 export type RegisterInputProps = {
     firstName: string;

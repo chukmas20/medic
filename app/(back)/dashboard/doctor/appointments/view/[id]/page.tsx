@@ -12,7 +12,7 @@ const page = () => {
          {/* 2 panels */}
          <div className='grid grid-cols-12'>
             <div className='col-span-4'>
-            <PanelHeader title='Appointments' count={10} icon={Calendar}/>
+            <PanelHeader title='Appointments' count={(10).toString().padStart(2,"0")} icon={Calendar}/>
               <ListPanel  />
             </div>
             <div className='col-span-8'>

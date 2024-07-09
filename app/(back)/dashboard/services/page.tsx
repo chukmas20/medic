@@ -1,12 +1,10 @@
 import { getServices } from '@/actions/services'
-import HomeDisplayCard from '@/components/dashboard/Doctor/HomeDisplayCard'
-import ListPanel from '@/components/dashboard/Doctor/ListPanel'
 import NewButton from '@/components/dashboard/Doctor/NewButton'
 import PanelHeader from '@/components/dashboard/Doctor/PanelHeader'
 import ServiceCard from '@/components/dashboard/ServiceCard'
 import ServiceForm from '@/components/dashboard/ServiceForm'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import {  Briefcase, Dot, LayoutGrid } from 'lucide-react'
+import {  Briefcase, Calendar, Dot, LayoutGrid } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -36,7 +34,15 @@ const page = async () => {
           <NewButton title='New Service'  href='/dashboard/services/new'/>
         </div>
        </div>
-         <HomeDisplayCard   />
+       <div className='flex justify-center items-center h-1/2'>
+     <div className='text-center flex flex-col text-sm items-center gap-1 border border-yellow-200 px-3 py-3 shadow-md'>
+       <LayoutGrid />
+        <div className='py-3'>
+        <p> {(services.length).toString().padStart(2,"0")} Patients are on your appointment list today</p>
+        </div>
+        <NewButton title='New Service'  href='/dashboard/services/new'/>
+     </div>
+    </div>
         </div>
         </div> 
     </div>

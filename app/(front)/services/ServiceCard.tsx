@@ -7,7 +7,7 @@ const ServiceCard = ({service}:{service:ServiceProps}) => {
     <Link href={`/services/${service.slug}`}
       className='rounded-md bg-yellow-600 overflow-hidden dark:bg-slate-700 hover:bg-yellow-700 duration-300 flex gap-4'>
          <img
-           src={service.image}
+           src={service.imageUrl}
              alt={service.title}
            className='w-1/3 object-cover aspect-video'  
            width={1170}  

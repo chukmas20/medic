@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    transpilePackages: ["@radix-ui/react-dialog"],
-};
+const nextConfig = {};
+
 
 export default nextConfig;

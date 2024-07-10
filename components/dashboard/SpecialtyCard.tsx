@@ -26,7 +26,7 @@ const SpecialtyCard = ({specialty}:{specialty:Speciality}) => {
     toast.success("Specialty successfully deleted")
   }
   return (
-            <div  className="border rounded-md flex  items-center border-yellow-600 bg-white shadow-sm text-sm w-full dark:text-yellow-500 gap-4 py-3 px-2">
+            <div  className="border rounded-md flex justify-between px-4 items-center border-yellow-600 bg-white shadow-sm text-sm w-full dark:text-yellow-500 gap-4 py-3 px-2">
                 <h2>{specialty.title}</h2>
                 <div className='flex items-center '>
                   <Link className="text-yellow-500" href={`/dashboard/services/update/${specialty.slug}`}>

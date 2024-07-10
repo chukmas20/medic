@@ -6,6 +6,7 @@ import { Button } from '../ui/button'
 import { deleteServices } from '@/actions/services'
 import toast from 'react-hot-toast'
 import { Service } from '@prisma/client'
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,7 +25,7 @@ const ServiceCard = ({service}:{service:Service}) => {
     toast.success("Service successfully deleted")
   }
   return (
-            <div  className="border rounded-md flex  items-center border-yellow-600 bg-white shadow-sm text-sm w-full dark:text-yellow-500 gap-4 py-3 px-2">
+            <div  className="border rounded-md flex justify-between items-center border-yellow-600 bg-white shadow-sm text-sm w-full dark:text-yellow-500 gap-4 py-3 px-2">
                 <img 
                   src={service.imageUrl} width={512} height={512}  alt={service.title}
                   className="w-14 h-auto"

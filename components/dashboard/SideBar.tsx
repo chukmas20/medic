@@ -1,12 +1,13 @@
 "use client";
-import { Badge, Bell,  Book,  Calendar,  Home, LayoutGrid,  Mail, Package2, Settings, ShieldPlus, Users2 } from "lucide-react";
+import { Badge, Bell,  Book,  Calendar,  Home, LayoutGrid,  LogOut,  Mail, Package2, Settings, ShieldPlus, Users2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 
  
 export default  function SideBar({session}:{session:Session}) {
@@ -94,6 +95,12 @@ export default  function SideBar({session}:{session:Session}) {
   //   },
    
   // ]
+  const router = useRouter();
+  async function handleLogout(){
+    await signOut()
+    router.push("/login")
+  }
+
   return (
     <div className="hidden border-r bg-muted/40 md:block">
     <div className="flex h-full max-h-screen flex-col gap-2">
@@ -136,16 +143,10 @@ export default  function SideBar({session}:{session:Session}) {
       </div>
       <div className="mt-auto p-4">
         <Card x-chunk="dashboard-02-chunk-0">
-          <CardHeader className="p-2 pt-0 md:p-4">
-            <CardTitle>Upgrade to Pro</CardTitle>
-            <CardDescription>
-              Unlock all features and get unlimited access to our support
-              team.
-            </CardDescription>
-          </CardHeader>
           <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-            <Button size="sm" className="w-full">
-              Upgrade
+            <Button size="sm" className="w-full bg-yellow-500 hover:bg-yellow-600">
+              <LogOut className="w-4 h-4 mr-2" />
+               Logout
             </Button>
           </CardContent>
         </Card>

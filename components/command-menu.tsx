@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { DialogProps } from "@radix-ui/react-alert-dialog"
+// import { DialogProps } from "@radix-ui/react-alert-dialog"
 import {
   CircleIcon,
   FileIcon,
@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/command"
 import { Search } from "lucide-react"
 
-export function CommandMenu({ ...props }: DialogProps) {
+export function CommandMenu() {
   const router = useRouter()
   const [open, setOpen] = React.useState(false)
   const { setTheme } = useTheme()
@@ -65,7 +65,7 @@ export function CommandMenu({ ...props }: DialogProps) {
           "relative h-10 w-full justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64"
         )}
         onClick={() => setOpen(true)}
-        {...props}
+        // {...props}
       >
         <span className="hidden lg:inline-flex">Search documentation...</span>
         <span className="inline-flex lg:hidden">Search...</span>

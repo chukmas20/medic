@@ -6,7 +6,6 @@ import { Button } from '../ui/button'
 import { deleteServices } from '@/actions/services'
 import toast from 'react-hot-toast'
 import { Service } from '@prisma/client'
-import DeletePopup from './DeletePopup'
 import {
   AlertDialog,
   AlertDialogAction,

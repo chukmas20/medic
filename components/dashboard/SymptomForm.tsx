@@ -5,25 +5,27 @@ import { useState } from "react";
 
 import { useRouter} from "next/navigation";
 import TextAreaInput from "../FormInputs/TextAreaInput";
-import ImageInput from "../FormInputs/ImageInput";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { X } from "lucide-react";
 import generateSlug from "@/utils/generateSlug";
-import { ServiceProps } from "@/types/type";
-import { createManyServices, createService, updateService } from "@/actions/services";
 import toast from "react-hot-toast";
-import { Service } from "@prisma/client";
+import { createManySymptoms, createSymptom, updatedSymptom } from "@/actions/symptom";
+import { Symptom } from "@prisma/client";
 
 
+export type SymptomProps = {
+  title: string;
+  slug: string;
 
-export default function ServiceForm({title, initialData}:{title:string, initialData?: Service}) {
+}
+
+export default function SymptomForm({title, initialData}:{title:string, initialData?: Symptom}) {
    
   const [isLoading, setIsLoading] = useState(false)
-  const initialImageUrl = initialData?.imageUrl || ""
-  const [imageUrl, setImageUrl] = useState(initialImageUrl)
-  
- const editingId  = initialData?.id || "";
+
+  const editingId  = initialData?.id || "";
+
 
   const router = useRouter();
   const {
@@ -32,33 +34,28 @@ export default function ServiceForm({title, initialData}:{title:string, initialD
     reset,
     watch,
     formState: { errors },
-  } = useForm<ServiceProps>({
-    defaultValues:{
-      title: initialData?.title
-    }
-  })
+  } = useForm<SymptomProps>()
 
-  async function onSubmit(data: ServiceProps){
+  async function onSubmit(data: SymptomProps){
     setIsLoading(true)
     const slug = generateSlug(data.title)
-     data.imageUrl = imageUrl
      data.slug = slug
     console.log(data)
 
     if(editingId){
-      await updateService(editingId, data);
-      toast.success("Service updated successfully");
+      await updatedSymptom(editingId, data);
+      toast.success("Symptom updated successfully");
     }else{
-      await createService(data);
-      toast.success("Service created successfully");
+      await createSymptom(data);
+      toast.success("Symptom created successfully");
     }
     reset();
-    router.push("/dashboard/services") 
+    router.push("/dashboard/symptoms") 
  }
  async function handleCreateMany(){
     setIsLoading(true)
      try {
-        await createManyServices()
+        await createManySymptoms()
         setIsLoading(false);
      } catch (error) {
         console.log(error)
@@ -67,51 +64,39 @@ export default function ServiceForm({title, initialData}:{title:string, initialD
     return (
         <div className="flex min-h-full  mx-auto border border-gray-200  max-w-xl flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-full">
              <div className="text-center ">
+                 {/* <p>Tracking Number: {trackingNumber}</p> */}
                  <div className="flex items-center justify-between">
                    <h1 className="font-bold text-1xl max-w-6xl">{title}</h1>
-                   <Button type="button"  asChild variant={"outline"}>
-                       <Link href={"/dashboard/services"}>
+                   <Button  asChild variant={"outline"}>
+                       <Link href={"/dashboard/symptoms"}>
                          <X  className="w-4 h-4"     />
                        </Link>
                    </Button>
                    {/* <Button type="button" onClick={handleCreateMany} variant={"outline"}>
-                         {isLoading ? "Loading..." :"Create Many"}
+                         {isLoading ? "Loading..." :"Create Many Symptoms"}
                    </Button> */}
                  </div>
              </div>
              <form onSubmit={handleSubmit(onSubmit)} className="space-y-2" >
-                   {/* Also known as BIO */}
                     <TextAreaInput 
-                    label="Service Title" 
+                    label="Symptom Title" 
                     name="title"
                     register={register}
                     errors={errors}
                     />
-                  
-                     <ImageInput 
-                     label = "Profile Photo"
-                     imageUrl = {imageUrl}
-                     setImageUrl={setImageUrl}
-                     endpoint = "serviceImage"
-                  />
                  
                  <div className="mt-8 flex items-center justify-between gap-4">
-                 <Button type="button"  asChild variant={"outline"}>
-                       <Link href={"/dashboard/services"}>
+                 <Button  asChild variant={"outline"}>
+                       <Link href={"/dashboard/symptoms"}>
                          Cancel
                        </Link>
                    </Button>
-                    <SubmitButton 
-                     title={editingId ? "Update service": "Create service"}
+                      <SubmitButton 
+                      title={editingId ? "Update symptom": "Create symptom"}
                      buttonType="submit" loadingTitle="Please Wait..." isLoading={isLoading}   />
                 </div>
             </form>
-            {/* <p className="mt-10 text-center text-sm text-gray-500">
-               Already have an account?{' '}
-              <Link href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                 Sign in
-              </Link>
-            </p> */}
+          
         </div>
     )
   }

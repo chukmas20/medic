@@ -1,4 +1,4 @@
-import {  getSpecialties } from '@/actions/services'
+import { getSpecialties } from '@/actions/specialty'
 import NewButton from '@/components/dashboard/Doctor/NewButton'
 import PanelHeader from '@/components/dashboard/Doctor/PanelHeader'
 import SpecialtyCard from '@/components/dashboard/SpecialtyCard'
@@ -36,7 +36,7 @@ const page = async () => {
      <div className='text-center flex flex-col text-sm items-center gap-1 border border-yellow-200 px-3 py-3 shadow-md'>
        <ShieldPlus />
         <div className='py-3'>
-        <p> {(specialties.length).toString().padStart(2,"0")} Patients are on your appointment list today</p>
+        <p> {(specialties.length).toString().padStart(2,"0")} Specialties</p>
         </div>
         <NewButton title='New Specialty'  href='/dashboard/specialties/new'/>
      </div>

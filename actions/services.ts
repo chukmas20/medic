@@ -1,6 +1,5 @@
 "use server";
 
-import { SpecialtyProps } from "@/components/dashboard/SpecialtyForm";
 import { prismaClient } from "@/lib/db";
 import { ServiceProps } from "@/types/type";
 import { revalidatePath } from "next/cache";
@@ -39,27 +38,30 @@ export async function createService(data:ServiceProps){
     }
 }
 
-export async function createSpecialty(data:SpecialtyProps){
+export async function updateService(id:string, data:ServiceProps){
     try {
-        const existingSpecialty = await prismaClient.speciality.findUnique({
+        const existingService = await prismaClient.service.findUnique({
             where:{
-                slug:data.slug
+                id
             }
         })
-        if (existingSpecialty){
+        if (!existingService){
             return{
                 data: null,
-                status: 409,
-                error:"Specialty already exists"
+                status: 404,
+                error:"Service with id does not exist"
             }
         }
-        const newSpecialty = await prismaClient.speciality.create({
+        const updatedService = await prismaClient.service.update({
+            where:{
+                id,
+            },
             data
         })
-        revalidatePath("/dashboard/specialties")
-        console.log(newSpecialty)
+        revalidatePath("/dashboard/services")
+        console.log(updatedService)
         return{
-            data: newSpecialty,
+            data: updatedService,
             status: 201,
             error: null
         }
@@ -99,20 +101,21 @@ export async function getServices(){
 
 
 
-
-export async function getSpecialties(){
+export async function getServiceBySlug(slug: string){
     try {
-        const specialities = await prismaClient.speciality.findMany({
-            orderBy:{
-                createdAt: "desc"
+        if(slug){
+           const service =  await prismaClient.service.findUnique({
+                where:{
+                    slug
+                }
+            })  
+            return{
+                data: service,
+                status: 200,
+                error: null
             }
-        })  
-        console.log(specialities )
-        return{
-            data: specialities,
-            status: 200,
-            error: null
-        }
+        } 
+        
     } catch (error) {
         console.log(error)
         return{
@@ -122,6 +125,11 @@ export async function getSpecialties(){
         }
     }
 }
+
+
+
+
+
 
 
 export async function deleteServices(id: string){
@@ -196,82 +204,7 @@ export async function createManyServices(){
             status: 500,
             error
          }
-     }
-
-    
-      
+     }     
   
 }
 
-export async function createManySpecialties(){
-
-    try {
-        const specialties = [
-            {
-                title:"Dermatology",
-                slug: "dermatology",
-            },
-            {
-                title:"Primary Care ",
-                slug: "primary-care",
-            },
-            {
-                title:"Men's Health",
-                slug: "mens-health",
-            },
-            {
-                title:"Women's Health",
-                slug: "womens-health",
-            },
-            {
-                title:"Dental",
-                slug: "dental",
-            },
-            {
-                title:"ENT",
-                slug: "ent",
-            },   
-           ]
-           for(const specialty of specialties){
-            try {
-              await createSpecialty(specialty)
-            } catch (error) {
-                console.log(`Error creating service ${specialty.title}, ${error}`)
-               
-            }
-           }
-       } catch (error) {
-         return{
-            data: null,
-            status: 500,
-            error
-         }
-     }
-
-    
-      
-  
-}
-
-export async function deleteSpecialty(id: string){
-    try {
-         await prismaClient.speciality.delete({
-            where:{
-                id
-            }
-        })
-        revalidatePath("/dashboard/specialties")  
-        return{
-            ok: true,
-            status: 200,
-            error: null
-        }
-    } catch (error) {
-        console.log(error)
-        return{
-            data: null,
-            status: 500,
-            error
-        }
-    }
-}

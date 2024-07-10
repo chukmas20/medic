@@ -38,7 +38,7 @@ const page = async () => {
      <div className='text-center flex flex-col text-sm items-center gap-1 border border-yellow-200 px-3 py-3 shadow-md'>
        <LayoutGrid />
         <div className='py-3'>
-        <p> {(services.length).toString().padStart(2,"0")} Patients are on your appointment list today</p>
+        <p> {(services.length).toString().padStart(2,"0")} Services</p>
         </div>
         <NewButton title='New Service'  href='/dashboard/services/new'/>
      </div>

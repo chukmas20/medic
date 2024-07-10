@@ -9,9 +9,9 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { X } from "lucide-react";
 import generateSlug from "@/utils/generateSlug";
-import { ServiceProps } from "@/types/type";
-import { createManyServices, createManySpecialties, createService, createSpecialty } from "@/actions/services";
 import toast from "react-hot-toast";
+import { createManySpecialties, createSpecialty, updateSpecialty } from "@/actions/specialty";
+import { Speciality } from "@prisma/client";
 
 
 export type SpecialtyProps = {
@@ -20,10 +20,11 @@ export type SpecialtyProps = {
 
 }
 
-export default function SpecialtyForm() {
+export default function SpecialtyForm({title, initialData}:{title:string, initialData?: Speciality}) {
    
   const [isLoading, setIsLoading] = useState(false)
   
+  const editingId  = initialData?.id || "";
 
   const router = useRouter();
   const {
@@ -32,15 +33,25 @@ export default function SpecialtyForm() {
     reset,
     watch,
     formState: { errors },
-  } = useForm<ServiceProps>()
+  } = useForm<SpecialtyProps>({
+    defaultValues:{
+      title: initialData?.title
+    }
+  })
 
   async function onSubmit(data: SpecialtyProps){
     setIsLoading(true)
     const slug = generateSlug(data.title)
      data.slug = slug
     console.log(data)
-    await createSpecialty(data);
-    toast.success("Specialty created successfully");
+
+    if(editingId){
+      await updateSpecialty(editingId, data);
+      toast.success("Specialty updated successfully");
+    }else{
+      await createSpecialty(data);
+      toast.success("Specialty created successfully");
+    }
     reset();
     router.push("/dashboard/specialties") 
  }
@@ -58,7 +69,7 @@ export default function SpecialtyForm() {
              <div className="text-center ">
                  {/* <p>Tracking Number: {trackingNumber}</p> */}
                  <div className="flex items-center justify-between">
-                   <h1 className="font-bold text-1xl max-w-6xl">Create Service</h1>
+                   <h1 className="font-bold text-1xl max-w-6xl">{title}</h1>
                    <Button  asChild variant={"outline"}>
                        <Link href={"/dashboard/services"}>
                          <X  className="w-4 h-4"     />
@@ -84,7 +95,7 @@ export default function SpecialtyForm() {
                        </Link>
                    </Button>
                       <SubmitButton 
-                     title="Create Specialty" 
+                     title={editingId ? "Update specialty": "Create specialty"}
                      buttonType="submit" loadingTitle="Please Wait..." isLoading={isLoading}   />
                 </div>
             </form>

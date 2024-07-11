@@ -81,5 +81,12 @@ export type AdditionalFormProps = {
 
 }
 
+export type stats = {
+    doctors: string;
+    patients: string;
+    appointments: string;
+    services: string;
+}
+
 
 

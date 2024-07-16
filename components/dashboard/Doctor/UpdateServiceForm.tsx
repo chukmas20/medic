@@ -21,20 +21,20 @@ const UpdateServiceForm = ({
  symptoms:SelectOption[],
  profile: DoctorProfile | undefined | null
 }) => {
-  // const {data: session, status} = useSession()
-  const profileId = profile?.id
-  if(status === "loading"){
-    return <div className='flex item-center'>
-       <Loader  className='mr-1 w-4 h-4 animate-spin' />
-       <span>Loading a User ...</span>
-    </div>
-  }
-  // const user = session?.user
+
   const [selectedServiceId, setSelectedServiceId] = useState()
   const [specialtyId, setSpecialtyId] = useState()
   const [symptomsIds, setSymptomsIds] = useState<SelectOption[]>([])
   const [loading, setLoading] = useState(false);
    
+  const profileId = profile?.id
+  // if(status === "loading"){
+  //   return <div className='flex item-center'>
+  //      <Loader  className='mr-1 w-4 h-4 animate-spin' />
+  //      <span>Loading a User ...</span>
+  //   </div>
+  // }
+ 
   async function handleUpdateService(){
      setLoading(true);
      const data ={
@@ -72,13 +72,13 @@ const UpdateServiceForm = ({
         setSelectedOption={setSpecialtyId}
         />
         <p className='text-sm font-semibold'> Symptom</p>
-         {/* <CustomMultiSelect
+         <CustomMultiSelect
         label='Select Symptom'
         optionTitle='symptom'
         options={symptoms}  
         selectedOption={symptomsIds}  
         setSelectedOption={setSymptomsIds}
-        /> */}
+        />
     </CardContent>
     <CardFooter className="border-t px-6 py-4">
       <Button disabled={loading} onClick={handleUpdateService} className='bg-yellow-500 hover:bg-yellow-500'>

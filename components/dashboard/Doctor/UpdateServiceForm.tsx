@@ -30,8 +30,8 @@ const UpdateServiceForm = ({
     </div>
   }
   // const user = session?.user
-  const [selectedServiceId, setSelectedServiceId] = useState()
-  const [specialtyId, setSpecialtyId] = useState()
+  const [selectedServiceId, setSelectedServiceId] = useState([])
+  const [specialtyId, setSpecialtyId] = useState([])
   const [symptomsIds, setSymptomsIds] = useState<SelectOption[]>([])
   const [loading, setLoading] = useState(false);
    

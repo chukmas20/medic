@@ -73,11 +73,13 @@ model User {
   token         Int
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+
+
 }
 
 model Availability {
  id   String  @id @default(auto()) @map("_id") @db.ObjectId
- doctorProfileId      String    @db.ObjectId  @unique
+ doctorProfileId      String    @unique @db.ObjectId  
 doctorProfile      DoctorProfile @relation(fields: [doctorProfileId], references:[id], onDelete:Cascade,onUpdate:Cascade)
 monday     String[]
 tuesday     String[]
@@ -89,6 +91,7 @@ sunday     String[]
 
   createdAt     DateTime  @default(now()) 
   updatedAt     DateTime  @updatedAt
+
 }
 
 model Service {
@@ -97,9 +100,11 @@ model Service {
  title   String
  slug    String @unique
  imageUrl  String
+  doctorProfiles  DoctorProfile[]
 
   createdAt     DateTime  @default(now()) 
   updatedAt     DateTime  @updatedAt
+
 }
 
 model Speciality {
@@ -110,6 +115,9 @@ model Speciality {
 
   createdAt     DateTime  @default(now()) 
   updatedAt     DateTime  @updatedAt
+
+  doctorProfiles  DoctorProfile[]
+
 }
 
 model Symptom {
@@ -119,8 +127,9 @@ model Symptom {
 
   createdAt     DateTime  @default(now()) 
   updatedAt     DateTime  @updatedAt
-}
+    
 
+}
 
  
  model DoctorProfile {
@@ -168,16 +177,25 @@ model Symptom {
     accomplishments String?
     additionalDocs  String[]
 
- // services
- 
-  // specialityId      String    @db.ObjectId  @unique
-  // speciality     Speciality @relation(fields: [specialityId], references:[id], onDelete:Cascade,onUpdate:Cascade)
+  //Services
+      serviceId      String?      @db.ObjectId  
+      service         Service?     @relation(fields: [serviceId], references:[id])
 
-  symptomIds   String[] @db.ObjectId
+      specialtyId      String?     @db.ObjectId 
+      specialty         Speciality?   @relation(fields: [specialtyId], references:[id])
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+      symptomIds   String[] @db.ObjectId 
+
+
+     createdAt DateTime  @default(now())
+     updatedAt DateTime? @updatedAt
 }
+
+
+
+
+
+ 
  
 // model Category {
 //   id          String    @id @default(auto()) @map("_id") @db.ObjectId

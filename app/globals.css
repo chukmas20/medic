@@ -82,3 +82,16 @@
     background-repeat: no-repeat;
     background-position: center center;
   }
+
+  .react-date-picker__wrapper{
+    border: 0px !important;
+  }
+
+  .react-date-picker__inputGroup__Divider{
+   display: none;  
+}
+.form-input::placeholder{
+  visibility: hidden;
+}
+
+  

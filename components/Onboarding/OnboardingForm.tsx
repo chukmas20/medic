@@ -99,16 +99,7 @@ const OnboardingForm = ({id}:{id:string}) => {
              />,
             icon: Plus
         },
-        // {
-        //     title: "Availability",
-        //     page: "availability",
-        //     component:<Availability  title="Availability Information" 
-        //     description="Please fill Additional details" page={page} 
-        //     formId={doctorProfileId}
-        //     userId = {id}
-        //     />,
-        //     icon: Calendar
-        // },
+        
 
      ]
 
@@ -117,7 +108,7 @@ const OnboardingForm = ({id}:{id:string}) => {
     console.log(currentStep);
    
   return (
-    <div className='grid grid-cols-12 mx-auto rounded-lg shadow-md overflow-hidden min-h-screen bg-yellow-100'>
+    <div className='grid grid-cols-12 mx-auto rounded-lg shadow-md  min-h-screen bg-yellow-100'>
          <div className=' col-span-full sm:col-span-3 dark:bg-slate-900  '>
            
              {steps.map((step, i)=>{
@@ -139,11 +130,14 @@ const OnboardingForm = ({id}:{id:string}) => {
              })}
          </div>
          <div className='sm:col-span-9 col-span-full bg-yellow-100 p-4'>
+         Use the unique Unique Code {" "}
           {trackingNumber || savedDbData.id && (
                <p className="bg-yellow-600 text-slate-200 w-90 rounded-md text-sm px-4 py-2">
-               Use the unique Unique Code - {trackingNumber ? trackingNumber: savedDbData.trackingNumber} to resume registration or check status
+                {trackingNumber ? trackingNumber: savedDbData.trackingNumber} 
              </p> 
+             
             )}
+            {" "}to resume registration or check status
               
               {currentStep?.component}
          </div>

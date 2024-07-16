@@ -6,8 +6,11 @@ import toast from 'react-hot-toast'
 import SelectedTimes from './SelectedTimes'
 
 const Tuesday = ({profile, day}:{profile:any,day: string}) => {
-    const availability = profile?.availability || "";
-    const initialData: string[] = profile?.availability[day] || [];
+    let initialData : string[] = ["7:00 AM"];
+    if(profile && profile?.availability){
+        initialData = (profile?.availability[day]) || [];
+    }
+    const availability = (profile?.availability) || "";
 
 
     const timesArray: string[] | any = [

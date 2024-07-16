@@ -35,18 +35,18 @@ export default function ShadSelectInput({
     
  {
   return (
-    <Select>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder={label} />
+    <Select onValueChange={(value)=> setSelectedOption(value)}>
+      <SelectTrigger className="w-full">
+        <SelectValue placeholder={`Select ${optionTitle}`} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>{optionTitle}</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+        <SelectLabel >{optionTitle}</SelectLabel>
+         {options?.map((option, i)=>{
+           return(
+            <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+           )
+         })}
         </SelectGroup>
       </SelectContent>
     </Select>

@@ -11,7 +11,9 @@ import Sunday from "./AvailabilityDays/Sunday";
 
 
 
-const AvailabilitySettings = ({profile}:{profile:DoctorProfile | undefined | null}) => {
+const AvailabilitySettings = ({
+   profile
+  }:{profile:DoctorProfile | undefined | null}) => {
   const tabs = [
     {
         name:"Monday",

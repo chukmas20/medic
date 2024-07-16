@@ -148,8 +148,8 @@ export default  function SideBar({session}:{session:Session}) {
       <div className="mt-auto p-4">
         <Card x-chunk="dashboard-02-chunk-0">
           <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-            <Button size="sm" className="w-full bg-yellow-500 hover:bg-yellow-600">
-              <LogOut className="w-4 h-4 mr-2" />
+            <Button onClick={handleLogout} size="sm" className="w-full bg-yellow-500 hover:bg-yellow-600">
+              <LogOut  className="w-4 h-4 mr-2" />
                Logout
             </Button>
           </CardContent>

@@ -41,12 +41,6 @@ export default function Education(
 
 
 
-
-
- 
- 
-
-
   const router = useRouter();
   const {
     register,
@@ -92,9 +86,23 @@ export default function Education(
    } catch (error) {
      setIsLoading(false)
    }
-  
-    
+   
   }
+   
+  const educationValues = [
+    {
+        id:1,
+        title:"Dentist",
+    },
+    {
+        id:2,
+        title:"ENT"
+    },
+    {
+      id:3,
+      title:"Medical"
+  },
+]
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-full">
              <div className="text-center ">
@@ -115,12 +123,13 @@ export default function Education(
                     register={register}
                     errors={errors}
                  />
-                 {/* <SelectInput
+                 <SelectInput
                   label="Select Primary Specialization" 
                   register={register}
                   name="primarySpecialization"
                    errors={errors}
-                   /> */}
+                   optionValues={educationValues} 
+                   />
                   <ArrayItemsInput
                     setItems={setOtherSpecialties} 
                      items={otherSpecialties}

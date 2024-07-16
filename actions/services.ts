@@ -127,11 +127,6 @@ export async function getServiceBySlug(slug: string){
 }
 
 
-
-
-
-
-
 export async function deleteServices(id: string){
     try {
          await prismaClient.service.delete({
@@ -207,4 +202,32 @@ export async function createManyServices(){
      }     
   
 }
+
+
+export async function updateDoctorProfileWithService(id: string | undefined, data: any){
+    if(id){
+      try {
+         const updateProfile = await prismaClient.doctorProfile.update({
+             where:{
+                id 
+             },
+             data,
+         }) 
+         console.log(updateProfile )
+         revalidatePath("/dashboard/doctor/settings")
+         return {
+          data: updateProfile,
+          status: 201,
+          error: null
+        }; 
+      } catch (error) {
+         console.log(error)
+          return {
+              data: null,
+              status: 500,
+              error: "Profile Update Failed"
+          }
+      }
+    }
+  }
 

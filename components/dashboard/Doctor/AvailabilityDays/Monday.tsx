@@ -6,9 +6,18 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import SelectedTimes from './SelectedTimes'
 
-const Monday = ({profile, day}:{profile:any,day:string}) => {
-    const availability = profile?.availability || "";
-    const initialData: string[] = profile?.availability[day] || [];
+const Monday = ({
+      profile, 
+      day
+    }:{
+    profile:any,
+    day:string
+}) => {
+    let initialData : string[] = ["7:00 AM"];
+    if(profile && profile?.availability && profile.availability.monday){
+        initialData = (profile?.availability[day]) || [];
+    }
+    const availability = (profile?.availability) || "";
 
     const timesArray: string[] | any = [
         "7:00 AM",
@@ -25,6 +34,7 @@ const Monday = ({profile, day}:{profile:any,day:string}) => {
          ,"6:00 PM"        
     ]
     const [selectedTimes, setSelectedTimes] = useState<string[]>(initialData)
+    console.log(selectedTimes,profile?.id)
     const [loading, setLoading] = useState(false);
     console.log(selectedTimes)
     function handleAddTime(time: string){

@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { Checkbox } from "@/components/ui/checkbox"
 
@@ -19,7 +18,7 @@ import { Input } from "@/components/ui/input"
 const GeneralSettings = () => {
   return (
     <div className="grid gap-6 w-full">
-        <Card x-chunk="dashboard-04-chunk-1">
+        <Card x-chunk className='w-full'>
           <CardHeader>
             <CardTitle>Store Name</CardTitle>
             <CardDescription>

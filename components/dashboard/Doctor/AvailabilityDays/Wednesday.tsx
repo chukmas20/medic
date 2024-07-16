@@ -11,7 +11,10 @@ import SelectedTimes from './SelectedTimes'
 
 const Wednesday = ({profile, day}:{profile:any, day: string}) => {
     const availability = profile?.availability || "";
-    const initialData: string[] = profile?.availability[day] || [];
+    let initialData : string[] = ["7:00 AM"];
+    if(profile && profile?.availability){
+        initialData = (profile?.availability[day]) || [];
+    }
     const timesArray: string[] | any = [
         "7:00 AM",
         "8:00 AM",
@@ -26,7 +29,7 @@ const Wednesday = ({profile, day}:{profile:any, day: string}) => {
          "5:00 PM",
          ,"6:00 PM"        
     ]
-    const [selectedTimes, setSelectedTimes] = useState<string[]>(initialData)
+    const [selectedTimes, setSelectedTimes] = useState(initialData)
     const [loading, setLoading] = useState(false);
     console.log(selectedTimes)
     function handleAddTime(time: any){

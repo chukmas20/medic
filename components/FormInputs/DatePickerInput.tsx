@@ -20,33 +20,25 @@ type DatePickerInputProps ={
    title: string;
 }
 
+import { useState } from 'react';
+import DatePicker from 'react-date-picker';
+
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
+
 export default function DatePickerInput({date, setDate, title,className=""}:DatePickerInputProps) {
 
   return (
     <div >
       <h2 className="text-base font-normal">{title}</h2>
-          <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !date && "text-muted-foreground"
-          )}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          initialFocus
-        />
-      </PopoverContent>
-    </Popover>
+      <DatePicker
+        className="z-50 bg-slate-50 react-date-picker__wrapper dark:bg-slate-900 py-1.5 px-2"
+         onChange={setDate} 
+        value={date}
+       />
     </div>
    
   )

@@ -7,7 +7,10 @@ import SelectedTimes from './SelectedTimes'
 
 const Friday = ({profile, day}:{profile:any, day: string}) => {
     const availability = profile?.availability || "";
-    const initialData: string[] = profile?.availability[day] || [];
+    let initialData : string[] = ["7:00 AM"];
+    if(profile && profile?.availability){
+        initialData = (profile?.availability[day]) || [];
+    }
 
     const timesArray: string[]  | any = [
         "7:00 AM",

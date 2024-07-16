@@ -1,5 +1,4 @@
 "use client";
-import { updateDoctorProfile } from '@/actions/onboarding';
 import { updateDoctorProfileWithService } from '@/actions/services';
 import CustomMultiSelect from '@/components/FormInputs/CustomMultiSelect';
 import ShadSelectInput, { SelectOption } from '@/components/FormInputs/ShadSelectInput';
@@ -7,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { DoctorProfile } from '@prisma/client';
 import { Loader } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 

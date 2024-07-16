@@ -30,8 +30,8 @@ const UpdateServiceForm = ({
     </div>
   }
   // const user = session?.user
-  const [selectedServiceId, setSelectedServiceId] = useState([])
-  const [specialtyId, setSpecialtyId] = useState([])
+  const [selectedServiceId, setSelectedServiceId] = useState()
+  const [specialtyId, setSpecialtyId] = useState()
   const [symptomsIds, setSymptomsIds] = useState<SelectOption[]>([])
   const [loading, setLoading] = useState(false);
    
@@ -72,13 +72,13 @@ const UpdateServiceForm = ({
         setSelectedOption={setSpecialtyId}
         />
         <p className='text-sm font-semibold'> Symptom</p>
-         <CustomMultiSelect
+         {/* <CustomMultiSelect
         label='Select Symptom'
         optionTitle='symptom'
         options={symptoms}  
         selectedOption={symptomsIds}  
         setSelectedOption={setSymptomsIds}
-        />
+        /> */}
     </CardContent>
     <CardFooter className="border-t px-6 py-4">
       <Button disabled={loading} onClick={handleUpdateService} className='bg-yellow-500 hover:bg-yellow-500'>

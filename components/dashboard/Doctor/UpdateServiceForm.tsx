@@ -98,7 +98,7 @@ const UpdateServiceForm = ({
               {
                 services && services.map((item)=>{
                   return(
-                     <button onClick={()=>setSelectedServiceId(item.id)} className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
+                     <button key={item.id} onClick={()=>setSelectedServiceId(item.id)} className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
                        selectedServiceId ===item.id?"border-2 bg-yellow-100 border-yellow-500":"")}>
                          <img 
                             src={item.imageUrl}
@@ -127,7 +127,7 @@ const UpdateServiceForm = ({
               {
                 specialties && specialties.map((item)=>{
                   return(
-                     <button onClick={()=>setSpecialtyId(item.id)} 
+                     <button key={item.id} onClick={()=>setSpecialtyId(item.id)} 
                         className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
                           specialtyId === item.id ? "border-2 bg-yellow-100 border-yellow-500":""
                         )}>
@@ -149,7 +149,7 @@ const UpdateServiceForm = ({
               {
                 symptoms && symptoms.map((item)=>{
                   return(
-                     <button onClick={()=>setSymptomsIds([...symptomsIds, item.id])}
+                     <button key={item.id} onClick={()=>setSymptomsIds([...symptomsIds, item.id])}
                         className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
                           symptomsIds.includes(item.id) ?  "border-2 bg-yellow-100 border-yellow-500":""
                         )}>

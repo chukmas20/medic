@@ -1,44 +1,22 @@
 "use client"
 import { Tabs } from "flowbite-react";
 import ServiceList from "./services/ServiceList";
-import { MicroscopeIcon, Stethoscope, X } from "lucide-react";
+import { Box, MicroscopeIcon, Stethoscope, X } from "lucide-react";
 import LinkCards from "./doctors/LinkCards";
 import { FaSyringe } from "react-icons/fa";
+import { Service, Speciality, Symptom } from "@prisma/client";
+import SymptomCard from "./doctors/SymptomCard";
 
-export default function TabbedItems() {
-  const services = [
-    {
-      title:"Video Prescription",
-      imageUrl: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600",
-      slug:"telehealth"
-    },
-    {
-      title:"UTI consult",
-      imageUrl: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600",
-      slug:"telehealth"
-    },
-    {
-      title:"Mental Health",
-      imageUrl: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600",
-      slug:"telehealth"
-    },
-    {
-      title:"Telehealth",
-      imageUrl: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600",
-      slug:"telehealth"
-    },
-    {
-      title:"ED Consult",
-      imageUrl: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600",
-      slug:"telehealth"
-    },
-    {
-      title:"Urgent Care",
-      imageUrl: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600",
-      slug:"telehealth"
-    },
-    
-]
+type  TabbedItemsProps = {
+  services: Service[];
+  specialties: Speciality[];
+  symptoms: Symptom[];
+}
+export default function TabbedItems({
+   services,
+   specialties,
+   symptoms}:TabbedItemsProps) {
+ 
   const tabs = [
      {
       title:"Popular Services",
@@ -46,22 +24,22 @@ export default function TabbedItems() {
       component: <ServiceList data ={services}  />,
       content: []
      },
+    //  {
+    //   title:"Doctors",
+    //   icon : Stethoscope,
+    //   component: <LinkCards  className="bg-yellow-800" />,
+    //   content: []
+    //  },
      {
-      title:"Doctors",
-      icon : Stethoscope,
-      component: <LinkCards  className="bg-yellow-800" />,
-      content: []
-     },
-     {
-      title:"Specialists",
-      icon: X,
-      component: <LinkCards  className="bg-red-800"/>,
+      title:"Specialties",
+      icon: Box,
+      component: <LinkCards  className="bg-yellow-500" specialties={specialties}/>,
       content: []
      },
      {
       title:"Symptoms",
       icon : FaSyringe,
-      component: <LinkCards className="bg-purple-800" />,
+      component: <SymptomCard className="bg-yellow-500"  symptoms={symptoms}/>,
       content: []
      },
   ]

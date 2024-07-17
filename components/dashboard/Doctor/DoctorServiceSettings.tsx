@@ -24,40 +24,21 @@ const DoctorServiceSettings = async ({
     }:{
     profile: DoctorProfile | undefined | null
 }) => {
-   const allServices = (await getServices()).data
-   const allSpecialties = (await getSpecialties()).data
-   const allSymptoms = (await getSymptoms()).data
+   const services = (await getServices()).data
+   const specialties = (await getSpecialties()).data
+   const symptoms = (await getSymptoms()).data
 
-   const services: SelectOption[]  =  allServices?.map((item)=>{
-    return{
-       label: item.title,
-       value: item.id
-    }
- }) || []
-
- const specialties: SelectOption[]  = allSpecialties?.map((item)=>{
-    return{
-       label: item.title,
-       value: item.id
-    }
- }) || []
-
- const symptoms: SelectOption[]  = allSymptoms?.map((item)=>{
-    return{
-       label: item.title,
-       value: item.id
-    }
- }) || []
+   
 
   return (
     <div className="grid gap-6 w-full">
         <Card x-chunk className='w-full'>
-          <CardHeader>
+          {/* <CardHeader>
             <CardTitle>Choose Service</CardTitle>
             <CardDescription>
               Used to identify your store in the marketplace.
             </CardDescription>
-          </CardHeader>
+          </CardHeader> */}
           <UpdateServiceForm 
              profile={profile}
              services={services} 

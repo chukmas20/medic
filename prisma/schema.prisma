@@ -176,6 +176,7 @@ model Symptom {
     research String?
     accomplishments String?
     additionalDocs  String[]
+    operationMode   String?
 
   //Services
       serviceId      String?      @db.ObjectId  

@@ -13,8 +13,8 @@ export default function Footer (){
                     name: 'Register as A Doctor',
                 },
                 {
-                    href: 'javascript:void()',
-                    name: 'Support',
+                    href: '/onboarding/resume',
+                    name: 'Resume Application',
 
                 },
                 {

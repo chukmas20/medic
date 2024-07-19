@@ -4,18 +4,32 @@ import MegaMenu from "@/components/frontend/MegaMenu";
 import Brands from "./Brands";
 import TabbedSection from "./TabbedSection";
 import DoctorsList from "@/components/DoctorsList";
+import { getDoctors } from "@/actions/users";
 
 
-export default function Home() {
+export default async function Home() {
+  const doctors = await getDoctors() || []
+  console.log(doctors);
+  const telehealthDoctors = doctors.filter((doctor)=>doctor.doctorProfile?.operationMode === "TeleHealth visit")
+
+  const inpersonDoctors = doctors.filter((doctor)=>doctor.doctorProfile?.operationMode === "In-person doctor visit")
+
+  console.log(telehealthDoctors)
+
   return (
     <section className="">
          <HeroSection />
          <Brands  />
          <TabbedSection  />
-         <DoctorsList  />
+         <DoctorsList 
+          doctors={telehealthDoctors}
+
+         />
          <DoctorsList
            className="bg-white py-8 lg:py-24 dark:bg-slate-800"
-            title="In-person doctor visit"  isInperson={true}
+            title="In-person doctor visit" 
+             isInperson={true}
+             doctors={inpersonDoctors}
             />
 
     </section>

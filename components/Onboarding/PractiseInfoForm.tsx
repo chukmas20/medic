@@ -148,6 +148,14 @@ export default function PractiseInfoForm(
                     errors={errors}
                     isRequired={false}
                     />
+                     <TextInput 
+                    label="Pay per consultation" 
+                    name="hourlyPay"
+                    type="number"
+                    register={register}
+                    errors={errors}
+                    isRequired={false}
+                    />
                  <ArrayItemsInput
                     setItems={setServices} 
                      items={services}
@@ -158,14 +166,7 @@ export default function PractiseInfoForm(
                         items={languages}
                         itemTitle="Languages Spoken"
                       /> 
-                      {/* <ShadSelectInput  
-                         label ="Do you Accept Insurance?"
-                          className=""
-                           optionTitle="Insurance"
-                            options = {insuranceOptions}
-                             selectedOption = {insuranceAccepted}
-                             setSelectedOption = {setInsuranceAccepted}
-                      /> */}
+                     
                   <div>
                    <SubmitButton 
                      title="Save and Continue" 

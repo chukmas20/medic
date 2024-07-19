@@ -10,10 +10,10 @@ import Education from "./Education";
 import ProfileInfoForm from "./ProfileInfoForm";
 import PractiseInfoForm from "./PractiseInfoForm";
 import AdditionalInfo from "./AdditionalInfo";
-import Availability from "./Availability";
 import { useOnboardingContext } from "@/context/context";
+import { Speciality } from "@prisma/client";
 
-const OnboardingForm = ({id}:{id:string}) => {
+const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]}) => {
   const params = useSearchParams();
      const page = params.get("page")??"bio-data";
      const {trackingNumber, doctorProfileId, savedDbData } = useOnboardingContext()
@@ -61,13 +61,14 @@ const OnboardingForm = ({id}:{id:string}) => {
       
         {
             title: "Education",
-            page: "education",
+            page:"education",
             component: <Education title="Education Details" 
             description="Please fill in your Education details"
              page={page}
              nextPage="practise"
              formId={doctorProfileId ? doctorProfileId : savedDbData.id}
              userId = {id}
+             specialties={specialties}
 
               />,
            

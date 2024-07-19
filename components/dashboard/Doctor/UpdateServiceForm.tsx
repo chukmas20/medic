@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { DoctorProfile, Service, Speciality, Symptom } from '@prisma/client';
-import { Loader } from 'lucide-react';
+import {  Loader, Map, MonitorPlay, PictureInPicture, } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -26,9 +26,14 @@ const UpdateServiceForm = ({
   const [selectedServiceId, setSelectedServiceId] = useState(profile?.serviceId)
   const [specialtyId, setSpecialtyId] = useState(profile?.specialtyId)
   const [symptomsIds, setSymptomsIds] = useState<string[]>(profile?.symptomIds || [])
+  const [operationMode, setOperationMode] = useState(profile?.operationMode)
+
   const [loadingServives, setLoadingServices] = useState(false);
   const [loadingSpecialties, setLoadingSpecialties] = useState(false);
   const [loadingSymptoms, setLoadingSymptoms] = useState(false);
+  const [loadingOperationMode, setLoadingOperationMode] = useState(false)
+
+
 
    
   const profileId = profile?.id
@@ -38,6 +43,24 @@ const UpdateServiceForm = ({
   //      <span>Loading a User ...</span>
   //   </div>
   // }
+
+  const operationModes = [
+    {
+      title: "TeleHealth visit",
+      slug:"telehealth-visit",
+      icon: MonitorPlay
+    },
+    {
+      title: "In-person doctor visit",
+      slug:"inperson-visit",
+      icon: Map
+    },
+    {
+      title: "Both TeleHealth and In-person visit",
+      slug:"inperson-telehealth",
+      icon: PictureInPicture
+    },
+  ]
  
   async function handleUpdateService(){
      setLoadingServices(true);
@@ -84,9 +107,48 @@ const UpdateServiceForm = ({
   }
   console.log(data)
 }
+
+async function handleUpdateOperationMode(){
+  setLoadingOperationMode(true);
+  const data ={
+    operationMode 
+  }
+  try {
+    await updateDoctorProfileWithService(profileId, data)
+    toast.success("Mode of Operation Updated Successfully")
+    setLoadingOperationMode(false)
+  } catch (error) {
+    console.log(error)
+    setLoadingOperationMode(false)
+  }
+  console.log(data)
+}
   return (
     <>
     <CardContent className='space-y-3'>
+    <div className="border shadow rounded-md p-4 mt-3 "> 
+         <div className="flex items-center justify-between p-2">
+         <h2 className='text-sm font-semibold mb-3'> Choose Mode of Operation </h2>
+         <Button disabled={loadingOperationMode} onClick={handleUpdateOperationMode} className='bg-yellow-500 hover:bg-yellow-500'>
+            {loadingOperationMode ? "Please Wait ...":"Update Operation Mode"}
+          </Button>
+         </div>
+          <div className='grid grid-cols-4 gap-2 '>
+              {
+                operationModes && operationModes.map((item)=>{
+                  const Icon = item.icon
+                  return(
+                     <button key={item.slug} onClick={()=>setOperationMode(item.title)} className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
+                       operationMode ===item.title?"border-2 bg-yellow-100 border-yellow-500":"")}>
+                           <Icon className='w-8 h-8'/>
+                           <p className='text-xs font-semibold text-yellow-500'>{item.title}</p>
+                     </button>
+                  )
+                })
+              }
+           
+          </div>
+       </div>  
        <div className="border shadow rounded-md p-4 mt-3 "> 
          <div className="flex items-center justify-between p-2">
          <h2 className='text-sm font-semibold mb-3'> Choose the services that you offer </h2>
@@ -157,10 +219,10 @@ const UpdateServiceForm = ({
                      </button>
                   )
                 })
-              }
-               
+              }  
           </div>
-       </div>  
+       </div>
+      
     </CardContent>
     </>        
   )

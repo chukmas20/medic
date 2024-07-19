@@ -6,27 +6,19 @@ import DoctorCard from './DoctorCard'
 import { Map } from 'lucide-react'
 import DoctorsListCarousel from './DoctorsListCarousel'
 import { Button } from './ui/button'
+import { User } from '@prisma/client'
 
 const DoctorsList = (
-   {title = "TeleHealth Visit",isInperson, 
-    className="bg-yellow-100 py-8 lg:py-24 dark:bg-yellow-800"}:{title?:string,isInperson?:boolean,className?:string}) => {
-    const doctors = [
-       {
-         name:"John"
-       },
-       {
-        name:"John"
-      },
-      {
-        name:"John"
-      },
-      {
-        name:"John"
-      },
-      {
-        name:"John"
-      },
-    ]
+   {title = "TeleHealth Visit",
+     isInperson, 
+    className="bg-yellow-100 py-8 lg:py-24 dark:bg-yellow-800",
+    doctors
+    }:{
+      title?:string,
+      isInperson?:boolean,
+      className?:string,
+      doctors: User[]
+    }) => {
   return (
     <div className={className}>
          <div className="max-w-6xl mx-auto">

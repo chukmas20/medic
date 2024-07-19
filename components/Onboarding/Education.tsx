@@ -22,7 +22,8 @@ export default function Education(
      description,
      nextPage,
      userId,
-     formId
+     formId,
+     specialties
     }:StepFormProps)
 
    {
@@ -33,14 +34,35 @@ export default function Education(
   const initialSpecialities = educationData.otherSpecialties || savedDbData.otherSpecialities;
   const [otherSpecialties, setOtherSpecialties] = useState(initialSpecialities)
 
+  
+  const allSpecialties = specialties?.map((item)=>{
+    return{
+      label: item.title,
+      value: item.id,
+    }
+  }) || []
+
+  // const allSpecialties: any = [
+  //      {
+  //       label:"Men's health",
+  //       Value:1
+  //      },
+  //      {
+  //       label:"Women's health",
+  //       Value:2
+  //      },
+  //      {
+  //       label:"Primary Care",
+  //       Value:3
+  //      },
+  // ]
+
   const initialDocs = educationData.boardCertificates || savedDbData.boardCertificates;
   const [docs, setDocs] = useState<File[]>(initialDocs); 
   const defaultData = educationData || savedDbData
 
   console.log(docs);
-
-
-
+  
   const router = useRouter();
   const {
     register,
@@ -88,21 +110,7 @@ export default function Education(
    }
    
   }
-   
-  const educationValues = [
-    {
-        id:1,
-        title:"Dentist",
-    },
-    {
-        id:2,
-        title:"ENT"
-    },
-    {
-      id:3,
-      title:"Medical"
-  },
-]
+ 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-full">
              <div className="text-center ">
@@ -128,7 +136,7 @@ export default function Education(
                   register={register}
                   name="primarySpecialization"
                    errors={errors}
-                   optionValues={educationValues} 
+                   options={allSpecialties}
                    />
                   <ArrayItemsInput
                     setItems={setOtherSpecialties} 
@@ -146,13 +154,7 @@ export default function Education(
                      title="Save and Continue" 
                      buttonType="submit" loadingTitle="Please Wait..." isLoading={isLoading}   />
               </div>
-            </form>
-            {/* <p className="mt-10 text-center text-sm text-gray-500">
-               Already have an account?{' '}
-              <Link href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                 Sign in
-              </Link>
-            </p> */}
+            </form>   
         </div>
     )
   }

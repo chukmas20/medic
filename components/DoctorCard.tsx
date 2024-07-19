@@ -1,8 +1,15 @@
+import { User } from '@prisma/client';
 import { Stethoscope, Video } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-const DoctorCard = ({isInperson = false}:{isInperson?: boolean}) => {
+const DoctorCard = ({
+    isInperson = false,
+    doctor
+   }:{
+ isInperson?: boolean;
+ doctor:User
+}) => {
   const timeStamps = [
      {
       time:"8:30",
@@ -41,7 +48,7 @@ const DoctorCard = ({isInperson = false}:{isInperson?: boolean}) => {
        hover:border-yellow-600 duration-500 transition-all dark:bg-slate-800  " 
      >
         <Link href="#">
-        <h2 className='uppercase font-bold text-2xl tracking-widest'>Odilon kossonou, PA-C</h2>
+        <h2 className='uppercase font-bold text-2xl tracking-widest'>{doctor.name}</h2>
         {isInperson && (
            <p className='py-3'>3250 Lincoln Highway, Kendall Park, NJ 08824</p>
 

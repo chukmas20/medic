@@ -1,12 +1,18 @@
 "use client";
-import { BaggageClaim } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import DoctorCard from "./DoctorCard";
-export default function DoctorsListCarousel({ doctors, isInperson }:{doctors:any, isInperson?: boolean}) {
+import { Doctor } from "@/types/type";
+export default function DoctorsListCarousel(
+    { 
+    doctors,
+    isInperson 
+   }:{
+    doctors:Doctor[],
+   isInperson?: boolean
+  }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -43,7 +49,7 @@ export default function DoctorsListCarousel({ doctors, isInperson }:{doctors:any
       dotListClass="custom-dot-list-style"
       itemClass="px-4"
     >
-     {doctors.map((doctor:any, i:number)=>{
+     {doctors.map((doctor: Doctor, i:number)=>{
           return(
             <DoctorCard doctor={doctor} key={i} isInperson={isInperson}  />
              )

@@ -89,5 +89,35 @@ export type stats = {
     services: string;
 }
 
+export type DoctorProfileAvailability = {
+    monday: string[];
+    tuesday: string[];
+    wednesday: string[];
+    thursday: string[];
+    friday: string[];
+    saturday: string[];
+    sunday: string[]; 
+ }
+
+export type DoctorProfile = {
+   firstName: string;
+   lastName: string;
+   gender: string;
+   bio: string | null;
+   profilePicture: string | null;
+   operationMode: string | null;
+   hourlyWage: number;
+   availability: DoctorProfileAvailability | null;
+}
+
+
+export type Doctor = {
+     id:string;
+     name: string;
+     email: string;
+     phone: string;
+     doctorProfile: DoctorProfile | null;
+ }
+
 
 

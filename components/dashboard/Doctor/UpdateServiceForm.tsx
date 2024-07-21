@@ -9,6 +9,7 @@ import { DoctorProfile, Service, Speciality, Symptom } from '@prisma/client';
 import {  Loader, Map, MonitorPlay, PictureInPicture, } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import PriceUpdateForm from '../PriceUpdateForm';
 
 
 const UpdateServiceForm = ({
@@ -126,6 +127,27 @@ async function handleUpdateOperationMode(){
   return (
     <>
     <CardContent className='space-y-3'>
+      <div className=''>
+      <div className="sm:col-span-4">
+              <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+                Username
+              </label>
+              <div className="mt-2">
+                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                  <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">₦</span>
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    placeholder="Enter fee"
+                    // autoComplete="username"
+                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+            </div>
+      </div>
+      
     <div className="border shadow rounded-md p-4 mt-3 "> 
          <div className="flex items-center justify-between p-2">
          <h2 className='text-sm font-semibold mb-3'> Choose Mode of Operation </h2>

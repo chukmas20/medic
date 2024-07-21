@@ -2,11 +2,11 @@ import React from 'react'
 import SectionHeading from './SectionHeading'
 import ToggleButton from './ToggleButton'
 import Link from 'next/link'
-import DoctorCard from './DoctorCard'
 import { Map } from 'lucide-react'
 import DoctorsListCarousel from './DoctorsListCarousel'
 import { Button } from './ui/button'
 import { User } from '@prisma/client'
+import { Doctor } from '@/types/type'
 
 const DoctorsList = (
    {title = "TeleHealth Visit",
@@ -17,7 +17,7 @@ const DoctorsList = (
       title?:string,
       isInperson?:boolean,
       className?:string,
-      doctors: User[]
+      doctors: Doctor[]
     }) => {
   return (
     <div className={className}>

@@ -177,7 +177,7 @@ model Symptom {
     accomplishments String?
     additionalDocs  String[]
     operationMode   String?  @default("TeleHealth visit")
-    hourlyWage       Int @default(100)
+    hourlyWage       Int @default(1000)
 
   //Services
       serviceId      String?      @db.ObjectId  

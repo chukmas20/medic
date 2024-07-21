@@ -112,9 +112,38 @@ export async function getDoctors() {
       where:{
         role: "DOCTOR"
       },
-      include:{
-        doctorProfile: true,
+      
+     select:{
+      id:true,
+      name:true,
+      email:true,
+      phone: true,
+    
+      doctorProfile:{
+        select:{
+          firstName: true,
+          lastName: true,
+          gender: true,
+          bio: true,
+          profilePicture: true,
+          operationMode: true,
+          hourlyWage: true,
+
+          availability:{
+             select:{
+              monday: true,
+              tuesday: true,
+              wednesday: true,
+              thursday: true,
+              friday: true,
+              saturday: true,
+              sunday: true,
+             }
+          }
+         }
+
       }
+     }
     })
     return doctors
    } catch (error) {

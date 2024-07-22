@@ -1,6 +1,6 @@
 import { Doctor, DoctorProfileAvailability } from '@/types/type';
+import generateSlug from '@/utils/generateSlug';
 import { getFormattedDate } from '@/utils/getFormattedShortDay';
-import { DoctorProfile, User } from '@prisma/client';
 import { Stethoscope, Video } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -28,6 +28,7 @@ const DoctorCard = ({
    const today: keyof DoctorProfileAvailability = getDayName();
    const times = doctor.doctorProfile?.availability?.[today] ?? null
    const formattedDate = getFormattedDate()
+   const slug = generateSlug(doctor.slug)
   console.log(formattedDate)
    console.log(times)
  
@@ -41,8 +42,10 @@ const DoctorCard = ({
           flex-col items-start justify-start px-3
            hover:border-yellow-600 duration-500 transition-all dark:bg-slate-800  " 
          >
-            <Link href="#">
-            <h2 className='uppercase font-bold text-2xl tracking-widest'>{doctor.name}</h2>
+            <Link href={`/doctors/${slug}`}>
+            <h2 className='uppercase font-bold text-2xl tracking-widest'>
+               {doctor.name}
+            </h2>
             {isInperson && (
                <p className='py-3'>3250 Lincoln Highway, Kendall Park, NJ 08824</p>
     
@@ -83,7 +86,7 @@ const DoctorCard = ({
                 <div className='py-3 grid grid-cols-3 gap-2'>
                          {times.slice(0,5).map((item: any,i:number)=>{
                           return(
-                             <Link href="/doctors/slug" key={i} className='bg-yellow-700 text-white text-center py-2 px-3 '>
+                             <Link href={`/doctor/${slug}`} key={i} className='bg-yellow-700 text-white text-center py-2 px-3 '>
                                {item} 
                             </Link>
                           )

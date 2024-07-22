@@ -3,6 +3,7 @@
 import EmailTemplate from "@/components/Email/EmailTemplate";
 import { prismaClient } from "@/lib/db";
 import { RegisterInputProps } from "@/types/type";
+import generateSlug from "@/utils/generateSlug";
 import bcrypt from "bcrypt";
 import toast from "react-hot-toast";
 import {Resend} from "resend";
@@ -37,6 +38,7 @@ export async function createUser(formData: RegisterInputProps){
     const newUser = await prismaClient.user.create({
       data: {
         name:lastName + " " +" " + firstName,
+        slug: generateSlug(`${lastName} ${firstName}`),
         email,
         phone,
         password: hashedPassword,
@@ -117,6 +119,7 @@ export async function getDoctors() {
       id:true,
       name:true,
       email:true,
+      slug: true,
       phone: true,
     
       doctorProfile:{
@@ -128,7 +131,7 @@ export async function getDoctors() {
           profilePicture: true,
           operationMode: true,
           hourlyWage: true,
-
+         
           availability:{
              select:{
               monday: true,
@@ -152,3 +155,76 @@ export async function getDoctors() {
    }
 }
 
+export async function getDoctorBySlug(slug:string){
+   if(slug){
+    try {
+      const doctor = await prismaClient.user.findFirst({
+        where:{
+          role: "DOCTOR",
+          slug
+        },
+        
+       select:{
+        id:true,
+        name:true,
+        email:true,
+        slug: true,
+        phone: true,
+      
+        doctorProfile:{
+          select:{
+            firstName: true,
+            lastName: true,
+            gender: true,
+            bio: true,
+            profilePicture: true,
+            operationMode: true,
+            hourlyWage: true,
+            yearsOfExperience : true,
+      
+         
+            country: true,
+            city: true,
+            state : true,
+            primarySpecialization: true,
+            otherSpecialties : true,   
+            hospitalName  : true,
+            hospitalAddress :true,
+            hospitalContactNumber   : true,
+            hospitalEmailAddress    : true,
+            hospitalWebsite         : true,
+            hospitalHoursOfOperation : true,
+            servicesOffered : true,
+            insuranceAccepted  : true,
+            languagesSpoken : true,
+        
+            educationalHistory : true,
+            research : true,
+            accomplishments : true,
+  
+            availability:{
+               select:{
+                monday: true,
+                tuesday: true,
+                wednesday: true,
+                thursday: true,
+                friday: true,
+                saturday: true,
+                sunday: true,
+               }
+            }
+           }
+  
+        }
+       }
+      });
+      if(!doctor){
+        return null;
+      }
+      return doctor
+     } catch (error) {
+       console.log(error)
+       return null
+     }
+   }
+}

@@ -66,6 +66,7 @@ const Saturday = ({profile, day}:{profile:any, day:string}) => {
                     doctorProfileId: profile.id
                 }
                 await createAvailability(data);
+                toast.success("Created successfully")
                 setLoading(false)
             }else{
                 console.log("Profile Id not set")

@@ -142,6 +142,7 @@ export type Doctor = {
  }
 
  export type DoctorDetail = {
+    doctorProfile: any;
     id:string;
     name: string;
     email: string;

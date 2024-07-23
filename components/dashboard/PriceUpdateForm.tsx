@@ -71,6 +71,7 @@ export default function PriceUpdateForm({title, initialData}:{title:string, init
                    <h1 className="font-bold text-1xl max-w-6xl">
                       Update hourly Fee
                   </h1>
+
                  </div>
              </div>
              <form onSubmit={handleSubmit(onSubmit)} className="space-y-2" >

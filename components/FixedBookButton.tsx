@@ -8,7 +8,7 @@ const FixedBookButton = ({price}:{price:number | undefined}) => {
     <div className="fixed bg-white z-50 bottom-0 w-full shadow-2xl py-8 px-6 rounded-md flex justify-between mx-auto  ">
             <div className='max-w-4xl mx-auto gap-12 flex items-center justify-between'>
             <div className='w-full ' >
-                <p className='font-semibold text-xl'>₦ {price}</p>
+                <p className='font-semibold text-md'>₦ {price}</p>
                 <p className='font-bold text-sm'>{formattedDate}</p>
             </div>
             <Button 

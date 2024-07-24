@@ -37,7 +37,7 @@ const page = async({
                <DoctorDetails doctor={doctor}  />
              </div>
          </div>
-         <FixedBookButton  price={doctor.doctorProfile?.hourlyWage} />
+         {/* <FixedBookButton  price={doctor.doctorProfile?.hourlyWage} /> */}
      </div>
     ):(
       <div className='uppercase text-yellow-500 font-bold text-4xl flex items-center justify-center min-h-screen'>

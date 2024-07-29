@@ -7,12 +7,12 @@ import toast from 'react-hot-toast';
 
 type  MultipleImageInputProps ={
     label: string;
-    files: File[];
+    files: FileProps[];
     setFiles: any;
     className?: string;
     endpoint?: any
 }
-export type File = {
+export type FileProps = {
     title: string;
     size: number;
     url: string;
@@ -33,17 +33,18 @@ const MultipleFileUpload = ({
     }
   return (
      <div className={className}>
-         <div className='flex justify-between items-center mb-4'>
+         <div className=' mb-4'>
             <label htmlFor='course-image'
              className='block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50 mb-2'
             >
                 {label}
             </label>
             { files  && (
-                <button className='text-sm' onClick={()=>setFiles([])}
+                <button className='text-sm flex text-white rounded-md justify-center px-2 py-2 bg-yellow-500 hover:bg-yellow-600' 
+                 onClick={()=>setFiles([])}
                 >
-                    <Pencil className='w-5 h-5 '   />
-                    <span> Change</span>
+                    <Pencil className='w-5 h-5 mr-1 '   />
+                    <span> Change File</span>
                 </button>
             )}
              {files.length > 0 ? (

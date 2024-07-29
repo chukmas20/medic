@@ -1,5 +1,3 @@
-import { File } from "@/components/FormInputs/MultipleFileUpload";
-import { UserRole } from "@prisma/client";
 
 export  type ServiceProps = {title: string; imageUrl:string; slug:string}
 
@@ -111,6 +109,7 @@ export interface DoctorProfile {
 }
 
 interface DoctorProfileDetail extends DoctorProfile{
+    id: string | null;
     yearsOfExperience :number | null,     
     country:string | null,
     city:string | null,
@@ -149,6 +148,31 @@ export type Doctor = {
     phone: string;
     slug: string;
     // doctorProfile: DoctorProfileDetail | null;
+}
+
+export interface AppointmentProps{
+    appointmentDate: Date | undefined;
+    appointmentFormattedDate: string;
+    doctorId: string;
+    doctorProfileId?: string;
+    charge: number;
+    appointmentTime: string
+    //Patient details
+
+    firstName: string;
+    lastName: string;
+    phone: string;
+    gender: string;
+    email: string;
+    dob?: Date;
+    location: string;
+    appointmentReason: string;
+    medicalDocuments: string[];
+    occupation: string;
+    patientId?: string;
+
+
+
 }
 
 

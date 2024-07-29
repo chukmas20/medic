@@ -18,15 +18,19 @@ import Link from "next/link"
 import { Session } from "next-auth"
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { generateInitials } from "@/utils/genrateInitials"
 
 export function SiteHeader({session}:{session : Session | null}) {
   const user = session?.user;
+  const initials = generateInitials(user?.name)
   const router = useRouter();
 
   async function handleLogout(){
     await signOut();
     router.push("/login")
   }
+
+ 
   
   return (
     <header className="sticky top-0 z-50 w-full  border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -48,7 +52,7 @@ export function SiteHeader({session}:{session : Session | null}) {
                     {user.image ? (
                       <AvatarImage src="https://github.com/shadcn.png" />
                     ):(
-                      <AvatarFallback>DA</AvatarFallback>
+                      <AvatarFallback>{initials}</AvatarFallback>
                     )}
                    </Avatar>
           

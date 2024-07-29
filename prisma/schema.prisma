@@ -129,7 +129,34 @@ model Symptom {
   createdAt     DateTime  @default(now()) 
   updatedAt     DateTime  @updatedAt
     
+}
 
+model Appointment {
+ id   String  @id @default(auto()) @map("_id") @db.ObjectId
+ 
+
+  createdAt     DateTime  @default(now()) 
+  updatedAt     DateTime  @updatedAt
+
+   appointmentDate DateTime?
+    appointmentFormattedDate String?
+    doctorId String?
+    patientId String?
+    doctorProfileId String?
+    charge Int
+    appointmentTime String?
+
+   firstName  String?
+    lastName  String?
+    phone  String?
+    gender  String?
+    email  String?
+    dob  DateTime?
+    location String?
+    appointmentReason  String?
+    medicalDocuments String[]
+    occupation String?
+    
 }
 
  

@@ -173,6 +173,7 @@ export async function getDoctorBySlug(slug:string){
       
         doctorProfile:{
           select:{
+            id:true,
             firstName: true,
             lastName: true,
             gender: true,

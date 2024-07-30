@@ -9,7 +9,7 @@ import { useRouter} from "next/navigation";
 
 import SelectInput from "../FormInputs/SelectInput";
 import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
-import MultipleFileUpload, { File } from "../FormInputs/MultipleFileUpload";
+import MultipleFileUpload, { FileProps } from "../FormInputs/MultipleFileUpload";
 import { StepFormProps } from "./BiodataForm";
 import { updateDoctorProfile } from "@/actions/onboarding";
 import toast from "react-hot-toast";
@@ -58,7 +58,7 @@ export default function Education(
   // ]
 
   const initialDocs = educationData.boardCertificates || savedDbData.boardCertificates;
-  const [docs, setDocs] = useState<File[]>(initialDocs); 
+  const [docs, setDocs] = useState<FileProps[]>(initialDocs); 
   const defaultData = educationData || savedDbData
 
   console.log(docs);

@@ -7,7 +7,6 @@ import { useState } from "react";
 
 import { useRouter} from "next/navigation";
 
-import MultipleFileUpload from "../FormInputs/MultipleFileUpload";
 import TextAreaInput from "../FormInputs/TextAreaInput";
 import { StepFormProps } from "./BiodataForm";
 import { completeProfile } from "@/actions/onboarding";

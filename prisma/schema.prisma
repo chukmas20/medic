@@ -156,7 +156,10 @@ model Appointment {
     appointmentReason  String?
     medicalDocuments String[]
     occupation String?
-    
+
+    status Boolean @default(false)
+    meetingLink String @default("#")
+    meetingProvider String @default("#")
 }
 
  

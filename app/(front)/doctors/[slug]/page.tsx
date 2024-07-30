@@ -1,6 +1,5 @@
 import { getDoctorBySlug } from '@/actions/users'
 import DoctorDetails from '@/components/DoctorDetails'
-import FixedBookButton from '@/components/FixedBookButton'
 import React from 'react'
 
 const page = async({

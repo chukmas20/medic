@@ -87,20 +87,11 @@ export async function getAppointmentById(id: string){
                     id
                 }
             })  
-            return{
-                data: appointment,
-                status: 200,
-                error: null
-            }
+            return appointment
         } 
         
     } catch (error) {
         console.log(error)
-        return{
-            data: null,
-            status: 500,
-            error
-        }
     }
 }
 

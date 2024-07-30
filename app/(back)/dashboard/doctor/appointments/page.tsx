@@ -9,17 +9,9 @@ const page = async() => {
   const appointments = (await getAppointments()).data || []
   return (
     <div>
-         {/* Header */}
-         <PanelHeader title="Appointments" count={(10).toString()} icon={Calendar} />
-         {/* 2 panels */}
-         <div className='grid grid-cols-12'>
-            <div className='col-span-4'>
-              <ListPanel appointments={appointments} />
+          <div className='col-span-8'>
+              <HomeDisplayCard  count={appointments.length}  />
             </div>
-            <div className='col-span-8'>
-              <HomeDisplayCard   />
-            </div>
-         </div>
         
     </div>
   )

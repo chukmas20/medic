@@ -17,7 +17,7 @@ const PanelHeader = ({title,count, icon}:{title:string, count: string, icon: Luc
               className='bg-white w-6 h-6
                rounded-full flex items-center 
                justify-center shadow-sm border'>
-               {count}
+               {count.toString().padStart(2,"0")}
             </span>
         </div>  
     </div>

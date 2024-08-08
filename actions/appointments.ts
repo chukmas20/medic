@@ -13,7 +13,7 @@ import NewAppointment from "@/components/Email/NewAppointment";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 
-export async function createAppointment(data:AppointmentProps){
+export async function createAppointment(data:AppointmentProps | any){
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
     try {
         const doctor = await prismaClient.user.findUnique({

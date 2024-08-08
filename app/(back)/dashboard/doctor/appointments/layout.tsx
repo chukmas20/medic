@@ -1,4 +1,4 @@
-import { getAppointments, getDoctorAppointments } from '@/actions/appointments'
+import {  getDoctorAppointments } from '@/actions/appointments'
 import ListPanel from '@/components/dashboard/Doctor/ListPanel'
 import PanelHeader from '@/components/dashboard/Doctor/PanelHeader'
 import { authOptions } from '@/lib/auth'

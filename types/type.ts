@@ -150,7 +150,7 @@ export type Doctor = {
     // doctorProfile: DoctorProfileDetail | null;
 }
 
-export interface AppointmentProps{
+ export interface AppointmentProps{
     appointmentDate: Date | undefined;
     appointmentFormattedDate: string;
     doctorId: string;
@@ -173,8 +173,6 @@ export interface AppointmentProps{
     status: string;
     meetingLink: string;
     meetingProvider: string;
-
-
 
 }
 

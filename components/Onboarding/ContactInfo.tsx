@@ -34,7 +34,7 @@ export default function ContactInfo(
     reset,
     watch,
     formState: { errors },
-  } = useForm<ContactInfoFormProps>({
+   } = useForm<ContactInfoFormProps>({
     defaultValues: {
        country:contactData.country || savedDbData.country,
        city:contactData.city|| savedDbData.city,

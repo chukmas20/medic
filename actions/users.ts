@@ -5,7 +5,6 @@ import { prismaClient } from "@/lib/db";
 import { RegisterInputProps } from "@/types/type";
 import generateSlug from "@/utils/generateSlug";
 import bcrypt from "bcrypt";
-import toast from "react-hot-toast";
 import {Resend} from "resend";
 
 export async function createUser(formData: RegisterInputProps){

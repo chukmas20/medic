@@ -1,7 +1,7 @@
 import { getAppointmentById } from '@/actions/appointments'
 import UpdateAppointmentForm from '@/components/dashboard/Doctor/UpdateAppointmentForm'
 import { Button } from '@/components/ui/button'
-import { Calendar } from 'lucide-react'
+import { Calendar, Mail, Phone, Video } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -34,6 +34,59 @@ const page = async({
               </div>
            </div>
        </div>
+       {appointment?.status === "APPROVED" ? (
+           <div className='p-4 border shadow rounded-md  my-4' >
+           <div className="sm:col-span-4">
+           <div className="flex items-center justify-between p-2">
+             <h2 className='text-md font-semibold mb-3'> Appointment Approved </h2>
+               <Button className='bg-yellow-500 hover:bg-yellow-500'>
+                 {`${appointment?.appointmentFormattedDate} at ${appointment?.appointmentTime}`}
+               </Button>
+             </div> 
+           </div>
+           <div className='py-4 space-y-4'>
+            <div className='flex items-center justify-between text-sm'>
+               <h2 className='font-semibold uppercase'> {appointment?.meetingProvider} </h2> 
+                <Button asChild variant={'outline'}>
+                  <Link href={appointment?.meetingLink??"#"}>
+                  <Video className='mr-2 w-4 h-4'  />
+                   <span>Join meeting</span>
+                 </Link>
+                </Button>
+          </div>
+          <div className='flex items-center justify-between text-sm'>
+               <h2 className='font-semibold uppercase'>
+                 Communicate
+                </h2> 
+                <div className='flex space-x-3'>
+                <Button asChild variant={'outline'}>
+                  <Link href={appointment?.meetingLink??"#"}>
+                  <Phone className='mr-2 w-4 h-4'  />
+                   <span>Call Doctor</span>
+                 </Link>
+                </Button>
+                <Button asChild variant={'outline'}>
+                  <Link href={appointment?.meetingLink??"#"}>
+                  <Mail className='mr-2 w-4 h-4'  />
+                   <span>Mail Doctor</span>
+                 </Link>
+                </Button>
+                </div>
+          </div>    
+          </div>
+         </div>
+       ):(
+        <div className='p-4 border shadow rounded-md  my-4' >
+        <div className="sm:col-span-4">
+        <div className="flex items-center justify-between p-2">
+          <h2 className='text-1xl font-semibold mb-3'> Appointment Status </h2>
+            <Button className='bg-yellow-500 hover:bg-yellow-500'>
+               {appointment?.status}
+            </Button>
+          </div> 
+        </div>  
+      </div>
+       )}
        <div className='py-4'>
            <div className='flex divide-x-2 divide-gray-200 px-4 py-3 border-b'>
                <p className='px-3 text-sm font-semibold'> Consultation Reason</p>
@@ -65,10 +118,6 @@ const page = async({
                })}
 
                </div>
-               <p></p>
-           </div>
-           <div className=''>
-                <UpdateAppointmentForm  appointment={appointment}/>
            </div>
        </div>
     </div>

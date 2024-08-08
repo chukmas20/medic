@@ -1,4 +1,4 @@
-import { getAppointments, getDoctorAppointments } from '@/actions/appointments'
+import { getAppointments, getPatientAppointments, } from '@/actions/appointments'
 import HomeDisplayCard from '@/components/dashboard/Doctor/HomeDisplayCard'
 import NotAuthorized from '@/components/NotAuthorized'
 import { authOptions } from '@/lib/auth'
@@ -10,17 +10,17 @@ const page = async() => {
   const session = await getServerSession(authOptions)
   const user = session?.user
 
-  if(user?.role !== "DOCTOR"){
+  if(user?.role !== "USER"){
      return(
        <NotAuthorized  />
      )
   }
-  const appointments = (await getDoctorAppointments(user?.id)).data || []
+  const appointments = (await getPatientAppointments(user?.id)).data || []
   return (
     <div>
           <div className='col-span-8'>
               <HomeDisplayCard  count={appointments.length}  />
-           </div>
+            </div>
         
     </div>
   )

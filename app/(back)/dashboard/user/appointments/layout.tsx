@@ -1,11 +1,11 @@
-import { getAppointments, getDoctorAppointments } from '@/actions/appointments'
+import {  getPatientAppointments } from '@/actions/appointments'
 import ListPanel from '@/components/dashboard/Doctor/ListPanel'
 import PanelHeader from '@/components/dashboard/Doctor/PanelHeader'
-import { authOptions } from '@/lib/auth'
-import { getServerSession } from 'next-auth'
-import { Calendar } from 'lucide-react'
-import React, { ReactNode } from 'react'
 import NotAuthorized from '@/components/NotAuthorized'
+import { authOptions } from '@/lib/auth'
+import { Calendar } from 'lucide-react'
+import { getServerSession } from 'next-auth'
+import React, { ReactNode } from 'react'
 
 const layout = async({
     children
@@ -14,12 +14,12 @@ const layout = async({
   const session = await getServerSession(authOptions)
   const user = session?.user
 
-  if(user?.role !== "DOCTOR"){
+  if(user?.role !== "USER"){
      return(
        <NotAuthorized  />
      )
   }
-  const appointments = (await getDoctorAppointments(user?.id)).data || []
+  const appointments = (await getPatientAppointments(user?.id)).data || []
   return (
     <div>
     {/* Header */}

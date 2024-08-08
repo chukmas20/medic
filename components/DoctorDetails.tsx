@@ -71,7 +71,7 @@ const DoctorDetails = ({doctor}:{doctor:DoctorDetail}) => {
     data.medicalDocuments = medicalDocs.map((item)=>item.url);
     data.dob = dob;
     (data.doctorId = doctor.id);
-    (data.doctorProfileId = doctor?.doctorProfile.id ?? "");
+    // (data.doctorProfileId = doctor?.doctorProfile.id ?? "");
     (data.charge = doctor.doctorProfile?.hourlyWage ?? 0)
     data.patientId = patient?.id
     
@@ -81,7 +81,7 @@ const DoctorDetails = ({doctor}:{doctor:DoctorDetail}) => {
        const appo = res.data;
        setIsLoading(false)
        toast.success("Appointment created successfully")
-       router.push("/dashboard");
+       router.push("/dashboard/user/appointments");
        console.log(appo)
      } catch (error) {
       setIsLoading(false)

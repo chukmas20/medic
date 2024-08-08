@@ -11,24 +11,22 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-interface EmailTemplateProps {
-  name?: string;
-  token: number;
-  linkText: string;
+interface NewAppointmentEmailProps {
+  firstName?: string;
+  link: string;
   message: string;
 }
  
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
  
-export const EmailTemplate = ({
-  name = "",
-  token,
-  linkText,
+export const NewAppointment = ({
+  firstName = "",
+  link,
   message,
-}: EmailTemplateProps) => (
+}: NewAppointmentEmailProps) => (
   <Html>
     <Head />
-    <Preview>{linkText}</Preview>
+    <Preview> NewAppointment </Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
@@ -39,34 +37,28 @@ export const EmailTemplate = ({
         />
  
         <Text style={title}>
-          <strong>@{name}</strong>, thank you for Joining Us
+          <strong>Hello Dr{firstName}</strong>, You have a new appointment
         </Text>
  
         <Section style={section}>
           <Text style={text}>
-            Hey <strong>{name}</strong>!
+            Hey <strong>{firstName}</strong>!
           </Text>
           <Text style={text}>{message}</Text>
  
-          <Button style={button}>{token}</Button>
+          <Button style={button}>
+            <Link href={link}> View the Appointment</Link>
+          </Button>
           <Text style={text}>
             If you have any questions, feel free to reach out.
           </Text>
         </Section>
-        <Text style={links}>
-          <Link style={link}>Your security audit log</Link> ・{" "}
-          <Link style={link}>Contact support</Link>
-        </Text>
- 
-        <Text style={footer}>
-          {/* GitHub, Inc. ・88 Colin P Kelly Jr Street ・San Francisco, CA 94107 */}
-        </Text>
       </Container>
     </Body>
   </Html>
 );
  
-export default EmailTemplate;
+export default NewAppointment;
  
 const main = {
   backgroundColor: "#ffffff",

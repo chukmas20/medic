@@ -169,7 +169,6 @@ async function handleUpdateOperationMode(){
               </div>
             </div>
       </div>
-      
     <div className="border shadow rounded-md p-4 mt-3 "> 
          <div className="flex items-center justify-between p-2">
          <h2 className='text-sm font-semibold mb-3'> Choose Mode of Operation </h2>

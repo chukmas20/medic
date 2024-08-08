@@ -154,7 +154,7 @@ export interface AppointmentProps{
     appointmentDate: Date | undefined;
     appointmentFormattedDate: string;
     doctorId: string;
-    doctorProfileId?: string;
+    // doctorProfileId?: string;
     charge: number;
     appointmentTime: string
     //Patient details
@@ -170,6 +170,9 @@ export interface AppointmentProps{
     medicalDocuments: string[];
     occupation: string;
     patientId?: string;
+    status: string;
+    meetingLink: string;
+    meetingProvider: string;
 
 
 

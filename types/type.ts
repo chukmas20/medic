@@ -170,7 +170,7 @@ export type Doctor = {
     appointmentReason: string;
     medicalDocuments: string[];
     occupation: string;
-    patientId: string;
+    patientId: string | any;
     status: AppointmentStatus;
     meetingLink: string;
     meetingProvider: string;

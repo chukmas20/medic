@@ -36,9 +36,9 @@ export const NewAppointment = ({
           alt="Claridy"
         />
  
-        <Text style={title}>
-          <strong>Hello Dr{firstName}</strong>, You have a new appointment
-        </Text>
+        {/* <Text style={title}>
+          <strong>Hello {firstName}</strong>, You have a new appointment
+        </Text> */}
  
         <Section style={section}>
           <Text style={text}>

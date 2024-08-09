@@ -34,7 +34,7 @@ const page = async({
               </div>
            </div>
        </div>
-       {appointment?.status === "APPROVED" ? (
+       {appointment?.status === "approved" ? (
            <div className='p-4 border shadow rounded-md  my-4' >
            <div className="sm:col-span-4">
            <div className="flex items-center justify-between p-2">

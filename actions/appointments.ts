@@ -11,10 +11,10 @@ import NewAppointment from "@/components/Email/NewAppointment";
 
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 
-export async function createAppointment(data:AppointmentProps | any){
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+export async function createAppointment(data:AppointmentProps){
     try {
         const doctor = await prismaClient.user.findUnique({
             where:{
@@ -82,7 +82,9 @@ export async function updateAppointment(id:string, data:AppointmentProps){
 }
 
 
-export async function updateAppointmentById(id:string, data:AppointmentUpdateProps){
+export async function updateAppointmentById(
+    id:string,
+   data:AppointmentUpdateProps){
     try {
     
         const updatedAppointment= await prismaClient.appointment.update({
@@ -91,7 +93,27 @@ export async function updateAppointmentById(id:string, data:AppointmentUpdatePro
             },
             data
         })
+        const patientId = updatedAppointment.patientId
+        const patient = await prismaClient.user.findUnique({
+          where:{
+            id:patientId
+          }
+        })
+        const firstName = patient?.name;
+        const doctorMail = patient?.email
+        const link = `${baseUrl}/dashboard/user/appointments/view/${updatedAppointment.id}`
+
+        const message =
+        "You appointment has been approved. View details here";
+      const sendMail = await resend.emails.send({
+        from: "Medical App <coparaeke@yahoo.com>",
+        to: doctorMail??"",
+        subject: " Appointment Approved",
+        react: NewAppointment({ firstName, link, message }),
+      });
         revalidatePath("/dashboard/doctor/appointments")
+        revalidatePath("/dashboard/user/appointments")
+
         console.log(updatedAppointment)
         return{
             data: updatedAppointment,

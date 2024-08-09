@@ -1,5 +1,6 @@
-import { getAppointments, getDoctorAppointments } from '@/actions/appointments'
+import {  getDoctorAppointments } from '@/actions/appointments'
 import HomeDisplayCard from '@/components/dashboard/Doctor/HomeDisplayCard'
+import NewButton from '@/components/dashboard/Doctor/NewButton'
 import NotAuthorized from '@/components/NotAuthorized'
 import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
@@ -18,8 +19,13 @@ const page = async() => {
   const appointments = (await getDoctorAppointments(user?.id)).data || []
   return (
     <div>
+         <div className='py-2 border-b border-gray-200 flex items-center justify-end px-4'>
+            <div className='flex items-center gap-4'>
+              <NewButton title='New Appointment'  href='/dashboard/doctor/appointments/new'/>
+            </div>
+          </div>
           <div className='col-span-8'>
-              <HomeDisplayCard  count={appointments.length}  />
+              <HomeDisplayCard newAppointmentLink='/dashboard/doctor/appointments/new'  count={appointments.length}  />
            </div>
         
     </div>

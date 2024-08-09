@@ -68,7 +68,7 @@ const page = async({
                <p></p>
            </div>
            <div className=''>
-                <UpdateAppointmentForm  appointment={appointment}/>
+            {appointment && appointment.id && <UpdateAppointmentForm  appointment={appointment}/> }        
            </div>
        </div>
     </div>

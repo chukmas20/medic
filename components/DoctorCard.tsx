@@ -23,7 +23,7 @@ const DoctorCard = ({
    const times = doctor.doctorProfile?.availability?.[today] ?? null
    const formattedDate = getFormattedDate()
    // const slug = generateSlug(doctor.slug)
-   console.log(times)
+   // console.log(times)
  
   return (
    <>

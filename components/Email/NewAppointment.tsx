@@ -46,8 +46,8 @@ export const NewAppointment = ({
           </Text>
           <Text style={text}>{message}</Text>
  
-          <Button style={button}>
-            <Link href={link}> View the Appointment</Link>
+          <Button href={link}style={button}>
+              View Appointment
           </Button>
           <Text style={text}>
             If you have any questions, feel free to reach out.

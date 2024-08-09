@@ -132,9 +132,9 @@ model Symptom {
 }
 
 enum AppointmentStatus {
-  PENDING
-  REJECTED
-  APPROVED
+  pending
+  rejected
+  approved
 }
 
 model Appointment {
@@ -162,7 +162,7 @@ model Appointment {
     medicalDocuments String[]
     occupation String?
 
-    status AppointmentStatus @default(PENDING)
+    status AppointmentStatus @default(pending)
     meetingLink String @default("")
     meetingProvider String @default("zoom")
 }

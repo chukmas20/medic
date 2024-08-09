@@ -27,7 +27,7 @@ const layout = async({
     {/* 2 panels */}
     <div className='grid grid-cols-12'>
        <div className='col-span-4 space-x-4'>
-         <ListPanel appointments={appointments} />
+         <ListPanel appointments={appointments} role={user?.role} />
        </div>
        <div className='col-span-8'>
           {

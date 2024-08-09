@@ -1,9 +1,8 @@
 "use client"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import { timeAgo } from "@/utils/timeAgo"
-import { Appointment } from "@prisma/client"
+import { Appointment, UserRole } from "@prisma/client"
 import {  CalendarCheck2, Check, CircleEllipsis, Dot, History, X } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -14,13 +13,19 @@ import { usePathname } from "next/navigation"
 // }))
 
 
-const ListPanel = ({appointments}: {appointments:Appointment[]}) => {
+const ListPanel = ({
+    appointments,
+     role
+    }: {
+      appointments:Appointment[];
+      role: UserRole
+  }) => {
    const pathname = usePathname()
   return (
     <div className="p-6 ">
          <ScrollArea className="h-96 px-4 py-6 rounded-md w-full border bg-yellow-100 ">
         {appointments.map((item) => (
-            <Link key={item.id}  href={`/dashboard/user/appointments/view/${item.id}`}
+            <Link key={item.id}  href={`/dashboard/${role==="USER"?"user":"doctor"}/appointments/view/${item.id}`}
               className={cn("border border-gray-300 rounded-md   bg-white shadow-sm text-sm w-full dark:text-yellow-500 inline-block py-3 px-2",
                 pathname === `/dashboard/doctor/appointments/view/${item.id}` && "border-green-700 border-2 bg-green-100")}
               >

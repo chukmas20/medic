@@ -4,19 +4,19 @@ import RadioInput from '@/components/FormInputs/RadioInput';
 import SelectInput from '@/components/FormInputs/SelectInput';
 import TextInput from '@/components/FormInputs/TextInput';
 import { Button } from '@/components/ui/button';
-import { Appointment } from '@prisma/client';
+import { Appointment, AppointmentStatus } from '@prisma/client';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 
 export type AppointmentUpdateProps={
-    status:string;
+    status:AppointmentStatus;
     meetingLink: string;
     meetingProvider: string;
 }
 
-const UpdateAppointmentForm = ({appointment}:{appointment:any}) => {
+const UpdateAppointmentForm = ({appointment}:{appointment:Appointment}) => {
     //could change the appointment annotation to Appointment in the future
     const [loading, setLoading] = useState(false);
     const statusOptions = [

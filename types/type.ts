@@ -1,3 +1,4 @@
+import { AppointmentStatus } from "@prisma/client";
 
 export  type ServiceProps = {title: string; imageUrl:string; slug:string}
 
@@ -169,8 +170,8 @@ export type Doctor = {
     appointmentReason: string;
     medicalDocuments: string[];
     occupation: string;
-    patientId?: string;
-    status: string;
+    patientId: string;
+    status: AppointmentStatus;
     meetingLink: string;
     meetingProvider: string;
 

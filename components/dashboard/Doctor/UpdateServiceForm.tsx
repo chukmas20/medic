@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { DoctorProfile, Service, Speciality, Symptom } from '@prisma/client';
-import { Map, MonitorPlay, PictureInPicture, } from 'lucide-react';
+import { Loader, Map, MonitorPlay, PictureInPicture, } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -22,12 +22,27 @@ const UpdateServiceForm = ({
  profile: DoctorProfile | undefined | null
 }) => {
 
-  const [selectedServiceId, setSelectedServiceId] = useState(profile?.serviceId)
+  const profileId = profile?.id
+
+  // if(status === "loading"){
+  //   return <div className='flex item-center'>
+  //      <Loader  className='mr-1 w-4 h-4 animate-spin' />
+  //      <span>Loading a User ...</span>
+  //   </div>
+  // }
+  const initialServiceId = profile?.serviceId??""
+  const initialSpecialty = profile?.specialtyId??""
+  const initialOperationMode = profile?.operationMode??""
+  const initialSymptomIds = profile?.symptomIds || []
+  const initialPrice = profile?.hourlyWage??"1000"
+
+
+  const [selectedServiceId, setSelectedServiceId] = useState(initialServiceId)
   const [savingPrice, setSavingPrice] = useState(false)
-  const [price, setPrice] = useState(profile?.hourlyWage)
-  const [specialtyId, setSpecialtyId] = useState(profile?.specialtyId)
-  const [symptomsIds, setSymptomsIds] = useState<string[]>(profile?.symptomIds || [])
-  const [operationMode, setOperationMode] = useState(profile?.operationMode)
+  const [price, setPrice] = useState(initialPrice)
+  const [specialtyId, setSpecialtyId] = useState(initialSpecialty)
+  const [symptomsIds, setSymptomsIds] = useState<string[]>(initialSymptomIds)
+  const [operationMode, setOperationMode] = useState(initialOperationMode)
 
   const [loadingServives, setLoadingServices] = useState(false);
   const [loadingSpecialties, setLoadingSpecialties] = useState(false);
@@ -37,14 +52,7 @@ const UpdateServiceForm = ({
  console.log(price)
 
    
-  const profileId = profile?.id
-  // if(status === "loading"){
-  //   return <div className='flex item-center'>
-  //      <Loader  className='mr-1 w-4 h-4 animate-spin' />
-  //      <span>Loading a User ...</span>
-  //   </div>
-  // }
-
+ 
   const operationModes = [
     {
       title: "TeleHealth visit",
@@ -178,10 +186,10 @@ async function handleUpdateOperationMode(){
          </div>
           <div className='grid grid-cols-4 gap-2 '>
               {
-                operationModes && operationModes.map((item)=>{
+                operationModes && operationModes.map((item,i)=>{
                   const Icon = item.icon
                   return(
-                     <button key={item.slug} onClick={()=>setOperationMode(item.title)} className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
+                     <button key={i} onClick={()=>setOperationMode(item.title)} className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
                        operationMode ===item.title?"border-2 bg-yellow-100 border-yellow-500":"")}>
                            <Icon className='w-8 h-8'/>
                            <p className='text-xs font-semibold text-yellow-500'>{item.title}</p>
@@ -201,9 +209,9 @@ async function handleUpdateOperationMode(){
          </div>
           <div className='grid grid-cols-4 gap-2 '>
               {
-                services && services.map((item)=>{
+                services && services.map((item, i)=>{
                   return(
-                     <button key={item.id} onClick={()=>setSelectedServiceId(item.id)} className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
+                     <button key={i} onClick={()=>setSelectedServiceId(item.id)} className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
                        selectedServiceId ===item.id?"border-2 bg-yellow-100 border-yellow-500":"")}>
                          <img 
                             src={item.imageUrl}
@@ -230,9 +238,9 @@ async function handleUpdateOperationMode(){
          </div>
           <div className='grid grid-cols-4 gap-2'>
               {
-                specialties && specialties.map((item)=>{
+                specialties && specialties.map((item,i)=>{
                   return(
-                     <button key={item.id} onClick={()=>setSpecialtyId(item.id)} 
+                     <button key={i} onClick={()=>setSpecialtyId(item.id)} 
                         className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
                           specialtyId === item.id ? "border-2 bg-yellow-100 border-yellow-500":""
                         )}>
@@ -252,9 +260,9 @@ async function handleUpdateOperationMode(){
          </div>
           <div className='grid grid-cols-4 gap-2'>
               {
-                symptoms && symptoms.map((item)=>{
+                symptoms && symptoms.map((item,i)=>{
                   return(
-                     <button key={item.id} onClick={()=>setSymptomsIds([...symptomsIds, item.id])}
+                     <button key={i} onClick={()=>setSymptomsIds([...symptomsIds, item.id])}
                         className={cn('border flex items-center cursor-pointer justify-center flex-col px-2 py-3',
                           symptomsIds.includes(item.id) ?  "border-2 bg-yellow-100 border-yellow-500":""
                         )}>

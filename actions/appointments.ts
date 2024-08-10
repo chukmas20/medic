@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 
 import NewAppointment from "@/components/Email/NewAppointment";
+import { Appointment } from "@prisma/client";
 
 
 
@@ -179,6 +180,29 @@ export async function getPatientAppointments(patientId: string){
             error
         }
     }
+}
+
+export async function getAppointmentByPatientId(patientId: string | undefined){
+   if(patientId){
+    try {
+        const appointment = await prismaClient.appointment.findFirst({
+            where:{
+                patientId
+            }
+        })  
+        if(!appointment){
+            return null
+        }
+        return appointment as Appointment
+    } catch (error) {
+        console.log(error)
+        return{
+            data: null,
+            status: 500,
+            error
+        }
+    }
+   }
 }
 
 export async function getDoctorAppointments(doctorId: string){

@@ -2,7 +2,7 @@
 
 import EmailTemplate from "@/components/Email/EmailTemplate";
 import { prismaClient } from "@/lib/db";
-import { RegisterInputProps } from "@/types/type";
+import { DoctorDetail, RegisterInputProps } from "@/types/type";
 import generateSlug from "@/utils/generateSlug";
 import bcrypt from "bcrypt";
 import {Resend} from "resend";

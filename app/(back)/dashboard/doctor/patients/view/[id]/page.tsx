@@ -1,33 +1,24 @@
-"use client"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { cn } from "@/lib/utils"
-import { timeAgo } from "@/utils/timeAgo"
-import { Appointment, UserRole } from "@prisma/client"
-import {  CalendarCheck2, Check, CircleEllipsis, Dot, History, X } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
- 
-// const tags = Array.from({ length: 50 },(_, i)=>({
-//     id:i + 1,
-//     name: `name-${i+1}`,
-// }))
+import { getPatientAppointments } from '@/actions/appointments'
+import { cn } from '@/lib/utils'
+import { timeAgo } from '@/utils/timeAgo'
+import { Calendar, CalendarCheck2, Check, CircleEllipsis, History, X } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
 
-
-const ListPanel = ({
-    appointments,
-     role
-    }: {
-      appointments:Appointment[];
-      role: UserRole
-  }) => {
-   const pathname = usePathname()
+const page = async({
+   params:{id},
+  }:{params:{id:string}}
+) => {
+  const appointments = (await getPatientAppointments(id)).data || []
   return (
-    <div className="p-6 ">
-       <ScrollArea className="h-96 px-4 py-6 rounded-md w-full border bg-yellow-100 ">
-        {appointments.map((item) => (
-            <Link key={item.id}  href={`/dashboard/${role==="USER"?"user":"doctor"}/appointments/view/${item.id}`}
+    <div className='p-4'>
+        <h2 className='border-b pb-3 mb-3 '>Appointments ({appointments.length.toString().padStart(2,"0")})</h2>
+        <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+           {appointments.map((item)=>{
+             return(
+              <Link key={item.id}  href={`/dashboard/doctor/appointments/view/${item.id}`}
               className={cn("border border-gray-300 rounded-md   bg-white shadow-sm text-sm w-full dark:text-yellow-500 inline-block py-3 px-2",
-                pathname === `/dashboard/doctor/appointments/view/${item.id}` && "border-green-700 border-2 bg-green-100")}
+               )}
               >
                 <div  className="flex justify-between items-center pb-2 text-sm ">
                    <h2>{item.firstName} - {item.lastName}</h2>
@@ -57,11 +48,11 @@ const ListPanel = ({
                    <span>{item.status}</span>
                 </div>
             </Link>
-        ))}
-         </ScrollArea>
+             )
+           })}
+        </div>
     </div>
-    
   )
 }
 
-export default ListPanel
+export default page

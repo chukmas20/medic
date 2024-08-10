@@ -5,7 +5,7 @@ import { AppointmentProps, DoctorDetail  } from '@/types/type';
 import { Calendar } from './ui/calendar';
 import { getDayFromDate } from '@/utils/getDayFromDate';
 import { getLongDate } from '@/utils/getLongDate';
-import { CreditCard, Loader, LoaderPinwheel, MoveRight } from 'lucide-react';
+import { CreditCard, Loader, MoveRight } from 'lucide-react';
 import { Button } from './ui/button';
 
 import TextAreaInput from './FormInputs/TextAreaInput';
@@ -18,8 +18,15 @@ import MultipleFileUpload, { FileProps } from './FormInputs/MultipleFileUpload';
 import { useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import { createAppointment } from '@/actions/appointments';
+import { Appointment } from '@prisma/client';
 
-const DoctorDetails = ({doctor}:{doctor:DoctorDetail}) => {
+const DoctorDetails = ({
+   doctor,
+   appointment
+  }:{
+  doctor:DoctorDetail,
+ appointment: Appointment | null
+}) => {
     const [isActive, setIsActive] = useState("availability")
     const {data: session} = useSession()
     const patient = session?.user
@@ -58,7 +65,13 @@ const DoctorDetails = ({doctor}:{doctor:DoctorDetail}) => {
     formState: { errors },
   } = useForm<AppointmentProps>({
     defaultValues:{
-      email:patient?.email??"",
+      email:appointment?.email??"",
+      firstName:appointment?.firstName??"",
+      lastName:appointment?.lastName??"",
+      occupation:appointment?.occupation??"",
+      phone:appointment?.phone??"",
+      location:appointment?.location??"",
+      gender:appointment?.gender ??""
     }
   })
 
@@ -73,7 +86,7 @@ const DoctorDetails = ({doctor}:{doctor:DoctorDetail}) => {
     (data.doctorId = doctor.id);
     // (data.doctorProfileId = doctor?.doctorProfile.id ?? "");
     (data.charge = doctor.doctorProfile?.hourlyWage ?? 0)
-    data.patientId = patient?.id
+      data.patientId = patient?.id??""
     
      try {
        setIsLoading(true)

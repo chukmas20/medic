@@ -25,7 +25,11 @@ const page = async() => {
             </div>
           </div>
           <div className='col-span-8'>
-              <HomeDisplayCard newAppointmentLink='/dashboard/doctor/appointments/new'  count={appointments.length}  />
+              <HomeDisplayCard
+               newAppointmentLink='/dashboard/doctor/appointments/new' 
+               count={appointments.length} 
+                title='Appointments' 
+               />
            </div>
         
     </div>

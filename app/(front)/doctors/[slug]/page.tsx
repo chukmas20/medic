@@ -1,5 +1,9 @@
+import { getAppointmentByPatientId } from '@/actions/appointments'
 import { getDoctorBySlug } from '@/actions/users'
 import DoctorDetails from '@/components/DoctorDetails'
+import { authOptions } from '@/lib/auth'
+import { Appointment } from '@prisma/client'
+import { getServerSession } from 'next-auth'
 import React from 'react'
 
 const page = async({
@@ -8,7 +12,11 @@ const page = async({
    }:{
   params:{slug:string}}) => {
   //fetch doctor
+  const session = await getServerSession(authOptions)
   const doctor = (await getDoctorBySlug(slug)) || null;
+  const user = session?.user
+  //fetch appointment by patientId
+  const appointment = await getAppointmentByPatientId(user?.id??"")
   return (
     <>
     {doctor &&  doctor.id ? (
@@ -33,7 +41,7 @@ const page = async({
                   </div>
                 </div>
              <div className=''>
-               <DoctorDetails doctor={doctor}  />
+               <DoctorDetails appointment={appointment as Appointment | null} doctor={doctor}  />
              </div>
          </div>
          {/* <FixedBookButton  price={doctor.doctorProfile?.hourlyWage} /> */}

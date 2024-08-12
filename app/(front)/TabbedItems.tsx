@@ -6,9 +6,10 @@ import LinkCards from "./doctors/LinkCards";
 import { FaSyringe } from "react-icons/fa";
 import { Service, Speciality, Symptom } from "@prisma/client";
 import SymptomCard from "./doctors/SymptomCard";
+import { ServiceWithDoctorProfileCount } from "@/actions/services";
 
 type  TabbedItemsProps = {
-  services: Service[];
+  services: ServiceWithDoctorProfileCount[];
   specialties: Speciality[];
   symptoms: Symptom[];
 }

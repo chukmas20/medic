@@ -15,7 +15,7 @@ const LinkCards = ({className, specialties}:LinkCardsProps) => {
           return(
             <Link
              key={item.id}
-             href={`/specialties/${item.slug}`}
+             href={`/specialty/${item.slug}`}
              className={`rounded-md py-3 px-6 flex gap-4 bg-slate-800 text-slate-50 
              ${className}`}>
             <h2>{item.title}</h2>

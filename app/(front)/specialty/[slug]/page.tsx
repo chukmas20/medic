@@ -1,4 +1,4 @@
-import { DataProps, getDoctorsByServiceSlug } from '@/actions/doctors'
+import { DataProps, getDoctorsBySpecialtySlug } from '@/actions/doctors'
 import DoctorCard from '@/components/DoctorCard'
 import { Doctor } from '@/types/type'
 import Link from 'next/link'
@@ -14,7 +14,7 @@ const page =async ({
     const {type} = searchParams;
     console.log(type)
     const title = slug.split("-").join(" ")
-    const data = await getDoctorsByServiceSlug(slug) as DataProps
+    const data = await getDoctorsBySpecialtySlug(slug) as DataProps
     const doctors = data?.doctors as Doctor[];
     const services = data.services
   return (

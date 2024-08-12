@@ -1,5 +1,5 @@
 import { getAppointmentByPatientId } from '@/actions/appointments'
-import { getDoctorBySlug } from '@/actions/users'
+import { getDoctorById, getDoctorBySlug } from '@/actions/users'
 import DoctorDetails from '@/components/DoctorDetails'
 import { authOptions } from '@/lib/auth'
 import { Appointment } from '@prisma/client'
@@ -8,12 +8,17 @@ import React from 'react'
 
 const page = async({
   params:{slug},
-  
-   }:{
-  params:{slug:string}}) => {
+  searchParams
+}:{
+params:{slug:string}
+searchParams:{[key:string]:string | string[] | undefined}
+}) => {
+  const {id} = searchParams
   //fetch doctor
   const session = await getServerSession(authOptions)
-  const doctor = (await getDoctorBySlug(slug)) || null;
+  // const doctor = (await getDoctorBySlug(slug)) || null;
+  const doctor = (await getDoctorById(id as string)) || null;
+
   const user = session?.user
   //fetch appointment by patientId
   const appointment = await getAppointmentByPatientId(user?.id??"")

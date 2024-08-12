@@ -65,6 +65,7 @@ export default function PractiseInfoForm(
      data.servicesOffered = services
      data.languagesSpoken = languages
      data.hospitalHoursOfOperation = Number(data.hospitalHoursOfOperation);
+     data.hourlyWage = Number(data.hourlyWage)
      data.page = page;
      console.log(data);
     setIsLoading(true); 
@@ -150,7 +151,7 @@ export default function PractiseInfoForm(
                     />
                      <TextInput 
                     label="Pay per consultation" 
-                    name="hourlyPay"
+                    name="hourlyWage"
                     type="number"
                     register={register}
                     errors={errors}

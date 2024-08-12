@@ -68,7 +68,7 @@ export type PractiseFormProps = {
     servicesOffered: string[];
     insuranceAccepted?: string;
     languagesSpoken: string[];
-    hourlyPay: number
+    hourlyWage: number
 
 }
 

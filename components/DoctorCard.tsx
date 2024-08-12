@@ -35,9 +35,9 @@ const DoctorCard = ({
           flex-col items-start justify-start px-3
            hover:border-yellow-600 duration-500 transition-all dark:bg-slate-800  " 
          >
-            <Link href={`/doctors/${doctor.slug}`}>
+            <Link href={`/doctors/${doctor.slug}?id=${doctor.id}`}>
             <h2 className='uppercase font-bold text-2xl tracking-widest'>
-               {doctor.name}
+               {`${doctor.doctorProfile?.firstName} ${doctor.doctorProfile?.lastName}`}
             </h2>
             {isInperson && (
                <p className='py-3'>3250 Lincoln Highway, Kendall Park, NJ 08824</p>

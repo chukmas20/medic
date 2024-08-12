@@ -64,11 +64,11 @@ const UpdateServiceForm = ({
       slug:"inperson-visit",
       icon: Map
     },
-    {
-      title: "Both TeleHealth and In-person visit",
-      slug:"inperson-telehealth",
-      icon: PictureInPicture
-    },
+    // {
+    //   title: "Both TeleHealth and In-person visit",
+    //   slug:"inperson-telehealth",
+    //   icon: PictureInPicture
+    // },
   ]
  
   async function handleUpdateService(){

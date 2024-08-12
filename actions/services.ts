@@ -160,7 +160,7 @@ export async function createManyServices(){
                 imageUrl: "https://cdn-icons-png.flaticon.com/128/3063/3063106.png"
             },
             {
-                title:"In-person doctor vist ",
+                title:"In-person doctor visit ",
                 slug: "inperson-visit",
                 imageUrl: "https://cdn-icons-png.flaticon.com/128/3439/3439472.png"
             },

@@ -4,7 +4,7 @@ import React from 'react'
 
 const ServiceCard = ({service}:{service:ServiceProps}) => {
   return (
-    <Link href={`/services/${service.slug}`}
+    <Link href={`/service/${service.slug}`}
       className='rounded-md bg-yellow-500 items-center px-2 overflow-hidden dark:bg-slate-700 hover:bg-yellow-600 duration-300 flex gap-4'>
          <img
            src={service.imageUrl}

@@ -91,7 +91,7 @@ const initialPractiseData = {
     servicesOffered: [],
     insuranceAccepted: "",
     languagesSpoken: [],
-    hourlyPay:100
+    hourlyWage:1000
 
 }
 

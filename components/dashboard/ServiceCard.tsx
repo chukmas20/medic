@@ -3,7 +3,7 @@ import {  Pencil, Trash } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from '../ui/button'
-import { deleteServices } from '@/actions/services'
+import { deleteServices, ServiceWithDoctorProfileCount } from '@/actions/services'
 import toast from 'react-hot-toast'
 import { Service } from '@prisma/client'
 
@@ -19,7 +19,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-const ServiceCard = ({service}:{service:Service}) => {
+const ServiceCard = ({service}:{service:ServiceWithDoctorProfileCount}) => {
   async function handleDelete(id:string){
     await deleteServices(id)
     toast.success("Service successfully deleted")

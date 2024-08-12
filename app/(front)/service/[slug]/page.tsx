@@ -15,12 +15,12 @@ const page =async ({
     console.log(type)
     const title = slug.split("-").join(" ")
     const data = await getDoctorsByServiceSlug(slug) as DataProps
-    const doctors = data?.doctors as Doctor[];
-    const services = data.services
+    const doctors = data?.doctors as Doctor[] || [];
+    const services = data?.services || [];
   return (
     <div className='container p-8'>
           <h1 className='scroll-m-20 lg:text-3xl py-4 pb-6 capitalize text-2xl font-extrabold tracking-tight'>
-            {title} ({doctors.length?.toString().padStart(2,"0")})
+            {title} ({doctors.length?.toString().padStart(2,"0" )})
         </h1>
         <div className='max-w-6xl mx-auto grid grid-cols-12 gap-6 lg:gap-10'>
             <div className='col-span-3 shadow border border-gray-200/50 rounded p-6'>

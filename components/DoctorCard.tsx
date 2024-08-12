@@ -85,12 +85,15 @@ const DoctorCard = ({
                 <div className='py-3 grid grid-cols-3 gap-2'>
                          {times.slice(0,5).map((item: any,i:number)=>{
                           return(
-                             <Link href={`/doctors/${doctor.slug}`} key={i} className='bg-yellow-700 text-white text-center py-2 px-3 '>
+                             <Link  
+                               href={`/doctors/${doctor.slug}?id=${doctor.id}`} key={i} 
+                               className='bg-yellow-700 text-white text-center py-2 px-3 '
+                              >
                                {item} 
                             </Link>
                           )
                          })}
-                         <Link href={`/doctors/${doctor.slug}`}
+                         <Link  href={`/doctors/${doctor.slug}?id=${doctor.id}`}
                           className='bg-yellow-900 text-center truncate text-sm text-white py-2 px-3'>
                             More Slots
                           </Link>

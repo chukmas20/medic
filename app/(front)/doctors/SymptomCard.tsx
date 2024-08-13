@@ -4,18 +4,18 @@ import React from 'react'
 
 type  LinkCardsProps = {
   className?: string,
-  symptoms: Symptom[]
+  symptoms: Symptom[] 
 
 }
 const SymptomCard = ({className, symptoms}:LinkCardsProps) => {
   return (
     <div className='grid lg:grid-cols-5  md:grid-cols-3 sm:grid-cols-3 grid-cols-1 gap-6'>
        {
-        symptoms && symptoms.map((item)=>{
+         symptoms.map((item)=>{
           return(
             <Link
              key={item.id}
-             href={`/specialties/${item.slug}`}
+             href={`/symptoms/${item.slug}?id=${item.id}`} 
              className={`rounded-md py-3 px-6 flex gap-4 bg-slate-800 text-slate-50 
              ${className} justify-between`}>
             <h2>{item.title}</h2>

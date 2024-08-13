@@ -1,26 +1,31 @@
-import { DataProps, getDoctorsBySpecialtySlug } from '@/actions/doctors'
+import { DataProps, getDoctorsBySearch, getDoctorsByServiceSlug } from '@/actions/doctors'
 import DoctorCard from '@/components/DoctorCard'
 import { Doctor } from '@/types/type'
 import Link from 'next/link'
 import React from 'react'
+import ServiceList from '../services/ServiceList'
+import LinkCards from '../doctors/LinkCards'
+import SymptomCard from "../doctors/SymptomCard";
+
 
 const page =async ({
-    params:{slug},
     searchParams
 }:{
- params:{slug:string}
  searchParams:{[key:string]:string | string[] | undefined}
 }) => {
-    const {type} = searchParams;
-    console.log(type)
-    const title = slug.split("-").join(" ")
-    const data = await getDoctorsBySpecialtySlug(slug) as DataProps
-    const doctors = data?.doctors as Doctor[];
-    const services = data.services
+    const {query} = searchParams;
+    const data = await getDoctorsBySearch(query as string) 
+    const doctors = data?.doctors || []
+    const services = data?.services || []
+    const specialties = data?.specialties || []
+    const symptoms = data?.symptoms || []
+
+    console.log(data);
   return (
     <div className='container p-8'>
           <h1 className='scroll-m-20 lg:text-3xl py-4 pb-6 capitalize text-2xl font-extrabold tracking-tight'>
-            {title} ({doctors.length?.toString().padStart(2,"0")})
+            {query} 
+            {/* ({doctors.length?.toString().padStart(2,"0" )}) */}
         </h1>
         <div className='max-w-6xl mx-auto grid grid-cols-12 gap-6 lg:gap-10'>
             <div className='col-span-3 shadow border border-gray-200/50 rounded p-6'>
@@ -31,9 +36,7 @@ const page =async ({
                           {
                             services.map((service, i)=>{
                              return(
-                              <Link key={i}
-                                href={`/specialty/${service.slug}`}
-                                className='hover:text-yellow-600'>
+                              <Link key={i} href={`/service/${service.slug}`} className='hover:text-yellow-600'>
                                {service.title}
                             </Link>
                              ) 
@@ -44,6 +47,21 @@ const page =async ({
                     }
             </div>
             <div className='col-span-9 '>
+                {services && services.length > 0 &&
+                  (<div className='py-6 border-b'>
+                    <h2>Search results for {query} in services</h2>
+                        <ServiceList data={services} />
+                  </div>) 
+                  }
+                
+                <div className='py-6 border-b'>
+                  <h2>Search results for {query} in specialties</h2>
+                  <LinkCards className='bg-yellow-600'  specialties={specialties}     />
+                </div>
+                <div className='py-6 border-b'>
+                  <h2>Search results for {query} in symptoms</h2>
+                  <SymptomCard className="bg-yellow-500"  symptoms={symptoms}/>
+                   </div>
                 {
                     doctors && doctors.length > 0 ? (
                       <div className='grid grid-cols-2 gap-6'>

@@ -3,6 +3,8 @@ import React from 'react';
 import TransitionText from './TransitionText';
 import { CommandMenu } from '@/components/command-menu';
 import Link from 'next/link';
+import SearchBar from './SearchBar';
+import Searchbar from '@/components/Searchbar';
 
 const HeroSection= () => {
   return (
@@ -22,7 +24,7 @@ const HeroSection= () => {
            </div>
            
           <div className='xl:mr-[250px] mt-10'>
-            <CommandMenu  />
+              <Searchbar  />
           </div>
           <div className='flex items-center gap-6 pt-6 '>
           <div className='py-4 flex gap-4'>

@@ -23,7 +23,7 @@ export default async function Home() {
          <TabbedSection  />
          <DoctorsList 
           doctors={telehealthDoctors}
-
+          title="TeleHealth visit"
          />
          <DoctorsList
            className="bg-white py-8 lg:py-24 dark:bg-slate-800"

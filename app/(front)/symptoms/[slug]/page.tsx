@@ -1,4 +1,4 @@
-import { DataProps, getDoctorsBySpecialtySlug } from '@/actions/doctors'
+import { DataProps, getDoctorsBySymptomId } from '@/actions/doctors'
 import DoctorCard from '@/components/DoctorCard'
 import { Doctor } from '@/types/type'
 import Link from 'next/link'
@@ -11,10 +11,9 @@ const page =async ({
  params:{slug:string}
  searchParams:{[key:string]:string | string[] | undefined}
 }) => {
-    const {type} = searchParams;
-    console.log(type)
+    const {id} = searchParams;
     const title = slug.split("-").join(" ")
-    const data = await getDoctorsBySpecialtySlug(slug) as DataProps
+    const data = await getDoctorsBySymptomId(id as string) as DataProps
     const doctors = data?.doctors as Doctor[];
     const services = data.services
   return (
@@ -32,7 +31,7 @@ const page =async ({
                             services.map((service, i)=>{
                              return(
                               <Link key={i}
-                                href={`/specialty/${service.slug}`}
+                                href={`/symptoms/${service.slug}?id=${service.id}`}
                                 className='hover:text-yellow-600'>
                                {service.title}
                             </Link>

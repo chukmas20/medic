@@ -17,15 +17,15 @@ export const docsConfig: DocsConfig = {
     },
     {
     title:"Telehealth",
-    href:"/tele-health"
+    href:"/category?mode=TeleHealth%20visit"
     },
     {
     title:"Inperson Visit",
-    href:"/inperson"
+    href:"/category?mode=In-person%20doctor%20visit"
     },
     {
-    title:"Doctors",
-    href:"/doctors"
+    title:"Register as a Doctor",
+    href:"/join/doctors"
     },
     {
     title:"About",

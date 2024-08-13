@@ -33,7 +33,7 @@ const DoctorsList = (
               <ToggleButton  />
              )}
              <Button asChild>
-               <Link href="#" className=''>
+               <Link href={`/category?mode=${title}`} className=''>
                   Expand
                 </Link>
              </Button>

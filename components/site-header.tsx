@@ -18,6 +18,7 @@ import { Session } from "next-auth"
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { generateInitials } from "@/utils/genrateInitials"
+import Searchbar from "./Searchbar";
 
 export function SiteHeader({session}:{session : Session | null}) {
   const user = session?.user;
@@ -37,8 +38,8 @@ export function SiteHeader({session}:{session : Session | null}) {
         <MainNav />
         <MobileNav />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          {/* <div className="w-full flex-1 md:w-auto md:flex-none">
-            <CommandMenu />
+        {/* <div className="w-full flex-1 md:w-auto md:flex-none">
+              <Searchbar   />
           </div> */}
           <nav className="flex items-center gap-4">
             {session && session.user && user?.email ? (
@@ -54,7 +55,6 @@ export function SiteHeader({session}:{session : Session | null}) {
                       <AvatarFallback>{initials}</AvatarFallback>
                     )}
                    </Avatar>
-          
           
                     <span className="sr-only">Toggle user menu</span>
                   </Button>
@@ -80,7 +80,10 @@ export function SiteHeader({session}:{session : Session | null}) {
               </Link>
            </Button>
             )}
-            <ModeToggle />
+            {/* <ModeToggle /> */}
+            <div className="w-full flex-1 md:w-auto md:flex-none">
+              <Searchbar   />
+          </div>
           </nav>
         </div>
       </div>

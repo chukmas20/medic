@@ -10,6 +10,7 @@ const Searchbar = () => {
         e.preventDefault()
         console.log(query)
         router.push(`/search?query=${query}`)
+        
     }
 return (
 <form className="max-w-md mx-auto" onSubmit={handleSearch}>   

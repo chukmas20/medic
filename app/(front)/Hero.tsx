@@ -1,9 +1,7 @@
 import React from 'react';
 // import SearchBar from "./SearchBar"
-import TransitionText from './TransitionText';
-import { CommandMenu } from '@/components/command-menu';
+
 import Link from 'next/link';
-import SearchBar from './SearchBar';
 import Searchbar from '@/components/Searchbar';
 
 const HeroSection= () => {

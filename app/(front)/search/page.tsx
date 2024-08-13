@@ -6,6 +6,7 @@ import React from 'react'
 import ServiceList from '../services/ServiceList'
 import LinkCards from '../doctors/LinkCards'
 import SymptomCard from "../doctors/SymptomCard";
+import { getServices } from '@/actions/services'
 
 
 const page =async ({
@@ -16,9 +17,11 @@ const page =async ({
     const {query} = searchParams;
     const data = await getDoctorsBySearch(query as string) 
     const doctors = data?.doctors || []
-    const services = data?.services || []
+    const searchServices = data?.services || []
     const specialties = data?.specialties || []
     const symptoms = data?.symptoms || []
+    const allServices =   (await getServices()).data || []
+    const services = searchServices.length > 0 ?searchServices : allServices
 
     console.log(data);
   return (
@@ -37,7 +40,8 @@ const page =async ({
                             services.map((service, i)=>{
                              return(
                               <Link key={i} href={`/service/${service.slug}`} className='hover:text-yellow-600'>
-                               {service.title}
+                               {service.title} 
+                               ({service._count.doctorProfiles.toString().padStart(2,"0")})
                             </Link>
                              ) 
                             })
@@ -47,24 +51,29 @@ const page =async ({
                     }
             </div>
             <div className='col-span-9 '>
-                {services && services.length > 0 &&
+                {searchServices && searchServices.length > 0 &&
                   (<div className='py-6 border-b'>
-                    <h2>Search results for {query} in services</h2>
-                        <ServiceList data={services} />
+                    <h2 className='pb-3'>Search results for {query} in services</h2>
+                        <ServiceList data={searchServices} />
                   </div>) 
                   }
-                
-                <div className='py-6 border-b'>
-                  <h2>Search results for {query} in specialties</h2>
-                  <LinkCards className='bg-yellow-600'  specialties={specialties}     />
-                </div>
-                <div className='py-6 border-b'>
-                  <h2>Search results for {query} in symptoms</h2>
-                  <SymptomCard className="bg-yellow-500"  symptoms={symptoms}/>
-                   </div>
+                   {specialties && specialties.length > 0 &&
+                  (<div className='py-6 border-b'>
+                    <h2 className='pb-3'>Search results for {query} in specialties </h2>
+                    <LinkCards className='bg-yellow-600'  specialties={specialties}     />
+                  </div>) 
+                  }
+                  {symptoms && symptoms.length > 0 && (
+                     <div className='py-6 border-b'>
+                     <h2 className='pb-3'>Search results for {query} in symptoms </h2>
+                     <SymptomCard className="bg-yellow-500"  symptoms={symptoms}/>
+                      </div>
+                  )}
                 {
-                    doctors && doctors.length > 0 ? (
-                      <div className='grid grid-cols-2 gap-6'>
+                    doctors && doctors.length > 0 && (
+                      <div className='py-6'>
+                        <h2 className='pb-3'>Results for {query} in doctors</h2>
+                           <div className='grid grid-cols-2 gap-6'>
                          {
                             doctors.map((doctor:Doctor)=>{
                                 return(
@@ -73,10 +82,7 @@ const page =async ({
                             })
                          }
                       </div>
-                    ):(
-                        <div className=''>
-                           <h2>No Doctors for this category</h2>
-                        </div>
+                      </div>
                     )
                 }
             </div>

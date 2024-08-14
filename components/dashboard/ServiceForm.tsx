@@ -74,9 +74,9 @@ export default function ServiceForm({title, initialData}:{title:string, initialD
                          <X  className="w-4 h-4"     />
                        </Link>
                    </Button>
-                   {/* <Button type="button" onClick={handleCreateMany} variant={"outline"}>
+                   <Button type="button" onClick={handleCreateMany} variant={"outline"}>
                          {isLoading ? "Loading..." :"Create Many"}
-                   </Button> */}
+                   </Button>
                  </div>
              </div>
              <form onSubmit={handleSubmit(onSubmit)} className="space-y-2" >

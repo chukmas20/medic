@@ -101,7 +101,9 @@ export async function getServices(){
                     select:{
                         doctorProfiles:true
                     }
-                }
+                },
+                createdAt:true,
+                updatedAt:true
             }
         })  
         console.log(services)
@@ -204,6 +206,16 @@ export async function createManyServices(){
                 title:"Erectile Dysfunction",
                 slug: "ante-natal",
                 imageUrl: "https://cdn-icons-png.flaticon.com/128/16543/16543848.png"
+            },
+            {
+                title:"Cardiology",
+                slug: "cardiology",
+                imageUrl: "https://cdn-icons-png.flaticon.com/128/3478/3478982.png"
+            },
+            {
+                title:"Dermatology",
+                slug: "dermatology",
+                imageUrl: "https://cdn-icons-png.flaticon.com/128/2763/2763315.png"
             },   
            ]
            for(const service of services){

@@ -131,6 +131,19 @@ model Symptom {
     
 }
 
+model Inbox {
+ id   String  @id @default(auto()) @map("_id") @db.ObjectId
+ receiverId  String
+ senderId  String
+ senderName String
+ senderEmail String
+ subject   String
+ body      String
+  createdAt     DateTime  @default(now()) 
+  updatedAt     DateTime  @updatedAt
+    
+}
+
 enum AppointmentStatus {
   pending
   rejected

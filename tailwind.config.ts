@@ -10,6 +10,7 @@ export default withUt({
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
     'node_modules/flowbite-react/lib/esm/**/*.js',
+     "./node_modules/react-tailwindcss-select/dist/index.esm.js"
 	],
   prefix: "",
   theme: {

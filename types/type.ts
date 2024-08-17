@@ -38,6 +38,15 @@ export type ProfileInfoFormProps ={
 
 }
 
+export type InboxProps = {
+    receiverId: string
+    senderId: string
+    senderName: string
+    senderEmail: string
+    subject: string
+    body: string
+}
+
 export type ContactInfoFormProps ={
     page: string;
     email: string;

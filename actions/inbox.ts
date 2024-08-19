@@ -56,6 +56,20 @@ export async function getInboxMessages(receiverId: string){
     }
 }
 
+export async function getInboxMessageById(id: string){
+    try {
+        const message = await prismaClient.inbox.findUnique({
+            where:{
+                id
+            }
+        })  
+        return message
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
 export async function getInboxSentMessages(senderId: string){
     try {
         const messages = await prismaClient.inbox.findMany({

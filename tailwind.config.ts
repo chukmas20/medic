@@ -82,6 +82,7 @@ export default withUt({
     require("tailwindcss-animate"),
     require("@tailwindcss/forms"),
     require('flowbite/plugin'),
+    require('@tailwindcss/typography'),
   ],
 });
 

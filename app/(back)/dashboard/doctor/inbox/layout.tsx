@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth'
 import { Calendar, Mail } from 'lucide-react'
 import React, { ReactNode } from 'react'
 import NotAuthorized from '@/components/NotAuthorized'
-import { getInboxMessages } from '@/actions/inbox'
+import { getInboxMessages, getInboxSentMessages } from '@/actions/inbox'
 import MailListPanel from '@/components/dashboard/Doctor/MailListPanel'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
@@ -22,6 +22,7 @@ const layout = async({
      )
   }
   const messages = (await getInboxMessages(user?.id)).data || []
+  const sentMessages = (await getInboxSentMessages(user?.id)).data || []
   return (
     <div> 
        <div className='grid grid-cols-12'>
@@ -33,8 +34,12 @@ const layout = async({
               <div className='px-3 py-3'>
               <Tabs defaultValue="received" className="">
               <TabsList>
-                <TabsTrigger value="received">Received</TabsTrigger>
-                <TabsTrigger value="sent">Sent</TabsTrigger>
+                <TabsTrigger value="received">
+                  Received ({messages.length.toString().padStart(2,"0")})
+                </TabsTrigger>
+                <TabsTrigger value="sent">
+                  Sent ({sentMessages.length.toString().padStart(2,"0")})
+                </TabsTrigger>
               </TabsList>
                 <TabsContent value="received">
                 <MailListPanel 
@@ -44,7 +49,7 @@ const layout = async({
                 </TabsContent>
                 <TabsContent value="sent">
                   <MailListPanel 
-                    messages={messages}
+                    messages={sentMessages}
                     role={user?.role} 
                     />
                 </TabsContent>

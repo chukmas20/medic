@@ -87,6 +87,7 @@ const DoctorDetails = ({
     // (data.doctorProfileId = doctor?.doctorProfile.id ?? "");
     (data.charge = doctor.doctorProfile?.hourlyWage ?? 0)
       data.patientId = patient?.id??""
+      data.doctorName = doctor.name
     
      try {
        setIsLoading(true)

@@ -17,6 +17,7 @@ export default  function SideBar({session}:{session:Session}) {
   const roles ={
     USER:[
       {title: "Dashboard", path:"/dashboard", icon: Home},
+      {title: "Inbox", path:"/dashboard/user/inbox", icon: Mail},
       {
         title: "My Appointments",
        path:"/dashboard/user/appointments",

@@ -95,7 +95,7 @@ export default async function MailDisplay({params:{id}}:{params:{id:string}}) {
           </div>
           <Separator />
           <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-             <MessageBody html={mail.body} />
+             <MessageBody html={mail.body}          />
           </div>         
         </div>
       ) : (

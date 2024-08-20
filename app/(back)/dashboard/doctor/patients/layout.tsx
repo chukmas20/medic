@@ -6,6 +6,7 @@ import {  User } from 'lucide-react'
 import React, { ReactNode } from 'react'
 import NotAuthorized from '@/components/NotAuthorized'
 import PatientPanel from '@/components/dashboard/Doctor/PatientPanel'
+
 export interface PatientProps {
   patientId: string;
   name: string;
@@ -15,6 +16,12 @@ export interface PatientProps {
   gender: string;
   occupation: string;
   dob: string;
+}
+
+export interface DoctorProps {
+  doctorId: string;
+  doctorName: string;
+  
 }
 
 const PatientLayout = async({

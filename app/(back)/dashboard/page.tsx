@@ -21,10 +21,7 @@ const page = async() => {
   if(role === "USER"){
     return(
        <div className='p-3'>
-        <p className='bg-yellow-500 text-white w-28 px-2 rounded-md shadow-md' >
-          Role: {user?.role}
-        </p>
-         <PatientDashboard />
+         <PatientDashboard  session={session}/>
        </div>
     ) 
   }

@@ -23,6 +23,8 @@ export default  function SideBar({session}:{session:Session}) {
        path:"/dashboard/user/appointments",
         icon: Calendar
       },
+      {title: "Doctors", path:"/dashboard/user/doctors", icon: Users2},
+
       {
         title: "Settings",
        path:"/dashboard/user/settings",

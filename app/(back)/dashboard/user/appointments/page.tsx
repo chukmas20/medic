@@ -1,4 +1,4 @@
-import { getAppointments, getPatientAppointments, } from '@/actions/appointments'
+import {  getPatientAppointments, } from '@/actions/appointments'
 import HomeDisplayCard from '@/components/dashboard/Doctor/HomeDisplayCard'
 import NewButton from '@/components/dashboard/Doctor/NewButton'
 import NotAuthorized from '@/components/NotAuthorized'

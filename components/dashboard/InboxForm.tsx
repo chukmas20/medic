@@ -69,7 +69,7 @@ export default function InboxForm({
         reset();
         setIsLoading(false);
         toast.success("Message sent successfully")
-         router.push("/dashboard/doctor/inbox") 
+         router.push(`/dashboard/${session?.user.role === "DOCTOR"?"doctor":"user"}/inbox`) 
       }
     } catch (error) {
       setIsLoading(false);
@@ -84,7 +84,9 @@ export default function InboxForm({
                  <div className="flex items-center justify-between">
                    <h1 className="font-bold text-1xl max-w-6xl">{title}</h1>
                    <Button type="button"  asChild variant={"outline"}>
-                       <Link href={"/dashboard/doctor/inbox"}>
+                       <Link
+                        href={`/dashboard/${session?.user?.role ==="DOCTOR"?"doctor":"user"}/inbox`}
+                        >
                          <X  className="w-4 h-4"     />
                        </Link>
                    </Button>

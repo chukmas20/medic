@@ -1,5 +1,4 @@
 import { getAppointmentById } from '@/actions/appointments'
-import UpdateAppointmentForm from '@/components/dashboard/Doctor/UpdateAppointmentForm'
 import { Button } from '@/components/ui/button'
 import { Calendar, Mail, Phone, Video } from 'lucide-react'
 import Link from 'next/link'

@@ -31,7 +31,8 @@ const MailListPanel = ({
             key={item.id}
             className={cn(
               "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
-              // mail.selected === item.id && "bg-muted"
+              // mail.selected === item.id && "bg-muted"   
+              pathname === `/dashboard/${role === "DOCTOR"?"doctor":"user"}/inbox/view/${item.id}` && "border-yellow-700 border-2 bg-yellow-200"
             )}
             // onClick={() =>
             //   setMail({

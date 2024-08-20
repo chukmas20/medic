@@ -1,5 +1,4 @@
 
-import DoctorsList from "@/components/DoctorsList";
 import { getDoctors } from "@/actions/users";
 import DoctorCard from "@/components/DoctorCard";
 

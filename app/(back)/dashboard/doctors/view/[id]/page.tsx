@@ -88,17 +88,40 @@ const page = async({
                   <span>{doctor?.doctorProfile?.medicalLicense}</span>
                </div>
                <div className='flex items-center '>
-                  <span className='mr-3'>Gender :</span>
-                  <span>{doctor?.doctorProfile?.gender}</span>
-               </div>
-               <div className='flex items-center '>
-                  <span className='mr-3'>Medical License expiry date :</span>
-                  <span>{(expiry)?.toDateString()}</span>
+                  <span className='mr-3 text-xs '>Medical License expiry date :</span>
+                  <span className='text-xs'>{(expiry)?.toDateString()}</span>
                </div>
             </div>
             <div className='flex items-center w-full mt-4 text-sm font-bold '>
                   <span>{doctor?.doctorProfile?.bio}</span>
                </div>
+          </div>
+          <div className='p-4'>
+             <h2 className='text-sm tracking-widest border-b pb-1 mb-2'> 
+                Contact Information
+            </h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 text-sm gap-4'>
+               <div className='flex items-center '>
+               <span className='mr-3'>Hospital Address :</span>
+                <span>{doctor?.doctorProfile?.hospitalAddress}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Medical License :</span>
+                  <span>{doctor?.doctorProfile?.medicalLicense}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3 text-xs'>Hospital Phone Number :</span>
+                  <span className='text-xs'>{doctor?.doctorProfile?.hospitalContactNumber}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3 text-xs'>Hospital Email:</span>
+                  <span className='text-xs'>{doctor?.doctorProfile?.hospitalEmailAddress}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Hours of Operation :</span>
+                  <span>{doctor?.doctorProfile?.hospitalHoursOfOperation}</span>
+               </div>
+            </div>
           </div>
         </TabsContent>
         <TabsContent value="appointments">

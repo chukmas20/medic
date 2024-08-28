@@ -11,7 +11,7 @@ import { signOut } from "next-auth/react";
 
  
 export default  function SideBar({session}:{session:Session}) {
-   const{user} = session;
+   const {user} = session;
    const role = user?.role;
    const id = user?.id;
   const pathname = usePathname();
@@ -68,51 +68,7 @@ export default  function SideBar({session}:{session:Session}) {
   };
   console.log(role)
   let sideBarLinks = roles[role] || [];
-  // const sideBarLinks = [
-  //   {
-  //     name:"Dashboard",
-  //     path:"/dashboard",
-  //     icon: Home
-  //   },
-   
-  //   {
-  //     name:"Products",
-  //     path:"/dashboard/products",
-  //     icon: Package
-  //   },
-  //   {
-  //     name:"Orders",
-  //     path:"/dashboard/orders",
-  //     icon: ShoppingCart,
-  //     badgeCount: 6
-  //   },
-  //   {
-  //     name:"Customers",
-  //     path:"/dashboard/customers",
-  //     icon: Users
-  //   },
-  //   {
-  //     name:"Settings",
-  //     path:"/dashboard/settings",
-  //     icon: Settings
-  //   },
-  //   {
-  //     name:"Analytics",
-  //     path:"/dashboard/analytics",
-  //     icon: LineChart
-  //   }, 
-  //   {
-  //     name:"Website",
-  //     path:"/",
-  //     icon: Telescope
-  //   }, 
-  //   {
-  //     name:"Logout",
-  //     path:"/dashboard/logout",
-  //     icon: Bell
-  //   },
-   
-  // ]
+  
   const router = useRouter();
   async function handleLogout(){
     await signOut()
@@ -123,14 +79,6 @@ export default  function SideBar({session}:{session:Session}) {
     <div className="hidden border-r bg-muted/40 md:block">
     <div className="flex h-full max-h-screen flex-col gap-2">
       <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
-          <Package2 className="h-6 w-6" />
-          <span className="">Acme Inc</span>
-        </Link>
-        <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-          <Bell className="h-4 w-4" />
-          <span className="sr-only">Toggle notifications</span>
-        </Button>
       </div>
       <div className="flex-1">
         <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
@@ -147,12 +95,6 @@ export default  function SideBar({session}:{session:Session}) {
                    >
                   <Icon className="h-4 w-4" />
                      {item.title}
-                     {/* {item.badgeCount && (
-                      <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                          {item.badgeCount}
-                      </Badge>
-                     )} */}
-                  
                 </Link>
                )
             })

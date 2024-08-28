@@ -1,4 +1,4 @@
-export function formatDate(date: Date): string {
+export function getNormalDate(date: Date): string {
     const day = date.getDate();
     const monthNames = [
         "January", "February", "March", "April", "May", "June",

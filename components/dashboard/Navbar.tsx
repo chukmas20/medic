@@ -19,23 +19,79 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { useRouter } from "next/navigation";
-import {  Badge, Bell, CircleUser, Home,  LineChart,  Menu, Package, Package2, Search, ShoppingCart, Users } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import {  Badge, Bell, Book, Calendar, CircleUser, Home,  LayoutGrid,  LineChart,  Mail,  Menu, Package, Package2, Ribbon, Search, Settings, ShieldPlus, ShoppingCart, Stethoscope, User, Users, Users2 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import ModeToggle from "../ModeToggle";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
+import { cn } from "@/lib/utils";
  
 export default function Navbar({session}: {session: Session}) {
   const user = session.user;
   const router = useRouter();
+  const role = user?.role;
+  const id = user?.id;
+  const pathname = usePathname();
   async function handleLogout(){
     await signOut();
     router.push("/login")
   }
+
   
+  const roles ={
+    USER:[
+      {title: "Dashboard", path:"/dashboard", icon: Home},
+      {title: "Inbox", path:"/dashboard/user/inbox", icon: Mail},
+      {
+        title: "My Appointments",
+       path:"/dashboard/user/appointments",
+        icon: Calendar
+      },
+      {title: "Doctors", path:"/dashboard/user/doctors", icon: Users2},
+
+      {
+        title: "Settings",
+       path:"/dashboard/user/settings",
+        icon: Settings
+      },
+    ],
+    ADMIN:[
+      {title: "Dashboard", path:"/dashboard", icon: Home},
+      {title: "Services", path:"/dashboard/services", icon: LayoutGrid},
+      {title: "Specialties", path:"/dashboard/specialties", icon: ShieldPlus},
+      {title: "Symptoms", path:"/dashboard/symptoms", icon: Ribbon},
+      {title: "Appointments", path:"/dashboard/appointments", icon: Bell},
+      {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
+      {title: "Patients", path:"/dashboard/patients", icon: User},
+    ],
+     DOCTOR:[
+      {title: "Dashboard", path:"/dashboard", icon: Home},
+      {title: "Patients", path:"/dashboard/doctor/patients", icon: Users2},
+      {title: "Appointments", path:"/dashboard/doctor/appointments", icon: Calendar},
+      {title: "Tasks", path:"/dashboard/doctor/tasks", icon: Book},
+      {title: "Inbox", path:"/dashboard/doctor/inbox", icon: Mail},
+      {
+        title:"Profile",
+        path:`/dashboard/doctor/profile/${id}`,
+        icon: User
+      },  
+      // {
+      //   title:"Live Preview",
+      //   path:`/doctors/${slug}?id=${id}`,
+      //   icon: ExternalLink
+      // },      
+      {
+        title:"Settings",
+        path:"/dashboard/doctor/settings",
+        icon: Settings
+      },
+    ],
+  };
+  console.log(roles)
+  let sideBarLinks = roles[role] || [];
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
     <Sheet>
@@ -51,68 +107,24 @@ export default function Navbar({session}: {session: Session}) {
       </SheetTrigger>
       <SheetContent side="left" className="flex flex-col">
         <nav className="grid gap-2 text-lg font-medium">
-          <Link
-            href="#"
-            className="flex items-center gap-2 text-lg font-semibold"
-          >
-            <Package2 className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
-          </Link>
-          <Link
-             href="#"
-            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-          >
-            <Home className="h-5 w-5" />
-            Dashboard
-          </Link>
-          <Link
-            href="#"
-            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-          >
-            <ShoppingCart className="h-5 w-5" />
-            Orders
-            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-              6
-            </Badge>
-          </Link>
-          <Link
-            href="#"
-            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-          >
-            <Package className="h-5 w-5" />
-            Products
-          </Link>
-          <Link
-            href="#"
-            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-          >
-            <Users className="h-5 w-5" />
-            Customers
-          </Link>
-          <Link
-            href="#"
-            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-          >
-            <LineChart className="h-5 w-5" />
-            Analytics
-          </Link>
+        {
+            sideBarLinks.map((item, i)=>{
+              const Icon = item.icon
+               return(
+                <Link
+                 key={i}
+                  href={item.path}
+                  className={cn("flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
+                      pathname === item.path ? " bg-muted text-primary ":""
+                  )}
+                   >
+                  <Icon className="h-4 w-4" />
+                     {item.title}
+                </Link>
+               )
+            })
+           }   
         </nav>
-        <div className="mt-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle>Upgrade to Pro</CardTitle>
-              <CardDescription>
-                Unlock all features and get unlimited access to our
-                support team.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button size="sm" className="w-full">
-                Upgrade
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
       </SheetContent>
     </Sheet>
     <div className="w-full flex-1">

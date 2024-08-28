@@ -44,6 +44,7 @@ const page = async({
         <Tabs defaultValue="details" className="w-full">
         <TabsList>
           <TabsTrigger value="details">Doctor Details</TabsTrigger>
+          <TabsTrigger value="education">Education Info</TabsTrigger>
           <TabsTrigger value="appointments">Appointments</TabsTrigger>
         </TabsList>
         <TabsContent value="details">
@@ -67,6 +68,84 @@ const page = async({
                <div className='flex items-center '>
                   <span className='mr-3'>Middle Name :</span>
                   <span>{doctor?.doctorProfile?.middleName}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Gender :</span>
+                  <span>{doctor?.doctorProfile?.gender}</span>
+               </div>
+            </div>
+          </div>
+          <div className='p-4'>
+             <h2 className='text-sm tracking-widest border-b pb-1 mb-2'> 
+               Profile Information
+            </h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 text-sm gap-4'>
+               <div className='flex items-center '>
+               <span className='mr-3'>Years of Experience :</span>
+                <span>{doctor?.doctorProfile?.yearsOfExperience}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Medical License :</span>
+                  <span>{doctor?.doctorProfile?.medicalLicense}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3 text-xs '>Medical License expiry date :</span>
+                  <span className='text-xs'>{(expiry)?.toDateString()}</span>
+               </div>
+            </div>
+            <div className='flex items-center w-full mt-4 text-sm font-bold '>
+                  <span>{doctor?.doctorProfile?.bio}</span>
+               </div>
+          </div>
+          <div className='p-4'>
+             <h2 className='text-sm tracking-widest border-b pb-1 mb-2'> 
+                Contact Information
+            </h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 text-sm gap-4'>
+               <div className='flex items-center '>
+               <span className='mr-3'>Hospital Address :</span>
+                <span>{doctor?.doctorProfile?.hospitalAddress}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Medical License :</span>
+                  <span>{doctor?.doctorProfile?.medicalLicense}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3 text-xs'>Hospital Phone Number :</span>
+                  <span className='text-xs'>{doctor?.doctorProfile?.hospitalContactNumber}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3 text-xs'>Hospital Email:</span>
+                  <span className='text-xs'>{doctor?.doctorProfile?.hospitalEmailAddress}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Hours of Operation :</span>
+                  <span>{doctor?.doctorProfile?.hospitalHoursOfOperation}</span>
+               </div>
+            </div>
+          </div>
+        </TabsContent>
+        <TabsContent value="education">
+          <div className='p-4'>
+             <h2 className='text-sm tracking-widest border-b pb-1 mb-2'> 
+               Education Information
+            </h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 text-sm gap-4'>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Primary Specialization:</span>
+                  <span>{doctor?.doctorProfile?.primarySpecialization}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Medical School:</span>
+                  <span>{doctor?.doctorProfile?.medicalSchool}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Graduation Year :</span>
+                  <span>{doctor?.doctorProfile?.graduationYear}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>board Certificates:</span>
+                  <span>{doctor?.doctorProfile?.boardCertificates}</span>
                </div>
                <div className='flex items-center '>
                   <span className='mr-3'>Gender :</span>

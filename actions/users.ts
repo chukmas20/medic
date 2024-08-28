@@ -266,6 +266,9 @@ export async function getDoctorById(id:string){
            status: true,
            medicalLicenseExpiry:true,
            medicalLicense:true,
+           medicalSchool:true,
+           graduationYear:true,
+           boardCertificates:true,
      
         
            country: true,

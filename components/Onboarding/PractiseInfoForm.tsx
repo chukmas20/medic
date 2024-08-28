@@ -5,7 +5,7 @@ import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
 import SelectInput from "../FormInputs/SelectInput";
@@ -21,21 +21,23 @@ export default function PractiseInfoForm(
        description,
        nextPage,
        userId,
-       formId
+       formId,
+       doctorProfile
       }:StepFormProps
   ) {
+  const pathname = usePathname()
   const [isLoading, setIsLoading] = useState(false)
   const [docs, setDocs] = useState([])
   const {practiseData, savedDbData, setPractiseData} = useOnboardingContext()
-  const initialServices = practiseData.servicesOffered || savedDbData.servicesOffered;
+  const initialServices = doctorProfile.servicesOffered || savedDbData.servicesOffered;
   const [services, setServices] = useState(initialServices);
-  const initialLanguages = practiseData.languagesSpoken;
+  const initialLanguages = doctorProfile.languagesSpoken;
   const [languages, setLanguages] = useState(initialLanguages);
   const defaultData = practiseData || savedDbData
 
-  console.log(services);
+  // console.log(services);
   // const [insuranceAccepted, setInsuranceAccepted] = useState("")
-  console.log(docs);
+  // console.log(docs);
 
 
   const router = useRouter();
@@ -47,17 +49,16 @@ export default function PractiseInfoForm(
     formState: { errors },
   } = useForm<PractiseFormProps>({
       defaultValues: {
-        hospitalAddress: practiseData.hospitalAddress || savedDbData.hospitalAddress,
-        hospitalName: practiseData.hospitalName || savedDbData.hospitalName,
-        hospitalEmailAddress: practiseData.hospitalEmailAddress || savedDbData.hospitalEmailAddress,
-        hospitalContactNumber: practiseData.hospitalContactNumber || savedDbData.hospitalContactNumber,
-        hospitalWebsite: practiseData.hospitalWebsite || savedDbData.hospitalWebsite,
-        hospitalHoursOfOperation: practiseData.hospitalHoursOfOperation || savedDbData.hospitalHoursOfOperation,
-        languagesSpoken: practiseData.languagesSpoken || savedDbData.languagesSpoken,
-        servicesOffered: practiseData.servicesOffered || savedDbData.servicesOffered 
-
-
-
+        hospitalAddress: doctorProfile.hospitalAddress || savedDbData.hospitalAddress,
+        hospitalName: doctorProfile.hospitalName || savedDbData.hospitalName,
+        hospitalEmailAddress: doctorProfile.hospitalEmailAddress || savedDbData.hospitalEmailAddress,
+        hospitalContactNumber: doctorProfile.hospitalContactNumber || savedDbData.hospitalContactNumber,
+        hospitalWebsite: doctorProfile.hospitalWebsite || savedDbData.hospitalWebsite,
+        hospitalHoursOfOperation: doctorProfile.hospitalHoursOfOperation || savedDbData.hospitalHoursOfOperation,
+        languagesSpoken: doctorProfile.languagesSpoken || savedDbData.languagesSpoken,
+        servicesOffered: doctorProfile.servicesOffered || savedDbData.servicesOffered ,
+        page: doctorProfile.page || savedDbData.page,
+        hourlyWage: doctorProfile.hourlyWage || savedDbData.hourlyWage,
       }
   })
 
@@ -73,14 +74,14 @@ export default function PractiseInfoForm(
 
 
     try {
-      const res = await updateDoctorProfile(formId, data)
+      const res = await updateDoctorProfile(doctorProfile.id, data)
       setPractiseData(data);
 
       if(res?.status === 201){
        setIsLoading(false)
        //extract the profile form data  from the updated profile
        toast.success("Practise Information completed successfully")
-       router.push( `/onboarding/${userId}?page=${nextPage}`);
+       router.push(`${pathname}?page=${nextPage}`);
        console.log(res.data)
       }else{
        setIsLoading(false)

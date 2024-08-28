@@ -5,7 +5,7 @@ import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
 
-import { useRouter} from "next/navigation";
+import { usePathname, useRouter} from "next/navigation";
 
 import SelectInput from "../FormInputs/SelectInput";
 import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
@@ -23,15 +23,17 @@ export default function Education(
      nextPage,
      userId,
      formId,
-     specialties
+     specialties,
+     doctorProfile
     }:StepFormProps)
 
    {
-   
-
+   const pathname = usePathname();
   const {educationData,savedDbData, setEducationData} = useOnboardingContext()
   const [isLoading, setIsLoading] = useState(false)
-  const initialSpecialities = educationData.otherSpecialties || savedDbData.otherSpecialities;
+  const initialSpecialities = 
+   doctorProfile.otherSpecialties.length > 0 ?
+  doctorProfile.otherSpecialties : savedDbData.otherSpecialities;
   const [otherSpecialties, setOtherSpecialties] = useState(initialSpecialities)
 
   
@@ -57,7 +59,14 @@ export default function Education(
   //      },
   // ]
 
-  const initialDocs = educationData.boardCertificates || savedDbData.boardCertificates;
+  const initialDocs = doctorProfile.boardCertificates.map((item)=>{
+    return{
+      title: item,
+      size: 0,
+      url: item
+    }
+  })
+   || savedDbData.boardCertificates;
   const [docs, setDocs] = useState<FileProps[]>(initialDocs); 
   const defaultData = educationData || savedDbData
 
@@ -72,11 +81,11 @@ export default function Education(
     formState: { errors },
   } = useForm<EducationFormProps>({
     defaultValues: {
-       medicalSchool: educationData.medicalSchool || savedDbData.medicalSchool,
-       graduationYear: educationData.graduationYear || savedDbData.graduationYear,
-       primarySpecialization: educationData.primarySpecialization || savedDbData.primarySpecialization,
-       otherSpecialties: educationData.otherSpecialties || savedDbData.otherSpecialties ,
-       boardCertificates: educationData.boardCertificates || savedDbData.boardCertificates,
+       medicalSchool: doctorProfile.medicalSchool || savedDbData.medicalSchool,
+       graduationYear: doctorProfile.graduationYear || savedDbData.graduationYear,
+       primarySpecialization: doctorProfile.primarySpecialization || savedDbData.primarySpecialization,
+       otherSpecialties: doctorProfile.otherSpecialties || savedDbData.otherSpecialties ,
+       boardCertificates: doctorProfile.boardCertificates || savedDbData.boardCertificates,
     }
   })
   async function onSubmit(data: EducationFormProps){
@@ -93,13 +102,13 @@ export default function Education(
     // otherSpecialties?: string[];
     // boardCertificates: string[];
     try {
-      const res = await updateDoctorProfile(formId, data)
+      const res = await updateDoctorProfile(doctorProfile.id, data)
        setEducationData(data)
       if(res?.status === 201){
        setIsLoading(false)
        //extract the profile form data  from the updated profile
        toast.success("Education information completed successfully")
-       router.push( `/onboarding/${userId}?page=${nextPage}`);
+       router.push(`${pathname}?page=${nextPage}`);
        console.log(res.data)
       }else{
        setIsLoading(false)

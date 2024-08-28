@@ -65,7 +65,9 @@ const MultipleFileUpload = ({
                                      <File className='w-6 h-6 flex-shrink-0 mr-2'  />
                                      <div className=" flex flex-col items-center">
                                         <span className='line-clamp-1'>{file.title}</span>
-                                        <span className='text-xs'>{(file.size /1000).toFixed(2)} {" "} kbs</span>
+                                         {file.size > 0 && 
+                                         <span className='text-xs'>{(file.size /1000).toFixed(2)} {" "} kbs</span>
+                                        }
                                      </div>
                                </div>
                             </div>

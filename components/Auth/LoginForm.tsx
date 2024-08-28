@@ -8,7 +8,7 @@ import { LoginInputProps } from "@/types/type";
 import SubmitButton from "../FormInputs/SubmitButton";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
 import { Alert } from "flowbite-react";
 
@@ -17,6 +17,8 @@ export default function LoginForm() {
     const [isLoading, setIsLoading] = useState(false)
     const [showNotification, setShowNotification] = useState(false)
     const router = useRouter();
+    const searchParams = useSearchParams()
+    const returnUrl = searchParams.get("returnUrl")||"/dashboard"
 
     const {
       register,
@@ -45,7 +47,7 @@ export default function LoginForm() {
           reset();
           setIsLoading(false);
           toast.success("Login Successful");
-          router.push("/dashboard");
+          router.push(returnUrl);
         }
       } catch (error) {
         setIsLoading(false);

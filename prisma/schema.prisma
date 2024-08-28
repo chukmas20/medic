@@ -62,7 +62,6 @@ model User {
   sessions      Session[]
   symptomIds     String[]
   doctorProfile  DoctorProfile?
-
   specialityId      String ?   @db.ObjectId  
   speciality     Speciality? @relation(fields: [specialityId], references:[id], onDelete:Cascade,onUpdate:Cascade)
 
@@ -150,6 +149,11 @@ enum AppointmentStatus {
   approved
 }
 
+enum  DoctorStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
 model Appointment {
  id   String  @id @default(auto()) @map("_id") @db.ObjectId
  
@@ -194,6 +198,7 @@ model Appointment {
     gender String
     page String
     availability Availability?
+    status       DoctorStatus @default(PENDING)
     bio   String?
     medicalLicense   String?
     medicalLicenseExpiry    DateTime?

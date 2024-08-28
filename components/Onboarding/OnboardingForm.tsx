@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import {  Contact, GraduationCap, Icon,Info,Plus,StethoscopeIcon, User } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import BiodataForm from "./BiodataForm";
 import ContactInfo from "./ContactInfo";
 import Education from "./Education";
@@ -11,9 +11,18 @@ import ProfileInfoForm from "./ProfileInfoForm";
 import PractiseInfoForm from "./PractiseInfoForm";
 import AdditionalInfo from "./AdditionalInfo";
 import { useOnboardingContext } from "@/context/context";
-import { Speciality } from "@prisma/client";
+import { DoctorProfile, Speciality } from "@prisma/client";
 
-const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]}) => {
+const OnboardingForm = ({
+   id, 
+   specialties,
+   doctorProfile
+  }:{
+  id :string,
+  specialties:Speciality[],
+  doctorProfile:DoctorProfile
+}) => {
+  const pathname = usePathname()
   const params = useSearchParams();
      const page = params.get("page")??"bio-data";
      const {trackingNumber, doctorProfileId, savedDbData } = useOnboardingContext()
@@ -28,7 +37,8 @@ const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]})
                 description="Please fill in your Bio details"
                  page={page}
                  nextPage="profile"
-                 formId={doctorProfileId ? doctorProfileId : savedDbData.id}
+                 formId={doctorProfile.id ? doctorProfileId : savedDbData.id}
+                 doctorProfile= {doctorProfile}
                 />,
             icon: Info
        },
@@ -41,7 +51,8 @@ const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]})
                     page={page} 
                     nextPage="contact"
                     userId = {id}
-                    formId={doctorProfileId ? doctorProfileId : savedDbData.id}
+                    formId={doctorProfile.id ? doctorProfileId : savedDbData.id}
+                    doctorProfile= {doctorProfile}
                      />,
         icon: User
    },
@@ -52,8 +63,10 @@ const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]})
             component: <ContactInfo title="Contact  Information" 
             description="Please fill in your profile details" page={page}  
             nextPage="education"
-            formId={doctorProfileId ? doctorProfileId : savedDbData.id}
+            formId={doctorProfile.id ? doctorProfileId : savedDbData.id}
             userId = {id}
+            doctorProfile= {doctorProfile}
+
              />,
             icon: Contact
 
@@ -66,10 +79,10 @@ const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]})
             description="Please fill in your Education details"
              page={page}
              nextPage="practise"
-             formId={doctorProfileId ? doctorProfileId : savedDbData.id}
+             formId={doctorProfile.id ? doctorProfileId : savedDbData.id}
              userId = {id}
              specialties={specialties}
-
+             doctorProfile= {doctorProfile}
               />,
            
             icon: GraduationCap,
@@ -81,9 +94,9 @@ const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]})
             component:<PractiseInfoForm  title="Practise Information" 
             description="Please fill in your Practise details" page={page}
             nextPage="additional" 
-            formId={doctorProfileId ? doctorProfileId : savedDbData.id}
+            formId={doctorProfile.id ? doctorProfileId : savedDbData.id}
             userId = {id}
-
+            doctorProfile= {doctorProfile}
             />,
             icon: StethoscopeIcon
 
@@ -95,8 +108,9 @@ const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]})
             component:<AdditionalInfo  title="Additional Information" 
             description="Please fill Additional details"
              page={page} nextPage="final"
-             formId={doctorProfileId ? doctorProfileId : savedDbData.id}
+             formId={doctorProfile.id? doctorProfileId : savedDbData.id}
              userId = {id}
+             doctorProfile= {doctorProfile}
              />,
             icon: Plus
         },
@@ -115,7 +129,7 @@ const OnboardingForm = ({id, specialties}:{id:string, specialties:Speciality[]})
              {steps.map((step, i)=>{
               const icon = Icon;
                 return(
-             <Link   key={i}  href={`/onboarding/${id}?page=${step.page}`}
+             <Link   key={i}  href={`${pathname}?page=${step.page}`}
                className={cn(" block py-3  px-4 bg-yellow-200 font-semibold text-slate-800 border uppercase text-sm border-slate-200",
                  step.page === page?"bg-yellow-600 text-slate-200 font-semibold border-slate-200 ":"" )
                 }

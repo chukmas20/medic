@@ -1,18 +1,17 @@
 "use client"
 import { BioDataFormProps,} from "@/types/type";
-import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form"
 import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useRouter,} from "next/navigation";
+import { usePathname, useRouter,} from "next/navigation";
 import DatePickerInput from "../FormInputs/DatePickerInput";
 import RadioInput from "../FormInputs/RadioInput";
 import { generateTrackingNumber } from "@/lib/generateTracking";
 import { createDoctorProfile, updateDoctorProfile } from "@/actions/onboarding";
 import { useOnboardingContext } from "@/context/context";
-import { Speciality } from "@prisma/client";
+import { DoctorProfile, Speciality } from "@prisma/client";
 
 
 
@@ -23,7 +22,8 @@ export type StepFormProps ={
   userId?: string;
   nextPage?: string;
  formId?: string;
- specialties?: Speciality[]
+ specialties?: Speciality[];
+ doctorProfile: DoctorProfile
   
 }
 export default function BiodataForm({
@@ -32,8 +32,11 @@ export default function BiodataForm({
   description,
   nextPage,
   userId,
-  formId = ""
+  formId = "",
+  doctorProfile
  }:StepFormProps ){
+
+  const pathname = usePathname()
 
   //Get Context Data
   const {trackingNumber, doctorProfileId,setTrackingNumber, setDoctorProfileId  } = useOnboardingContext()
@@ -41,7 +44,7 @@ export default function BiodataForm({
 
   // const [initialData, setInitialData] = useState<BioDataFormProps>()
   const {bioData, savedDbData, setBioData} = useOnboardingContext()
-  const initialDateOfBirth = bioData.dob || savedDbData.dob;
+  const initialDateOfBirth = doctorProfile.dob || savedDbData.dob;
   const [dob, setDob] = useState<Date>(initialDateOfBirth)
   const defaultData = bioData || savedDbData;
 
@@ -73,11 +76,11 @@ export default function BiodataForm({
     formState: { errors },
   } = useForm<BioDataFormProps>({
     defaultValues: {
-      firstName:bioData.firstName || savedDbData.firstName,
-      lastName:bioData.lastName || savedDbData.lastName,
-      middleName:bioData.middleName|| savedDbData.middleName,
-      trackingNumber:bioData.trackingNumber || savedDbData.trackingNumber,
-      gender:bioData.gender || savedDbData.gender,
+      firstName:doctorProfile.firstName || savedDbData.firstName,
+      lastName:doctorProfile.lastName || savedDbData.lastName,
+      middleName:doctorProfile.middleName|| savedDbData.middleName,
+      trackingNumber:doctorProfile.trackingNumber || savedDbData.trackingNumber,
+      gender:doctorProfile.gender || savedDbData.gender,
 
 
 
@@ -101,7 +104,7 @@ export default function BiodataForm({
       console.log(data);
     try {
       if(formId){
-        const res   = await updateDoctorProfile(formId,data)
+        const res   = await updateDoctorProfile(doctorProfile.id,data)
         if(res && res.status === 201){
           toast.success("Doctor Bio data updated successfully");
           setIsLoading(false);
@@ -129,7 +132,7 @@ export default function BiodataForm({
           setDoctorProfileId(res.data?.id ?? "")
          
         
-          router.push( `/onboarding/${userId}?page=${nextPage}`);
+          router.push(`${pathname}?page=${nextPage}`);
           console.log(res.data);
         }else{
           setIsLoading(false)

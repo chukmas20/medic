@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation";
-import { AlignJustify, Badge, Bell, CircleUser, Home, HomeIcon, LineChart, Mail, Menu, Package, Package2, Search, ShoppingCart, Users } from "lucide-react";
+import {  Badge, Bell, CircleUser, Home,  LineChart,  Menu, Package, Package2, Search, ShoppingCart, Users } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
@@ -59,7 +59,7 @@ export default function Navbar({session}: {session: Session}) {
             <span className="sr-only">Acme Inc</span>
           </Link>
           <Link
-            href="#"
+             href="#"
             className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
           >
             <Home className="h-5 w-5" />

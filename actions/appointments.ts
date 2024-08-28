@@ -205,7 +205,7 @@ export async function getAppointmentByPatientId(patientId: string | undefined){
    }
 }
 
-export async function getDoctorAppointments(doctorId: string){
+export async function getDoctorAppointments(doctorId: string ){
     try {
         const appointments = await prismaClient.appointment.findMany({
             orderBy:{

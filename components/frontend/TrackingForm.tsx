@@ -4,12 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { HiInformationCircle } from "react-icons/hi";
 import { Alert } from "flowbite-react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { updateUserById } from "@/actions/users";
-import { Button } from "@/components/ui/button";
+
 
 import {
   Form,
@@ -20,18 +19,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
-import { UserRole } from "@prisma/client";
+
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { getApplicationByTrack } from "@/actions/onboarding";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useOnboardingContext } from "@/context/context";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
  
 const FormSchema = z.object({
    trackingNumber: z.string().min(2, {
@@ -41,12 +35,11 @@ const FormSchema = z.object({
 
 
  
-export default  function TrackingForm() {
+export default function TrackingForm() {
   const [loading, setLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const {savedDbData, setSavedDbData} = useOnboardingContext()
 
-  
 
   const router = useRouter();
   

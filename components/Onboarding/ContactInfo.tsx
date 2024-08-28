@@ -5,7 +5,7 @@ import TextInput from "../FormInputs/TextInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useRouter,} from "next/navigation";
+import { usePathname, useRouter,} from "next/navigation";
 import { StepFormProps } from "./BiodataForm";
 import { updateDoctorProfile } from "@/actions/onboarding";
 import { useOnboardingContext } from "@/context/context";
@@ -17,10 +17,11 @@ export default function ContactInfo(
       description,
       formId,
       userId,
-      nextPage
+      nextPage,
+      doctorProfile
     }:
       StepFormProps) {
-   
+  const pathname = usePathname()
   const [isLoading, setIsLoading] = useState(false)
   const {contactData, savedDbData, setContactData} = useOnboardingContext()
   const defaultData = contactData || savedDbData
@@ -36,11 +37,11 @@ export default function ContactInfo(
     formState: { errors },
    } = useForm<ContactInfoFormProps>({
     defaultValues: {
-       country:contactData.country || savedDbData.country,
-       city:contactData.city|| savedDbData.city,
-       email:contactData.email || savedDbData.email,
-       phone:contactData.phone || savedDbData.phone,
-       state:contactData.state || savedDbData.state
+       country:doctorProfile.country || savedDbData.country,
+       city:doctorProfile.city|| savedDbData.city,
+       email:doctorProfile.email || savedDbData.email,
+       phone:doctorProfile.phone || savedDbData.phone,
+       state:doctorProfile.state || savedDbData.state
     }
   })
 
@@ -50,13 +51,13 @@ export default function ContactInfo(
      console.log(data);
   // setIsLoading(true);  
     try {
-      const res = await updateDoctorProfile(formId, data)
+      const res = await updateDoctorProfile(doctorProfile.id, data)
       setContactData(data);
       if(res?.status === 201){
        setIsLoading(false)
        //extract the profile form data  from the updated profile
        toast.success("Contact Information completed successfully")
-       router.push( `/onboarding/${userId}?page=${nextPage}`);
+       router.push(`${pathname}?page=${nextPage}`);
        console.log(res.data)
       }else{
        setIsLoading(false)

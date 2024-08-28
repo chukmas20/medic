@@ -6,7 +6,7 @@ import SubmitButton from "../FormInputs/SubmitButton";
 import { useState } from "react";
 
 import toast from "react-hot-toast";
-import { useRouter} from "next/navigation";
+import { usePathname, useRouter} from "next/navigation";
 import DatePickerInput from "../FormInputs/DatePickerInput";
 import TextAreaInput from "../FormInputs/TextAreaInput";
 import ImageInput from "../FormInputs/ImageInput";
@@ -21,16 +21,17 @@ export default function ProfileInfoForm(
      description,
      formId,
      userId,
-     nextPage
+     nextPage,
+     doctorProfile
     }:
     StepFormProps) {
-   
+   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false)
   // const {trackingNumber, doctorProfileId } = useOnboardingContext();
   const {profileData, savedDbData, setProfileData} = useOnboardingContext()
-  const initialProfileImage = profileData.profilePicture || savedDbData.profilePicture
+  const initialProfileImage = doctorProfile.profilePicture || savedDbData.profilePicture
   const [profileImage, setProfileImage] = useState(initialProfileImage)
-  const initilaExpiryDate = profileData.medicalLicenseExpiry || savedDbData.medicalLicenseExpiry;
+  const initilaExpiryDate = doctorProfile.medicalLicenseExpiry || savedDbData.medicalLicenseExpiry;
   const [expiry, setExpiry] = useState<Date>(initilaExpiryDate)
   const defaultData = profileData || savedDbData
 
@@ -45,9 +46,9 @@ export default function ProfileInfoForm(
     formState: { errors },
   } = useForm<ProfileInfoFormProps>({
     defaultValues: {
-      bio:profileData.bio || savedDbData.bio,
-      medicalLicense:profileData.medicalLicense || savedDbData.medicalLicense,
-      yearsOfExperience:profileData.yearsOfExperience || savedDbData.yearsOfExperience,
+      bio:doctorProfile.bio || savedDbData.bio,
+      medicalLicense:doctorProfile.medicalLicense || savedDbData.medicalLicense,
+      yearsOfExperience:doctorProfile.yearsOfExperience || savedDbData.yearsOfExperience,
 
     }
   })
@@ -66,14 +67,14 @@ export default function ProfileInfoForm(
     //  data.yearsOfExperience
      console.log(data);
     try {
-       const res = await updateDoctorProfile(`${formId?formId:savedDbData.id}`, data)
+       const res = await updateDoctorProfile(doctorProfile.id, data)
        setProfileData(data);
        if(res?.status === 201){
         setIsLoading(false)
         //extract the profile form data  from the updated profile
 
         toast.success("Profile Information completed successfully")
-        router.push( `/onboarding/${userId}?page=${nextPage}`);
+        router.push(`${pathname}?page=${nextPage}`);
         console.log(res.data)
        }else{
         setIsLoading(false)

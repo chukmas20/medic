@@ -1,4 +1,4 @@
-import { AppointmentStatus } from "@prisma/client";
+import { AppointmentStatus, DoctorStatus } from "@prisma/client";
 
 export  type ServiceProps = {title: string; imageUrl:string; slug:string}
 
@@ -120,25 +120,29 @@ export interface DoctorProfile {
 
 interface DoctorProfileDetail extends DoctorProfile{
     id: string | null;
-    yearsOfExperience :number | null,     
-    country:string | null,
-    city:string | null,
-    state :string | null,
-    primarySpecialization:string | null,
-    otherSpecialties :string[] | null,   
-    hospitalName  :string | null,
-    hospitalAddress :true,
-    hospitalContactNumber   :string | null,
-    hospitalEmailAddress    :string | null,
-    hospitalWebsite         :string | null,
-    hospitalHoursOfOperation :number | null,
-    servicesOffered :string[] | null,
-    insuranceAccepted  :string | null,
-    languagesSpoken :string | null,
+    yearsOfExperience :number | null;   
+    country:string | null;
+    city:string | null;
+    state :string | null;
+    dob: Date;
+    middleName: string | null;
+    medicalLicenseExpiry: Date;
+    primarySpecialization:string | null;
+    otherSpecialties :string[] | null;  
+    hospitalName  :string | null;
+    hospitalAddress :true;
+    hospitalContactNumber   :string | null;
+    hospitalEmailAddress    :string | null;
+    hospitalWebsite         :string | null;
+    hospitalHoursOfOperation :number | null;
+    servicesOffered :string[] | null;
+    insuranceAccepted  :string | null;
+    languagesSpoken :string | null;
 
-    educationalHistory :string | null,
-    research :string | null,
-    accomplishments :string | null,
+    educationalHistory :string | null;
+    research :string | null;
+    accomplishments :string | null;
+    status:DoctorStatus;
 
 }
 export type Doctor = {
@@ -151,13 +155,13 @@ export type Doctor = {
  }
 
  export type DoctorDetail = {
-    doctorProfile: any;
+    // doctorProfile: any;
     id:string;
     name: string;
     email: string;
     phone: string;
     slug: string;
-    // doctorProfile: DoctorProfileDetail | null;
+    doctorProfile: DoctorProfileDetail | null;
 }
 
  export interface AppointmentProps{

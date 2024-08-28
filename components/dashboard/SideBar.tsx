@@ -1,5 +1,5 @@
 "use client";
-import { Badge, Bell,  Book,  Calendar,  Home, LayoutGrid,  LogOut,  Mail, Package2, Ribbon, Settings, ShieldPlus, Stethoscope, User, Users2 } from "lucide-react";
+import { Badge, Bell,  Book,  Calendar,  ExternalLink,  Home, LayoutGrid,  LogOut,  Mail, Package2, Ribbon, Settings, ShieldPlus, Stethoscope, User, Users2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ import { signOut } from "next-auth/react";
 export default  function SideBar({session}:{session:Session}) {
    const{user} = session;
    const role = user?.role;
+   const id = user?.id;
   const pathname = usePathname();
   const roles ={
     USER:[
@@ -38,7 +39,7 @@ export default  function SideBar({session}:{session:Session}) {
       {title: "Symptoms", path:"/dashboard/symptoms", icon: Ribbon},
       {title: "Appointments", path:"/dashboard/appointments", icon: Bell},
       {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
-      {title: "Patients", path:"/dashboard/doctors", icon: User},
+      {title: "Patients", path:"/dashboard/patients", icon: User},
 
 
     ],
@@ -49,10 +50,20 @@ export default  function SideBar({session}:{session:Session}) {
       {title: "Tasks", path:"/dashboard/doctor/tasks", icon: Book},
       {title: "Inbox", path:"/dashboard/doctor/inbox", icon: Mail},
       {
+        title:"Profile",
+        path:`/dashboard/doctor/profile/${id}`,
+        icon: User
+      },  
+      // {
+      //   title:"Live Preview",
+      //   path:`/doctors/${slug}?id=${id}`,
+      //   icon: ExternalLink
+      // },      
+      {
         title:"Settings",
         path:"/dashboard/doctor/settings",
         icon: Settings
-      }
+      },
     ],
   };
   console.log(role)

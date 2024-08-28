@@ -123,6 +123,7 @@ export async function getDoctors() {
     
       doctorProfile:{
         select:{
+          id:true,
           firstName: true,
           lastName: true,
           gender: true,
@@ -130,6 +131,9 @@ export async function getDoctors() {
           profilePicture: true,
           operationMode: true,
           hourlyWage: true,
+          status: true,
+          dob:true,
+          middleName:true,
          
           availability:{
              select:{
@@ -201,6 +205,7 @@ export async function getDoctorBySlug(slug:string){
             educationalHistory : true,
             research : true,
             accomplishments : true,
+           
   
             availability:{
                select:{
@@ -256,6 +261,10 @@ export async function getDoctorById(id:string){
            operationMode: true,
            hourlyWage: true,
            yearsOfExperience : true,
+           dob:true,
+           middleName:true,
+           status: true,
+           medicalLicenseExpiry:true,
      
         
            country: true,

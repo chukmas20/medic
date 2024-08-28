@@ -1,11 +1,13 @@
 import { Session } from "next-auth"
 import AnalyticsCard from "../AnalyticsCard"
 import { getDoctorAnalytics } from "@/actions/stats";
+import { getDoctorAppointments } from "@/actions/appointments";
 
 
 const DoctorDashboard = async ({session}:{session:Session | null}) => {
   const user = session?.user;
   const analytics = await getDoctorAnalytics() || []
+  // const appointments = (await getDoctorAppointments(doctorId)).data || []
   return (
     <div className="p-8 py-4">
         <p className='bg-yellow-500 text-white mb-2  px-2 flex rounded-md shadow-md w-20'>

@@ -1,6 +1,9 @@
 import { getUserById } from "@/actions/users";
 import TrackingForm from "@/components/frontend/TrackingForm";
-import VerifyTokenForm from "@/components/frontend/VerifyTokenForm";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
 // import VerifyTokenForm from "@/components/VerifyTokenForm";
  
 export default async function VerifyTrackingNumber({
@@ -8,6 +11,11 @@ export default async function VerifyTrackingNumber({
 }: {
   params: { id: string };
 }) {
+  const session = await getServerSession(authOptions)
+  // const sid = session?.user.id
+  // if(sid){
+  //     redirect(`/onboarding/${id}`)
+  // }
   //Get a User from DB
   const user = await getUserById(id);
   const userToken = user?.token;

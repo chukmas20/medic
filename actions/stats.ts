@@ -2,10 +2,12 @@
 
 import { prismaClient } from "@/lib/db";
 import { Calendar, LucideIcon, Mail, User } from "lucide-react";
-import { getDoctorAppointments, getPatientAppointments } from "./appointments";
+import { getAppointments, getDoctorAppointments, getPatientAppointments } from "./appointments";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getInboxMessages } from "./inbox";
+import { getDoctors } from "./users";
+import { getServices } from "./services";
 
 export type DoctorAnalyticsProps = {
     title: string;
@@ -38,7 +40,6 @@ export async function getStats(){
         }
     }
 }
-
 
 export async function getDoctorAnalytics(){
     try {
@@ -83,6 +84,73 @@ const messages = (await getInboxMessages(user!.id)).data || []
         {
             title:"Inbox",
             count: messages.length,
+            // icon: Mail,
+            unit: "",
+            detailLink:"/dashboard/doctor/inbox"
+        },
+         
+       ]
+        return analytics as DoctorAnalyticsProps[]
+        
+    } catch (error) {
+        console.log(error)
+        return[]
+    }
+}
+
+export async function getAdminAnalytics(){
+    try {
+        const session = await getServerSession(authOptions)
+        const user = session?.user
+        const appointments = (await getAppointments()).data || []
+        const doctors = (await getDoctors()) || []
+        const services = (await getServices()).data || [];
+
+        const uniquePatientsMap = new Map();
+
+appointments.forEach((app)=>{
+   if(!uniquePatientsMap.has(app.patientId)){
+     uniquePatientsMap.set(app.patientId, {
+       patientId:app.patientId,
+      name: `${app.firstName} ${app.lastName}`,
+      email: app.email,
+      phone: app.phone,
+      location: app.location,
+      gender: app.gender,
+      occupation: app.occupation,
+      dob: app.dob
+   })
+  }
+})
+
+const patients = Array.from(uniquePatientsMap.values()) 
+const messages = (await getInboxMessages(user!.id)).data || []
+
+       const analytics = [
+        {
+            title:"Doctors",
+            count:doctors.length,
+            // icon: User,
+            unit: "",
+            detailLink:"/dashboard/doctors"
+        },
+        {
+            title:"Patients",
+            count:patients.length,
+            // icon: User,
+            unit: "",
+            detailLink:"/dashboard/patients"
+        },
+        {
+            title:"Appointments",
+            count: appointments.length ?? 0,
+            // icon: Calendar,
+            unit: "",
+            detailLink:"/dashboard/appointments"
+        },
+        {
+            title:"Services",
+            count: services.length,
             // icon: Mail,
             unit: "",
             detailLink:"/dashboard/doctor/inbox"

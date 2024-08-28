@@ -24,7 +24,7 @@ const DoctorDetails = ({
    doctor,
    appointment
   }:{
-  doctor:DoctorDetail,
+  doctor:DoctorDetail | any 
  appointment: Appointment | null
 }) => {
     const [isActive, setIsActive] = useState("availability")

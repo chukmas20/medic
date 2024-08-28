@@ -80,15 +80,12 @@ const page = async({
             </h2>
             <div className='grid grid-cols-1 md:grid-cols-2 text-sm gap-4'>
                <div className='flex items-center '>
-                  <span className='mr-3'>About :</span>
-                  <span>{doctor?.doctorProfile?.bio}</span>
+               <span className='mr-3'>Years of Experience :</span>
+                <span>{doctor?.doctorProfile?.yearsOfExperience}</span>
                </div>
                <div className='flex items-center '>
-                 
-               </div>
-               <div className='flex items-center '>
-                  <span className='mr-3'>Date of Birth :</span>
-                  <span>{(dob)?.toDateString()}</span>
+                  <span className='mr-3'>Medical License :</span>
+                  <span>{doctor?.doctorProfile?.medicalLicense}</span>
                </div>
                <div className='flex items-center '>
                   <span className='mr-3'>Gender :</span>
@@ -99,6 +96,9 @@ const page = async({
                   <span>{(expiry)?.toDateString()}</span>
                </div>
             </div>
+            <div className='flex items-center w-full mt-4 text-sm font-bold '>
+                  <span>{doctor?.doctorProfile?.bio}</span>
+               </div>
           </div>
         </TabsContent>
         <TabsContent value="appointments">

@@ -8,12 +8,34 @@ import Link from "next/link";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Calendar } from "lucide-react";
 import { timeAgo } from "@/utils/timeAgo";
+import { PatientProps } from "@/app/(back)/dashboard/doctors/layout";
+import { generateInitials } from "@/utils/genrateInitials";
 
 
 const DoctorDashboard = async ({session}:{session:Session | null}) => {
   const user = session?.user;
   const analytics = await getDoctorAnalytics() || []
   const appointments = (await getDoctorAppointments(user?.id??"")).data || []
+  const uniquePatientsMap = new Map();
+
+appointments.forEach((app)=>{
+   if(!uniquePatientsMap.has(app.patientId)){
+     uniquePatientsMap.set(app.patientId, {
+       patientId:app.patientId,
+      name: `${app.firstName} ${app.lastName}`,
+      email: app.email,
+      phone: app.phone,
+      location: app.location,
+      gender: app.gender,
+      occupation: app.occupation,
+      dob: app.dob
+   })
+  }
+})
+
+const patients = Array.from(uniquePatientsMap.values()) as PatientProps[]
+
+console.log(patients)
 
   return (
     <div className="p-8 py-4">
@@ -80,7 +102,7 @@ const DoctorDashboard = async ({session}:{session:Session | null}) => {
              </Button>
            </div>
         </CardHeader>
-        {/* <CardContent className="grid gap-8">
+        <CardContent className="grid gap-8">
           {
             patients && patients.slice(0,9).map((patient)=>{
               const initials = generateInitials(patient?.name)
@@ -108,7 +130,7 @@ const DoctorDashboard = async ({session}:{session:Session | null}) => {
               )
             })
           }
-        </CardContent>  */}
+        </CardContent> 
         </Card> 
     </div>
     </div>

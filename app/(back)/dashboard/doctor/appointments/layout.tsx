@@ -25,11 +25,11 @@ const layout = async({
     {/* Header */}
     <PanelHeader title="Appointments" count={(appointments.length ?? 0).toString()} icon={Calendar} />
     {/* 2 panels */}
-    <div className='grid grid-cols-12'>
-       <div className='col-span-4 space-x-4'>
+    <div className='grid grid-cols-12 gap-2'>
+       <div className='col-span-12 md:col-span-4 '>
          <ListPanel appointments={appointments} role={user?.role} />
        </div>
-       <div className='col-span-8'>
+       <div className='col-span-12 md:col-span-8'>
           {
             children
           }

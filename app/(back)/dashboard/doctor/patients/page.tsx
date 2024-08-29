@@ -40,14 +40,11 @@ appointments.forEach((app)=>{
 
 const patients = Array.from(uniquePatientsMap.values()) as PatientProps[]
 
-console.log(patients)
+// console.log(patients)
   return (
     <div>
-         <div className='py-2 border-b border-gray-200 flex items-center justify-end px-4'>
+         <div className='py-2  flex items-center justify-end px-4'>
             <div className='flex items-center gap-4'>
-              <NewButton title='New Patient'
-                href={`/doctors/${slug}`}
-              />
             </div>
           </div>
           <div className='col-span-8'>

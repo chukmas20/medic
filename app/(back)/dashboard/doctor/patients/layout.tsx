@@ -20,7 +20,7 @@ export interface PatientProps {
 
 export interface DoctorProps {
   doctorId: string;
-  doctorName: string;
+  doctorName:string;
   
 }
 
@@ -62,17 +62,16 @@ console.log(patients)
     {/* Header */}
     <PanelHeader title="Patients" count={(patients.length ?? 0).toString()} icon={User} />
     {/* 2 panels */}
-    <div className='grid grid-cols-12'>
-       <div className='col-span-4 space-x-4'>
+    <div className='grid grid-cols-12 gap-4'>
+       <div className='col-span-12 md:col-span-4 '>
          <PatientPanel patients={patients} role={user?.role} />
        </div>
-       <div className='col-span-8'>
+       <div className='col-span-12 md:col-span-8'>
           {
             children
           }
        </div>
     </div>
-   
 </div>
   )
 }

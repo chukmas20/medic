@@ -23,10 +23,10 @@ const PatientPanel=({
    const pathname = usePathname()
   return (
     <div className="p-6 ">
-      <ScrollArea className="h-96  px-4 py-6 rounded-md w-full border bg-yellow-100 ">
+      <ScrollArea className="h-96   px-4 py-6 rounded-md w-full border bg-yellow-100 ">
         {patients.map((item) => (
             <Link key={item.patientId}  href={`/dashboard/doctor/patients/view/${item.patientId}`}
-              className={cn("border border-gray-300 rounded-md   bg-white shadow-sm text-sm w-full dark:text-yellow-500 inline-block py-3 px-2",
+              className={cn("border border-gray-300 rounded-md bg-white shadow-sm text-sm w-full dark:text-yellow-500 inline-block py-3 px-2",
                 pathname === `/dashboard/doctor/patients/view/${item.patientId}` && "border-green-700 border-2 bg-green-100")}
               >
                 <div  className="flex justify-between items-center pb-2 text-xs ">

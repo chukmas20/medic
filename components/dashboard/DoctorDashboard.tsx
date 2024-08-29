@@ -98,7 +98,7 @@ console.log(patients)
            <div className="flex items-center justify-between">
              <CardTitle>Recent Patients</CardTitle>
              <Button asChild className="bg-yellow-500 hover:bg-yellow-600 ">
-                <Link href="/dashboard/patients"> View All</Link>
+                <Link href="/dashboard/doctor/patients"> View All</Link>
              </Button>
            </div>
         </CardHeader>
@@ -107,25 +107,25 @@ console.log(patients)
             patients && patients.slice(0,9).map((patient)=>{
               const initials = generateInitials(patient?.name)
               return(
-                <div key={patient?.patientId} className="flex items-center gap-4">
+                <Link href={`/dashboard/doctor/patients/view/${patient?.patientId}`} key={patient?.patientId} className="flex items-center gap-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
                   <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1">
-                  <p className="text-sm font-medium leading-none">
+                  <p className="text-xs font-medium leading-none">
                      {patient?.name}
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     {patient?.email}
                   </p>
                 </div>
-                <div className="ml-auto font-medium">
+                <div className="ml-auto text-xs font-medium">
                     {patient.phone}
                 </div>
-                <div className="ml-auto font-medium">
+                <div className="ml-auto text-xs font-medium">
                     {patient.location}
                 </div>
-              </div>
+              </Link>
               
               )
             })

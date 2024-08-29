@@ -52,13 +52,13 @@ const doctors = Array.from(uniquePatientsMap.values()) as DoctorProps[]
   return (
     <div>
     {/* Header */}
-    <PanelHeader title="Patients" count={(doctors.length ?? 0).toString()} icon={User} />
+    <PanelHeader title="Doctors" count={(doctors.length ?? 0).toString()} icon={User} />
     {/* 2 panels */}
-    <div className='grid grid-cols-12'>
-       <div className='col-span-4 space-x-4'>
+    <div className='grid grid-cols-12 gap-2'>
+       <div className='col-span-12 md:col-span-4'>
          <DoctorPanel doctors={doctors} role={user?.role} />
        </div>
-       <div className='col-span-8'>
+       <div className='col-span-12 md:col-span-8'>
           {
             children
           }

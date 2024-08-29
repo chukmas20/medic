@@ -22,12 +22,12 @@ const page = async() => {
 
   return (
     <div>
-         <div className='py-2 border-b border-gray-200 flex items-center justify-end px-4'>
-            <div className='flex items-center gap-4'>
+         <div className='py-2  flex items-center justify-end px-4'>
+            {/* <div className='flex items-center gap-4'>
               <NewButton title='New Doctor'
                 href={"#"}
               />
-            </div>
+            </div> */}
           </div>
           <div className='col-span-8'>
               <HomeDisplayCard

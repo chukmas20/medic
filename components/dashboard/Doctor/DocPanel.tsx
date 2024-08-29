@@ -37,7 +37,7 @@ const DocPanel=({
                 <AvatarFallback>{initials}</AvatarFallback>
               </Avatar>
               <div className="grid gap-1">
-                <p className="text-sm font-medium leading-none">
+                <p className="text-xs font-medium leading-none">
                    {doctor.name}
                 </p>
                 <p className="text-xs text-muted-foreground">

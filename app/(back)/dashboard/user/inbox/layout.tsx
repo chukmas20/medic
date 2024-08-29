@@ -25,8 +25,8 @@ const layout = async({
   const sentMessages = (await getInboxSentMessages(user?.id)).data || []
   return (
     <div> 
-       <div className='grid grid-cols-12'>
-          <div className='col-span-4  border-r border-gray-200'>
+       <div className='grid grid-cols-12 gap-2'>
+          <div className='col-span-12 md:col-span-4  border-r border-gray-200'>
           <PanelHeader title="Inbox Messages"
               count={(messages.length ?? 0).toString()}
               icon={Mail}
@@ -56,7 +56,7 @@ const layout = async({
             </Tabs>
               </div>
           </div>
-          <div className='col-span-8'>{children}</div>
+          <div className='col-span-12 md:col-span-8'>{children}</div>
        </div>
     
   </div>

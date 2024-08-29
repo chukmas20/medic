@@ -68,7 +68,7 @@ profileId: string | undefined;
     <Dialog>
     <DialogTrigger asChild>
     <button 
-     className={cn("py-2 px-3 rounded-md",status ==="APPROVED"?"bg-green-500":
+     className={cn("py-2 px-2 text-xs rounded-md text-white",status ==="APPROVED"?"bg-green-500":
         status ==="PENDING"?"bg-orange-400":"bg-red-700"
      )}>
         {status}

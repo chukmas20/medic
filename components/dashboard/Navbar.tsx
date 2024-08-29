@@ -63,7 +63,7 @@ export default function Navbar({session}: {session: Session}) {
       {title: "Services", path:"/dashboard/services", icon: LayoutGrid},
       {title: "Specialties", path:"/dashboard/specialties", icon: ShieldPlus},
       {title: "Symptoms", path:"/dashboard/symptoms", icon: Ribbon},
-      {title: "Appointments", path:"/dashboard/appointments", icon: Bell},
+      // {title: "Appointments", path:"/dashboard/appointments", icon: Bell},
       {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
       {title: "Patients", path:"/dashboard/patients", icon: User},
     ],

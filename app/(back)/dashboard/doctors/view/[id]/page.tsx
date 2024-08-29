@@ -45,6 +45,7 @@ const page = async({
         <TabsList>
           <TabsTrigger value="details">Doctor Details</TabsTrigger>
           <TabsTrigger value="education">Education Info</TabsTrigger>
+          <TabsTrigger value="practice">Practice Info</TabsTrigger>
           <TabsTrigger value="appointments">Appointments</TabsTrigger>
         </TabsList>
         <TabsContent value="details">
@@ -148,32 +149,10 @@ const page = async({
                   <span>{doctor?.doctorProfile?.boardCertificates}</span>
                </div>
                <div className='flex items-center '>
-                  <span className='mr-3'>Gender :</span>
-                  <span>{doctor?.doctorProfile?.gender}</span>
+                  <span className='mr-3'>Other Specialties :</span>
+                  <span>{doctor?.doctorProfile?.otherSpecialties}</span>
                </div>
             </div>
-          </div>
-          <div className='p-4'>
-             <h2 className='text-sm tracking-widest border-b pb-1 mb-2'> 
-               Profile Information
-            </h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 text-sm gap-4'>
-               <div className='flex items-center '>
-               <span className='mr-3'>Years of Experience :</span>
-                <span>{doctor?.doctorProfile?.yearsOfExperience}</span>
-               </div>
-               <div className='flex items-center '>
-                  <span className='mr-3'>Medical License :</span>
-                  <span>{doctor?.doctorProfile?.medicalLicense}</span>
-               </div>
-               <div className='flex items-center '>
-                  <span className='mr-3 text-xs '>Medical License expiry date :</span>
-                  <span className='text-xs'>{(expiry)?.toDateString()}</span>
-               </div>
-            </div>
-            <div className='flex items-center w-full mt-4 text-sm font-bold '>
-                  <span>{doctor?.doctorProfile?.bio}</span>
-               </div>
           </div>
           <div className='p-4'>
              <h2 className='text-sm tracking-widest border-b pb-1 mb-2'> 
@@ -196,6 +175,39 @@ const page = async({
                   <span className='mr-3 text-xs'>Hospital Email:</span>
                   <span className='text-xs'>{doctor?.doctorProfile?.hospitalEmailAddress}</span>
                </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Hours of Operation :</span>
+                  <span>{doctor?.doctorProfile?.hospitalHoursOfOperation}</span>
+               </div>
+            </div>
+          </div>
+        </TabsContent>
+        <TabsContent value="practice">
+          <div className='p-4'>
+             <h2 className='text-sm tracking-widest border-b pb-1 mb-2'> 
+                Practice Information
+            </h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 text-sm gap-4'>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Hospital Name:</span>
+                  <span>{doctor?.doctorProfile?.hospitalName}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Hospital Address:</span>
+                  <span>{doctor?.doctorProfile?.hospitalAddress}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Pay Per Consultation :</span>
+                  <span>₦ {doctor?.doctorProfile?.hourlyWage}</span>
+               </div>
+               <div className='flex items-center '>
+                  <span className='mr-3'>Other Specialties :</span>
+                  <span>{doctor?.doctorProfile?.otherSpecialties}</span>
+               </div>
+            </div>
+          </div>
+          <div className='p-4'>         
+            <div className='grid grid-cols-1 md:grid-cols-2 text-sm gap-4'>
                <div className='flex items-center '>
                   <span className='mr-3'>Hours of Operation :</span>
                   <span>{doctor?.doctorProfile?.hospitalHoursOfOperation}</span>

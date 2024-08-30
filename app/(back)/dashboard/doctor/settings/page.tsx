@@ -20,7 +20,7 @@ const page = async() => {
   return (
     <div className=' w-full px-6  py-6'>
          <h2 className='pb-4 text-2xl font-bold '>Settings</h2>
-         <Tabs defaultValue="availability" className="lg:w-[800px] w-[400px]">
+         <Tabs defaultValue="availability" className="lg:w-[800px] w-[350px]">
         <TabsList>
           <TabsTrigger value="availability">Availability</TabsTrigger>
           <TabsTrigger value="service"> Service settings</TabsTrigger>

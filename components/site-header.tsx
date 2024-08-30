@@ -67,17 +67,16 @@ export function SiteHeader({session}:{session : Session | null}) {
                   <DropdownMenuItem>
                       <Link href="/dashboard">Dashboard</Link>
                    </DropdownMenuItem>
-                  <DropdownMenuItem>Support</DropdownMenuItem>
+                  {/* <DropdownMenuItem>Support</DropdownMenuItem> */}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={()=>handleLogout()}>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
                   </DropdownMenu>
             ):(
-              <Button className="bg-yellow-600 hover:bg-yellow-800" asChild>
+              <Button className="bg-yellow-600 rounded-full hover:bg-yellow-700" asChild>
               <Link href="/login">
-                <LogIn className="mr-2 h-4 w-4" /> 
-                   Login
-              </Link>
+                <LogIn className=" h-4 w-4 font-bold" size={30}/> 
+                </Link>
            </Button>
             )}
             {/* <ModeToggle /> */}

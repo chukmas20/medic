@@ -13,7 +13,7 @@ const Searchbar = () => {
 
     }
 return (
-<form className="max-w-md mx-auto" onSubmit={handleSearch}>   
+<form className="max-w-md mx-auto mt-1" onSubmit={handleSearch}>   
     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
     <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -29,7 +29,7 @@ return (
             focus:border-yellow-500 dark:bg-gray-700
              dark:border-gray-600 dark:placeholder-gray-400
               dark:text-white dark:focus:ring-yellow-500
-               dark:focus:border-yellow-500" placeholder="Search item ..." required 
+               dark:focus:border-yellow-500" placeholder="Search item..." required 
           />
         <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Search</button>
     </div>

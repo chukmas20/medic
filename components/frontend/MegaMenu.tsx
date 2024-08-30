@@ -118,6 +118,8 @@ export default function MegaMenu() {
   if(pathname === "/login") return null;
   if(pathname === "/register") return null;
   if(pathname === "/join/doctors") return null;
+  if(pathname === "/about") return null;
+
 
   return (
     <NavigationMenu className="bg-opacity-5">

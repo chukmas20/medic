@@ -20,7 +20,7 @@ const page = async() => {
   return (
     <div className=' w-full px-6  py-6'>
          <h2 className='pb-4 text-2xl font-bold '>Settings</h2>
-         <Tabs defaultValue="availability" className="w-[800px]">
+         <Tabs defaultValue="availability" className="lg:w-[800px] w-[400px]">
         <TabsList>
           <TabsTrigger value="availability">Availability</TabsTrigger>
           <TabsTrigger value="service"> Service settings</TabsTrigger>
@@ -31,7 +31,7 @@ const page = async() => {
         <TabsContent value="service">
            <DoctorServiceSettings  profile={profile?.data}  />
         </TabsContent>
-        <TabsContent value="service">Change your password here.</TabsContent>
+        {/* <TabsContent value="service">Change your password here.</TabsContent> */}
       </Tabs>
     </div>
   )

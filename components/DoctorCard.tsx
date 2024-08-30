@@ -1,5 +1,4 @@
 import { Doctor, DoctorProfileAvailability } from '@/types/type';
-import generateSlug from '@/utils/generateSlug';
 import { getDayName } from '@/utils/getDayName';
 import { getFormattedDate } from '@/utils/getFormattedShortDay';
 import { Stethoscope, Video } from 'lucide-react'
@@ -39,10 +38,9 @@ const DoctorCard = ({
             <h2 className='uppercase font-bold text-2xl tracking-widest'>
                {`${doctor.doctorProfile?.firstName} ${doctor.doctorProfile?.lastName}`}
             </h2>
-            {isInperson && (
-               <p className='py-3'>3250 Lincoln Highway, Kendall Park, NJ 08824</p>
-    
-            )}
+            {/* {isInperson && (
+               <p className='py-3'>{doctor.doctorProfile?.operation}</p>
+            )} */}
             <div className="flex items-center gap-6 py-4">
                 <div className='relative'>
                 <img 

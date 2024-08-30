@@ -30,7 +30,7 @@ export default async function Home() {
             title="In-person doctor visit" 
              isInperson={true}
              doctors={inpersonDoctors}
-            />
+            />            
 
     </section>
   );

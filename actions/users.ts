@@ -134,6 +134,7 @@ export async function getDoctors() {
           status: true,
           dob:true,
           middleName:true,
+          hospitalAddress:true,
          
           availability:{
              select:{

@@ -13,11 +13,12 @@ export function MainNav() {
  
   return (
     <div className="mr-4 hidden md:flex">
-      <Link href="/" className="mr-6 flex items-center space-x-2 rounded-full">
+      <Link href="/" className="mr-6 flex items-center space-x-2">
         {/* <Icons.logo className="h-6 w-6" /> */}
         <img 
-         className="h-10 w-10 rounded-full"
-         src="https://utfs.io/f/f58b4f21-b50d-4710-9ff1-54dad8a7effc-zcjszo.png" />
+         className=" w-32 "
+        //  style={{width:"200px", height:"150px"}}
+         src="https://utfs.io/f/9e828e54-7cd7-4bea-9f47-f2844c4fe763-1s9otp.png" />
         {/* <span className="hidden font-bold sm:inline-block">
           {siteConfig.name}
         </span> */}

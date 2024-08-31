@@ -59,8 +59,8 @@ export function MobileNav() {
           onOpenChange={setOpen}
         >
              <img 
-         className="h-10 w-10 rounded-full"
-           src="https://utfs.io/f/f58b4f21-b50d-4710-9ff1-54dad8a7effc-zcjszo.png" />
+         className=" w-32  rounded-full"
+           src="https://utfs.io/f/9e828e54-7cd7-4bea-9f47-f2844c4fe763-1s9otp.png" />
            {/* <Icons.logo className="mr-2 h-4 w-4" />
           <span className="font-bold">{siteConfig.name}</span> */}
         </MobileLink>

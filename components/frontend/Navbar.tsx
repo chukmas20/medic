@@ -65,7 +65,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img className="h-10 w-auto " src="https://freepngimg.com/thumb/health/22943-8-health-image-thumb.png" alt="" />
+              <img className="h-10 w-auto " src="https://utfs.io/f/d4d254e3-2868-4742-9986-f64e113f35c0-z1vmv8.png" alt="" />
             </a>
             <button
               type="button"

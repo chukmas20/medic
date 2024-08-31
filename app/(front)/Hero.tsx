@@ -42,7 +42,7 @@ const HeroSection= () => {
         </div>
         <div className="mt-10">
           <img
-            src="https://images.pexels.com/photos/4021779/pexels-photo-4021779.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src="https://media.istockphoto.com/id/1400388878/photo/closeup-african-american-woman-nurse-making-a-heart-shape-with-her-hands-while-smiling-and.webp?a=1&b=1&s=612x612&w=0&k=20&c=Mbgezgdt7WVmeExSugPD5t_KQmEft6j9_OFRX1Oah0s="
             alt="hero"
 
             className="w-full h-90 rounded-md "

@@ -79,7 +79,7 @@ const page = () => {
                 <h2 className='md:text-4xl text-2xl leading-[3.5rem]'> Earn by easily onboarding Patients online</h2>
                 <p className='py-4'>We are a platform to help you build and run your practice and care for patients for virtual care, in-person care, or both.</p>
                  <CustomButton
-                    href='#'
+                    href='/register?role=DOCTOR&plan=free'
                     title='List your service'
                     className="bg-yellow-600
                      hover:bg-yellow-800" 

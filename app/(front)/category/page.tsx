@@ -45,7 +45,7 @@ const page =async ({
             <div className='md:col-span-9 col-span-12 '>
                 {
                     doctors && doctors.length > 0 ? (
-                      <div className='grid grid-cols-1  lg:grid-cols-2 gap-3'>
+                      <div className='grid grid-cols-1  md:grid-cols-2 gap-3'>
                          {
                             doctors.map((doctor:Doctor)=>{
                                 return(

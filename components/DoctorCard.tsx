@@ -85,14 +85,14 @@ const DoctorCard = ({
                           return(
                              <Link  
                                href={`/doctors/${doctor.slug}?id=${doctor.id}`} key={i} 
-                               className='bg-yellow-700 text-white text-center py-2 px-3 '
+                               className='bg-yellow-700 text-xs text-white text-center py-1 px-1 rounded-lg'
                               >
                                {item} 
                             </Link>
                           )
                          })}
                          <Link  href={`/doctors/${doctor.slug}?id=${doctor.id}`}
-                          className='bg-yellow-900 text-center truncate text-sm text-white py-2 px-3'>
+                          className='bg-yellow-900 text-center truncate text-sm text-white py-1 px-1 rounded-lg'>
                             More Slots
                           </Link>
                 </div>

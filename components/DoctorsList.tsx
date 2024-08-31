@@ -24,17 +24,17 @@ const DoctorsList = (
          <div className="max-w-6xl mx-auto">
          <SectionHeading title={title}     />
           <div className="py-4 flex items-center justify-between">
-             {isInperson ? (
+             {/* {isInperson ? (
                <Link href="#" className='text-yellow-800 font-semibold text-sm flex items-center'>
                   <Map className='mr-2 flex-shrink-0 w-4 h-4' />
                   <span> Map View </span>
                </Link>
              ):(
               <ToggleButton  />
-             )}
-             <Button asChild>
+             )} */}
+             <Button asChild className='bg-yellow-500 hover:bg-yellow-600'>
                <Link href={`/category?mode=${title}`} className=''>
-                  Expand
+                  see more 
                 </Link>
              </Button>
           </div>

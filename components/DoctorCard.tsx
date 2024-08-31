@@ -28,7 +28,7 @@ const DoctorCard = ({
    <>
      {
       times && times.length > 0 && (
-         <div
+       <div
          className="border border-gray-200
           bg-white py-8 rounded-md inline-flex 
           flex-col items-start justify-start px-3
@@ -61,9 +61,9 @@ const DoctorCard = ({
                     <div className='flex flex-col gap-2'>
                         <p className='flex items-center'>
                             <Stethoscope  className='w-4 h-4 mr-2 flex-shrink-0' />
-                            <span> Family Medicine</span>
+                            <span> {doctor.doctorProfile?.operationMode}</span>
                         </p>
-                        <p className='bg-green-200 py-3 px-6 uppercase dark:text-slate-900'>
+                        <p className='bg-green-200 text-sm p-2 rounded-lg px-6 uppercase dark:text-slate-900'>
                             Available Today {doctor.doctorProfile?.gender}
                         </p>
                     </div>

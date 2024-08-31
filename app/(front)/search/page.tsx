@@ -55,7 +55,8 @@ const page =async ({
                   (<div className='py-6 border-b'>
                     <h2 className='pb-3'>Search results for {query} in services</h2>
                         <ServiceList data={searchServices} />
-                  </div>) 
+                  </div>
+                  ) 
                   }
                    {specialties && specialties.length > 0 &&
                   (<div className='py-6 border-b'>
@@ -73,7 +74,7 @@ const page =async ({
                     doctors && doctors.length > 0 && (
                       <div className='py-6'>
                         <h2 className='pb-3'>Results for {query} in doctors</h2>
-                           <div className='grid grid-cols-2 gap-6'>
+                           <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
                          {
                             doctors.map((doctor:Doctor)=>{
                                 return(

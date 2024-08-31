@@ -53,22 +53,22 @@ const page = () => {
              description:"Complete your onboarding process",
             image:"https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=600",
             link: "/onboarding/resume",
-            linkTitle:"Continue your Application"
+            linkTitle:"Continue Application"
         },
-        {
-            title:" Schedule A Call",
-             description:"Arrange time for a call to finalize your application",
-            image:"https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=600",
-            link: "/",
-            linkTitle:"Schedule a Call"
-        },
-        {
-            title:"Track your Progress",
-             description:"Start a new application to join our network",
-            image:"https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=600",
-            link: "/",
-            linkTitle:"Check Status"
-        },
+        // {
+        //     title:" Schedule A Call",
+        //      description:"Arrange time for a call to finalize your application",
+        //     image:"https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=600",
+        //     link: "/",
+        //     linkTitle:"Schedule a Call"
+        // },
+        // {
+        //     title:"Track your Progress",
+        //      description:"Start a new application to join our network",
+        //     image:"https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=600",
+        //     link: "/",
+        //     linkTitle:"Check Status"
+        // },
         
     ]
   return (
@@ -77,7 +77,7 @@ const page = () => {
            <div className=' max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4'>
              <div >
                 <h2 className='md:text-4xl text-2xl leading-[3.5rem]'> Earn by easily onboarding Patients online</h2>
-                <p className='py-4'>Sesame is a full-service platform to help you build and run your practice and care for patients for virtual care, in-person care, or both.</p>
+                <p className='py-4'>We are a platform to help you build and run your practice and care for patients for virtual care, in-person care, or both.</p>
                  <CustomButton
                     href='#'
                     title='List your service'
@@ -117,7 +117,7 @@ const page = () => {
              </div>
              <div >
                 <h2 className='md:text-4xl text-2xl leading-[3.5rem]'> Treat patients the way you want to treat them.</h2>
-                <p className='py-4'>Sesame is a full-service platform to help you build and run your practice and care for patients for virtual care, in-person care, or both.</p>
+                <p className='py-4'>We are a  platform to help you build and run your practice and care for patients for virtual care, in-person care, or both.</p>
                  {/* <CustomButton
                     href='#'
                     title='List your service'
@@ -134,21 +134,21 @@ const page = () => {
                         )
                     })}
                 </div>   */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid lg:grid-cols-2 grid:grid-cols-1 gap-4">
                     {cards.map((card,i)=>{
                         return(
                             <div key={i} className="bg-yellow-600 p-3 rounded-lg shadow-2xl">
                             <h3 className='text-2xl font-semibold text-white'>
                                 {card.title}
                             </h3>
-                            <p className='text-white text-base'>
+                            <p className='text-white text-xs'>
                                  {card.description}
                             </p>
                             <CustomButton
                             href={card.link}
                             title={card.linkTitle}
                             className="bg-yellow-800
-                            hover:bg-yellow-900 text-xs " 
+                            hover:bg-yellow-900 text-xs mt-4 " 
                            />
                         </div>
                         )

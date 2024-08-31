@@ -79,7 +79,6 @@ export function MobileNav() {
                 )
             )}
           </div>
-          
         </ScrollArea>
       </SheetContent>
     </Sheet>

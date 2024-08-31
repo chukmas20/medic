@@ -145,7 +145,7 @@ const OnboardingForm = ({
              })}
          </div>
          <div className='sm:col-span-9 col-span-full bg-yellow-100 p-4'>
-         Use the unique Unique Code {" "}
+         Use the  Unique Code {" "}
           {trackingNumber || savedDbData.id && (
                <p className="bg-yellow-600 text-slate-200 w-90 rounded-md text-sm px-4 py-2">
                 {trackingNumber ? trackingNumber: savedDbData.trackingNumber} 

@@ -31,8 +31,8 @@ searchParams:{[key:string]:string | string[] | undefined}
                  <div className='flex items-center justify-between '>
                      <div className=''>
                      <div className='flex flex-col'>
-                         <h2 className='uppercase font-bold text-2xl tracking-widest'>{doctor.name}</h2>
-                         <p className='text-gray-600 uppercase text-xs'> Adult Health</p>
+                         <h2 className='uppercase font-bold text-md tracking-widest'>{doctor.name}</h2>
+                         {/* <p className='text-gray-600 uppercase text-xs'> Adult Health</p> */}
                          <p> {doctor.doctorProfile?.operationMode}</p>
                          <p>{doctor.doctorProfile?.city},</p>
                          <p>{doctor.doctorProfile?.state}, {doctor.doctorProfile?.country},</p>

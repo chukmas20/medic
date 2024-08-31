@@ -126,8 +126,7 @@ const DoctorDetails = ({
               className={isActive === "details"  ? 
               ('bg-yellow-600 py-4 w-full px-8 text-white')
               :('bg-yellow-100 text-gray-800 w-full py-4 px-8 ')}> 
-                Service Details 
-                
+                 Details 
              </button>
               <button 
                 onClick={()=> setIsActive("availability")} 
@@ -179,7 +178,21 @@ const DoctorDetails = ({
       </div>      
          ):(
          <div className='' >
-             Service Details Component
+             <p className="text-md">            
+                {doctor.doctorProfile?.bio}
+             </p>
+             <p className="text-md">
+                 <span className='text-sm font-bold'>years of experience</span>
+                  <span className=''> {doctor.doctorProfile?.yearsOfExperience} </span> 
+             </p>
+             <p className="text-md">
+                 <span className='text-sm font-bold'>Hospital</span>
+                  <span className=''> {doctor.doctorProfile?.hospitalName} </span> 
+             </p>
+             <p className="text-md">
+                 <span className='text-sm font-bold'>services offered</span>
+                  <span className=''> {doctor.doctorProfile?.servicesOffered} </span> 
+             </p>
         </div>
          )}
          </div>  

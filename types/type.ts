@@ -17,6 +17,10 @@ export type LoginInputProps = {
     password: string;  
 }
 
+export type PasswordResetProps = { 
+    email: string;
+}
+
 export type BioDataFormProps ={
     firstName: string;
     lastName: string;

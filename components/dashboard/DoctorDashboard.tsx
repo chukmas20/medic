@@ -54,7 +54,7 @@ console.log(patients)
       <Card x-chunk="dashboard-01-chunk-5">
         <CardHeader>
            <div className="flex items-center justify-between">
-             <CardTitle>Recent Appointments</CardTitle>
+             <CardTitle className="text-xs md:text-2xl">Recent Appointments</CardTitle>
              <Button asChild className="bg-yellow-500 hover:bg-yellow-600 ">
                 <Link href="/dashboard/doctor/appointments"> View All</Link>
              </Button>
@@ -76,11 +76,11 @@ console.log(patients)
                      {appointment?.email}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {appointment?.appointmentDate?.toDateString()}, {appointment?.appointmentTime}
+                    <span>{appointment?.appointmentDate?.toDateString()}, {appointment?.appointmentTime}</span>
+                    <span className="font-bold">  {appointment?.status}</span>
                   </p>
                 </div>
                 <div className="ml-auto font-medium text-xs">
-                    {appointment?.status}
                 </div>
                 <div className="ml-auto font-medium text-xs">
                     {/* {appointment?.createdAt?.toDateString()} */}
@@ -96,7 +96,7 @@ console.log(patients)
       <Card x-chunk="dashboard-01-chunk-5">
         <CardHeader>
            <div className="flex items-center justify-between">
-             <CardTitle>Recent Patients</CardTitle>
+             <CardTitle className="text-xs md:text-2xl">Recent Patients</CardTitle>
              <Button asChild className="bg-yellow-500 hover:bg-yellow-600 ">
                 <Link href="/dashboard/doctor/patients"> View All</Link>
              </Button>
@@ -107,7 +107,7 @@ console.log(patients)
             patients && patients.slice(0,9).map((patient)=>{
               const initials = generateInitials(patient?.name)
               return(
-                <Link href={`/dashboard/doctor/patients/view/${patient?.patientId}`} key={patient?.patientId} className="flex items-center gap-4">
+            <Link href={`/dashboard/doctor/patients/view/${patient?.patientId}`} key={patient?.patientId} className="flex items-center gap-2 md:gap-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
                   <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
@@ -116,11 +116,11 @@ console.log(patients)
                      {patient?.name}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {patient?.email}
+                    <span>{patient?.email}</span>
+                    <span className="font-bold text-xs">  {patient.phone}</span>
                   </p>
                 </div>
                 <div className="ml-auto text-xs font-medium">
-                    {patient.phone}
                 </div>
                 <div className="ml-auto text-xs font-medium">
                     {patient.location}

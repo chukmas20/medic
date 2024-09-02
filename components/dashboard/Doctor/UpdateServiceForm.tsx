@@ -2,10 +2,10 @@
 import { ServiceWithDoctorProfileCount, updateDoctorProfileWithService } from '@/actions/services';
 
 import { Button } from '@/components/ui/button';
-import { CardContent, CardFooter } from '@/components/ui/card';
+import { CardContent,} from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { DoctorProfile, Service, Speciality, Symptom } from '@prisma/client';
-import { Loader, Map, MonitorPlay, PictureInPicture, } from 'lucide-react';
+import { DoctorProfile, Speciality, Symptom } from '@prisma/client';
+import {  Map, MonitorPlay } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -177,14 +177,14 @@ async function handleUpdateOperationMode(){
               </div>
             </div>
       </div>
-    <div className="border shadow rounded-md p-4 mt-3 "> 
+    <div className="border shadow rounded-md p-2 md:p-4 mt-3 "> 
          <div className="flex items-center justify-between p-2">
-         <h2 className='text-sm font-semibold mb-3'> Choose Mode of Operation </h2>
-         <Button disabled={loadingOperationMode} onClick={handleUpdateOperationMode} className='bg-yellow-500 hover:bg-yellow-500'>
+         <h2 className='text-sm font-semibold mb-3'> Choose Operation mode </h2>
+         <Button disabled={loadingOperationMode} onClick={handleUpdateOperationMode} className='bg-yellow-500 text-sm hover:bg-yellow-500'>
             {loadingOperationMode ? "Please Wait ...":"Update Operation Mode"}
           </Button>
          </div>
-          <div className='grid grid-cols-4 gap-2 '>
+          <div className='grid grid-cols-2 md:grid-cols-4  gap-2 '>
               {
                 operationModes && operationModes.map((item,i)=>{
                   const Icon = item.icon

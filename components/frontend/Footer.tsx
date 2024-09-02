@@ -165,7 +165,7 @@ export default function Footer (){
                          {socialLinks.map((item,i)=>{
                             const Icon = item.icon
                             return(
-                            <a key={i} href={item.href} className={item.color}>
+                            <a key={i} href={item.href} target="_blank" className={item.color}>
                                 <Icon className="w-6 h-6"  />
                             </a>
                             )

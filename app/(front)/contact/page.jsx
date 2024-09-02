@@ -4,7 +4,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='grid grid-cols-12'  style={{padding:"50px"}}>
+    <div className=''  style={{padding:"50px"}}>
     <div>
         
     </div>

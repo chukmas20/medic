@@ -6,7 +6,7 @@ export default function Footer (){
 
     const footerNavs = [
         {
-            label: "Resources",
+            label: "Doctors",
             items: [
                 {
                     href: '/join/doctors',
@@ -17,14 +17,15 @@ export default function Footer (){
                     name: 'Resume Application',
 
                 },
+            
                 {
-                    href: 'javascript:void()',
-                    name: 'Documentation',
-
+                    href: 'category?mode=TeleHealth%20visit',
+                    name: 'Telehealth',
                 },
+                
                 {
-                    href: 'javascript:void()',
-                    name: 'Pricing',
+                    href: 'category?mode=In-person%20doctor%20visit',
+                    name: 'In-person Visit',
                 },
             ],
         },
@@ -44,32 +45,11 @@ export default function Footer (){
                     name: 'Privacy'
                 },
                 {
-                    href: 'javascript:void()',
+                    href: '/about',
                     name: 'About US'
                 },
             ]
-        },
-        {
-            label: "Explore",
-            items: [
-                {
-                    href: 'javascript:void()',
-                    name: 'Showcase'
-                },
-                {
-                    href: 'javascript:void()',
-                    name: 'Roadmap'
-                },
-                {
-                    href: 'javascript:void()',
-                    name: 'Languages'
-                },
-                {
-                    href: 'javascript:void()',
-                    name: 'Blog'
-                },
-            ]
-        },
+        }, 
         {
             label: "Company",
             items: [
@@ -121,12 +101,12 @@ export default function Footer (){
     ]
 
     return (
-        <footer className="pt-10">
+        <footer className="pt-10 bg-yellow-100">
             <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                 <div className="justify-between items-center gap-12 md:flex">
                     <div className="flex-1 max-w-lg">
-                        <h3 className="text-2xl font-bold">
-                            Get our beautiful newsletter straight to your inbox.
+                        <h3 className="text-2xl font-bold text-yellow-500">
+                            Subscribe to our news letter.
                         </h3>
                     </div>
                     <div className="flex-1 mt-6 md:mt-0">
@@ -149,6 +129,10 @@ export default function Footer (){
                     </div>
                 </div>
                 <div className="flex-1 mt-16 space-y-6 justify-between sm:flex md:space-y-0">
+                 <img 
+                    className=" md:w-38 md:h-28 "
+                    src="https://utfs.io/f/9e828e54-7cd7-4bea-9f47-f2844c4fe763-1s9otp.png" 
+                  />
                     {
                         footerNavs.map((item, idx) => (
                             <ul
@@ -185,9 +169,7 @@ export default function Footer (){
                                 <Icon className="w-6 h-6"  />
                             </a>
                             )
-                         })}
-                       
-                       
+                         })}      
                     </div>
                 </div>
             </div>

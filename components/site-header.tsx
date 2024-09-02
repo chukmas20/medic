@@ -80,7 +80,6 @@ export function SiteHeader({session}:{session : Session | null}) {
            </Button>
             )}
             {/* <ModeToggle /> */}
-           
           </nav>
         </div>
       </div>

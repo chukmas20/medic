@@ -6,8 +6,9 @@ const NotFound = () => {
     <div className="max-w-screen-xl mx-auto px-4 flex items-center justify-start h-screen md:px-8">
         <div className="max-w-lg mx-auto text-center">
             <div className="pb-6">
-                <img src="https://utfs.io/f/f58b4f21-b50d-4710-9ff1-54dad8a7effc-zcjszo.png"
-                   width={150} className="mx-auto rounded-full" 
+              <img 
+                    className=" md:w-38 md:h-28 "
+                    src="https://utfs.io/f/9e828e54-7cd7-4bea-9f47-f2844c4fe763-1s9otp.png" 
                   />
             </div>
             <h3 className="text-yellow-800 text-4xl font-semibold sm:text-5xl">

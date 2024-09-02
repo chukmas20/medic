@@ -1,9 +1,8 @@
 import CustomButton from '@/components/CustomButton'
 import CustomAccordion, { FAQItem } from '@/components/frontend/CustomAccordion'
 import Pricing from '@/components/frontend/Pricing'
-import { Check } from 'lucide-react'
+import {  AsteriskIcon } from 'lucide-react'
 import Link from 'next/link'
-import { title } from 'process'
 import React from 'react'
 
 const page = () => {
@@ -37,6 +36,8 @@ const page = () => {
         "Interact with patients online",
         "Take notes and prescribe drugs",
         "Have a face to face interaction with patients online",
+        "Approve / reject appointments  using your device",
+
     ];
 
     const cards =[
@@ -80,7 +81,7 @@ const page = () => {
                 <p className='py-4'>We are a platform to help you build and run your practice and care for patients for virtual care, in-person care, or both.</p>
                  <CustomButton
                     href='/register?role=DOCTOR&plan=free'
-                    title='List your service'
+                    title='Doctor registration'
                     className="bg-yellow-600
                      hover:bg-yellow-800" 
                     />
@@ -88,7 +89,7 @@ const page = () => {
                     {features.map((feature,i)=>{
                         return(
                            <p key ={1} className='flex items-center'>
-                             <Check className='w-4 h-4 mr-2 flex-shrink-0 text-yellow-600' />
+                             <AsteriskIcon className='w-4 h-4 mr-2 flex-shrink-0 text-yellow-600' />
                              {feature}
                            </p> 
                         )
@@ -164,6 +165,9 @@ const page = () => {
          </section>
          <section className='py-12 px-4'>
            <div className=' max-w-6xl mx-auto  gap-4'>
+            <h2 className="scroll-m-20 border-b text-center pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+                  Frequently asked questions
+             </h2>
                <CustomAccordion FAQS={faqs}  />
             </div> 
          </section>

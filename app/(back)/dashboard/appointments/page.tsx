@@ -48,7 +48,7 @@ const page = async() => {
         <div   className='grid md:grid-cols-3 grid-cols-1 p-3 gap-4'>
         {appointments && appointments.map((appoint)=>{
            return(
-                  <div className='border-solid border-2  border-r-2 p-1 '>
+                  <div  key={appoint.id} className='border-solid border-2  border-r-2 p-1 '>
                     <div className=' text-xs'>
                      <div className='flex items-center justify-between '> 
                        Dr {appoint.doctorName} {" "} 

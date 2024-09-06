@@ -153,7 +153,7 @@ const messages = (await getInboxMessages(user!.id)).data || []
             count: services.length,
             // icon: Mail,
             unit: "",
-            detailLink:"/dashboard/doctor/inbox"
+            detailLink:"/dashboard/services"
         },
          
        ]

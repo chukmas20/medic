@@ -68,7 +68,7 @@ export default function LoginForm() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {showNotification && (
             <Alert color="failure" className="bg-red-100" icon={HiInformationCircle}>
               <span className="font-medium text-red-600">Sign-in error!</span> Please Check

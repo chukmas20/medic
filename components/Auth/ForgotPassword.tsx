@@ -7,12 +7,19 @@ import { PasswordResetProps } from "@/types/type";
 import SubmitButton from "../FormInputs/SubmitButton";
 import toast from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Alert } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
+import { ForgotPasswordReset } from "@/actions/forgot-password";
 
 
 export default function ForgotPassword() {
     const [isLoading, setIsLoading] = useState(false)
+    // const [email, setEmail] = useState('');
     const router = useRouter();
+    const [showNotification, setShowNotification] = useState(false)
+    const [loading, setLoading] = useState(false)
     const searchParams = useSearchParams()
+    const returnUrl = searchParams.get("returnUrl")||"/dashboard"
 
     const {
       register,
@@ -21,6 +28,24 @@ export default function ForgotPassword() {
       watch,
       formState: { errors },
     } = useForm<PasswordResetProps>()
+
+    async function onSubmit(data: PasswordResetProps){
+      console.log(data)
+      try {
+        setIsLoading(true);
+        await ForgotPasswordReset(data)
+        toast.success("Password reset link has been sent to your email inbox")
+        reset();
+        setShowNotification(true);
+        setIsLoading(false);
+
+      } catch (error) {
+        setIsLoading(false);
+        console.error("Network Error:", error);
+        toast.error("Check your credentials");
+        setShowNotification(false)
+      }
+    }
    
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -36,7 +61,16 @@ export default function ForgotPassword() {
           </div>
   
           <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {showNotification && (
+                 <Alert  className="bg-green-300" icon={HiInformationCircle}>
+                 <span>
+                   We have sent a password reset link to your email
+                 </span>
+                 {" "} 
+              </Alert>
+              )}
+              
             <TextInput
                  label="Email Address" 
                  name="email"

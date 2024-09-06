@@ -48,6 +48,7 @@ export default function RegisterForm(
       }
      
     } catch (error) {
+      setIsLoading(false)
       console.log(error)
     }
   }

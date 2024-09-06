@@ -37,6 +37,8 @@ const PatientLayout = async({
      )
   }
   const appointments = (await getDoctorAppointments(user?.id)).data || []
+  console.log(appointments)
+  console.log(appointments.length)
   const uniquePatientsMap = new Map();
 
 appointments.forEach((app)=>{

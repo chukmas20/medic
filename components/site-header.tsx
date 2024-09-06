@@ -75,7 +75,7 @@ export function SiteHeader({session}:{session : Session | null}) {
             ):(
               <Button className="bg-yellow-600 rounded-full hover:bg-yellow-700" asChild>
               <Link href="/login">
-                <LogIn className=" h-4 w-4 font-bold" size={30}/> 
+                <LogIn className=" h-3 w-3 font-bold" size={30}/> 
                 </Link>
            </Button>
             )}

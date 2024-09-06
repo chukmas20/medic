@@ -72,7 +72,7 @@ console.log(patients)
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
          {analytics.map((item,i)=>{
            return(
-            <AnalyticsCard  key={i} data={item}/>
+            <AnalyticsCard  key={i} data={item}/> 
            )
          })}
        </div>
@@ -82,7 +82,7 @@ console.log(patients)
            <div className="flex items-center justify-between">
              <CardTitle>Recent Doctors</CardTitle>
              <Button asChild>
-                <Link href="/dashboard/patients"> View All</Link>
+                <Link href="/dashboard/doctors"> View All</Link>
              </Button>
            </div>
         </CardHeader>
@@ -126,7 +126,7 @@ console.log(patients)
              </Button>
            </div>
         </CardHeader>
-        <CardContent className="grid gap-8">
+        <CardContent className="grid gap-4">
           {
             patients && patients.slice(0,9).map((patient)=>{
               const initials = generateInitials(patient?.name)
@@ -136,17 +136,17 @@ console.log(patients)
                   <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1">
-                  <p className="text-sm font-medium leading-none">
+                  <p className="text-sx font-medium leading-none">
                      {patient?.name}
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     {patient?.email}
                   </p>
                 </div>
-                <div className="ml-auto font-medium">
+                <div className="ml-auto font-medium text-xs">
                     {patient.phone}
                 </div>
-                <div className="ml-auto font-medium">
+                <div className="ml-auto font-medium text-xs">
                     {patient.location}
                 </div>
               </div>

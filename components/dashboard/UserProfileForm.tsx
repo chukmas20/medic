@@ -75,12 +75,12 @@ export default function UserProfileForm({title, initialData}:{title:string, init
                     register={register}
                     errors={errors}
                     />
-                    <TextInput
+                    {/* <TextInput
                     label="Email" 
                     name="email"
                     register={register}
                     errors={errors}
-                    />
+                    /> */}
                     <TextInput
                     label="Phone Number" 
                     name="phone"

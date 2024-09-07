@@ -12,6 +12,13 @@ export type RegisterInputProps = {
     plan: any;
 }
 
+export type UserProfile = {
+    name:string;
+    email: string;
+    phone: string;
+    slug?:string;
+}
+
 export type LoginInputProps = { 
     email: string;
     password: string;  

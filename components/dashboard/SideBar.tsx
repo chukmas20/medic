@@ -31,6 +31,8 @@ export default  function SideBar({session}:{session:Session}) {
        path:"/dashboard/user/settings",
         icon: Settings
       },
+      {title: "Profile", path:"/dashboard/profile", icon: Users2},
+
     ],
     ADMIN:[
       {title: "Dashboard", path:"/dashboard", icon: Home},
@@ -40,6 +42,8 @@ export default  function SideBar({session}:{session:Session}) {
       {title: "Appointments", path:"/dashboard/appointments", icon: AlarmClock},
       {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
       {title: "Patients", path:"/dashboard/patients", icon: User},
+      {title: "Profile", path:"/dashboard/profile", icon: Users2},
+
     ],
     
      DOCTOR:[

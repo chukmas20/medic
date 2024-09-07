@@ -62,6 +62,8 @@ const page = async() => {
                         <p className='mr-2'>{appoint.phone}</p>
                     </div>
                     <p className='text-xs text-green-600 font-semibold'> ₦ {appoint.charge}</p>
+                    <p className='text-xs  font-semibold'> {appoint.status}</p>
+
                   </div>
            )
         })}

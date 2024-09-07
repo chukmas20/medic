@@ -1,10 +1,13 @@
 "use server";
 
 import EmailTemplate from "@/components/Email/EmailTemplate";
+import { authOptions } from "@/lib/auth";
 import { prismaClient } from "@/lib/db";
-import { DoctorDetail, RegisterInputProps } from "@/types/type";
+import { DoctorDetail, RegisterInputProps, UserProfile } from "@/types/type";
 import generateSlug from "@/utils/generateSlug";
 import bcrypt from "bcrypt";
+import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import {Resend} from "resend";
 
 export async function createUser(formData: RegisterInputProps){
@@ -75,18 +78,18 @@ export async function createUser(formData: RegisterInputProps){
 }
 
 export async function getUserById(id: string){
-   if(id){
-     try {
-        const user = await prismaClient.user.findUnique({
-            where:{
-                id
-            }
-        })
-        return user
-     } catch (error) {
-        console.log(error)
-     }
-   }
+  if(id){
+    try {
+       const user = await prismaClient.user.findUnique({
+           where:{
+               id
+           }
+       })
+       return user
+    } catch (error) {
+       console.log(error)
+    }
+  }
 }
 
 export async function updateUserById(id: string){
@@ -317,3 +320,49 @@ export async function getDoctorById(id:string){
     }
   }
 }
+
+
+export async function getLoggedInUserId(id: string){
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user || !session.user.id) {
+    throw new Error('No user logged in');
+  }
+  
+    try {
+       const user = await prismaClient.user.findUnique({
+           where:{
+            id: session.user.id,
+           }
+       })
+       return user
+    } catch (error) {
+       console.log(error)
+    }
+  
+}
+
+
+export async function updateLoggedInUser(data: UserProfile){
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user || !session.user.id) {
+    throw new Error('No user logged in');
+  }
+    try {
+      // Update the user profile in the database
+       const updatedUser = await prismaClient.user.update({
+       where: {
+        id: session.user.id,
+       },
+      data,
+   });
+
+  return updatedUser;
+    } catch (error) {
+       console.log(error)
+    }
+  
+}
+
+

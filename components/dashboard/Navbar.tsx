@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { usePathname, useRouter } from "next/navigation";
-import {  Badge, Bell, Book, Calendar, CircleUser, Home,  LayoutGrid,  LineChart,  Mail,  Menu, Package, Package2, Ribbon, Search, Settings, ShieldPlus, ShoppingCart, Stethoscope, User, Users, Users2 } from "lucide-react";
+import {  Badge, Bell, AlarmClock, Book, Calendar, CircleUser, Home,  LayoutGrid,  LineChart,  Mail,  Menu, Package, Package2, Ribbon, Search, Settings, ShieldPlus, ShoppingCart, Stethoscope, User, Users, Users2 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
@@ -57,15 +57,19 @@ export default function Navbar({session}: {session: Session}) {
        path:"/dashboard/user/settings",
         icon: Settings
       },
+      {title: "Profile", path:"/dashboard/profile", icon: Users2},
+
     ],
     ADMIN:[
       {title: "Dashboard", path:"/dashboard", icon: Home},
       {title: "Services", path:"/dashboard/services", icon: LayoutGrid},
       {title: "Specialties", path:"/dashboard/specialties", icon: ShieldPlus},
       {title: "Symptoms", path:"/dashboard/symptoms", icon: Ribbon},
-      // {title: "Appointments", path:"/dashboard/appointments", icon: Bell},
+      {title: "Appointments", path:"/dashboard/appointments", icon: AlarmClock},
       {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
       {title: "Patients", path:"/dashboard/patients", icon: User},
+      {title: "Profile", path:"/dashboard/profile", icon: Users2},
+
     ],
      DOCTOR:[
       {title: "Dashboard", path:"/dashboard", icon: Home},

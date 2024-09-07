@@ -42,7 +42,7 @@ const page = async({
        
         </div>
         <Tabs defaultValue="details" className="w-full">
-        <TabsList>
+        <TabsList >
           <TabsTrigger value="details">Doctor Details</TabsTrigger>
           <TabsTrigger value="education">Education Info</TabsTrigger>
           <TabsTrigger value="practice">Practice Info</TabsTrigger>

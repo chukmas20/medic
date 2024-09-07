@@ -2,11 +2,8 @@ import { getAppointments } from '@/actions/appointments';
 import React from 'react';
 
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { generateInitials } from '@/utils/genrateInitials';
-import { AppointmentProps } from '@/types/type';
 import { cn } from '@/lib/utils';
-import { AlarmClock, Calendar } from 'lucide-react';
+import { AlarmClock } from 'lucide-react';
 
 
 

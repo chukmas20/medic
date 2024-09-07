@@ -14,7 +14,7 @@ export type RegisterInputProps = {
 
 export type UserProfile = {
     name:string;
-    email: string;
+    email?: string;
     phone: string;
     slug?:string;
 }

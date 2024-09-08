@@ -3,8 +3,7 @@
 import { prismaClient } from "@/lib/db";
 import { Doctor } from "@/types/type";
 import generateSlug from "@/utils/generateSlug";
-import { exportTraceState } from "next/dist/trace";
-import { title } from "process";
+
 
 
 

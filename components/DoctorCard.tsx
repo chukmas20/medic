@@ -11,15 +11,17 @@ import React from 'react'
 
 const DoctorCard = ({
     isInperson = false,
-    doctor
+    doctor,
    }:{
  isInperson?: boolean;
- doctor: Doctor
+ doctor: Doctor;
+
 }) => {
    console.log(doctor.slug)
   
    const today: keyof DoctorProfileAvailability = getDayName();
    const times = doctor.doctorProfile?.availability?.[today] ?? null
+
    const formattedDate = getFormattedDate()
    // const slug = generateSlug(doctor.slug)
    // console.log(times)
@@ -35,6 +37,7 @@ const DoctorCard = ({
            hover:border-yellow-600 duration-500 transition-all dark:bg-slate-800  " 
          >
             <Link href={`/doctors/${doctor.slug}?id=${doctor.id}`}>
+                         
             <h2 className='uppercase font-bold text-2xl tracking-widest'>
                {`${doctor.doctorProfile?.firstName} ${doctor.doctorProfile?.lastName}`}
             </h2>

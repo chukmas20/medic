@@ -3,6 +3,7 @@ import { getDoctorById, getDoctorBySlug } from '@/actions/users'
 import DoctorDetails from '@/components/DoctorDetails'
 import { authOptions } from '@/lib/auth'
 import { Appointment } from '@prisma/client'
+import { ShieldCheck, TriangleAlert } from 'lucide-react'
 import { getServerSession } from 'next-auth'
 import React from 'react'
 
@@ -31,13 +32,26 @@ searchParams:{[key:string]:string | string[] | undefined}
                  <div className='flex items-center justify-between '>
                      <div className=''>
                      <div className='flex flex-col'>
+                     <p>{
+                       doctor.doctorProfile?.status === "APPROVED" ? 
+                         (
+                           <button className='bg-green-500 flex text-white px-2 py-1 rounded-lg text-xs'>
+                              <ShieldCheck className='h-4 w-4 space-x-2' />Verified
+                            </button>
+                           ) :
+                          //  (
+                          //   <button className='bg-red-500 flex text-white px-2 py-1 rounded-lg text-xs'>
+                          //      <TriangleAlert  className='h-4 w-4 space-x-2' /> pending
+                          //    </button>
+                          //   )
+                           ""
+                           }
+                      </p>
                          <h2 className='uppercase font-bold text-md tracking-widest'>{doctor.name}</h2>
                          {/* <p className='text-gray-600 uppercase text-xs'> Adult Health</p> */}
                          <p> {doctor.doctorProfile?.operationMode}</p>
                          <p>{doctor.doctorProfile?.city},</p>
                          <p>{doctor.doctorProfile?.state}, {doctor.doctorProfile?.country},</p>
-
-
                       </div>
                      </div>
                      <img 

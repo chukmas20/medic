@@ -28,7 +28,7 @@ export default function DoctorsListCarousel(
     >
      {doctors.slice(0,4).map((doctor: Doctor, i:number)=>{
           return(
-                 <DoctorCard doctor={doctor} key={i} isInperson={isInperson}  />
+                 <DoctorCard doctor={doctor} key={i} isInperson={isInperson} />
              )
             })}
     </div>

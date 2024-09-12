@@ -54,8 +54,8 @@ export default function Footer (){
             label: "Company",
             items: [
                 {
-                    href: 'javascript:void()',
-                    name: 'Partners'
+                    href: '/blog',
+                    name: 'Blog'
                 },
                 {
                     href: 'javascript:void()',

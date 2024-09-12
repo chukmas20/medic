@@ -10,14 +10,20 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { X } from "lucide-react";
 import generateSlug from "@/utils/generateSlug";
-import { ServiceProps } from "@/types/type";
-import { createManyServices, createService, updateService } from "@/actions/services";
+import { BlogsProp, } from "@/types/type";
 import toast from "react-hot-toast";
-import { Service } from "@prisma/client";
+import { Blog, } from "@prisma/client";
+import TextInput from "../FormInputs/TextInput";
+import { createBlog, updateBlog } from "@/actions/blog";
 
 
 
-export default function ServiceForm({title, initialData}:{title:string, initialData?: Service}) {
+export default function BlogsForm({
+   title, 
+   initialData
+  }:{
+    title:string,
+    initialData?: Blog}) {
    
   const [isLoading, setIsLoading] = useState(false)
   const initialImageUrl = initialData?.imageUrl || ""
@@ -32,45 +38,38 @@ export default function ServiceForm({title, initialData}:{title:string, initialD
     reset,
     watch,
     formState: { errors },
-  } = useForm<ServiceProps>({
+  } = useForm<BlogsProp>({
     defaultValues:{
-      title: initialData?.title
+      title: initialData?.title,
+      body: initialData?.body
     }
   })
 
-  async function onSubmit(data: ServiceProps){
+  async function onSubmit(data: BlogsProp){
     setIsLoading(true)
     const slug = generateSlug(data.title)
      data.imageUrl = imageUrl
      data.slug = slug
-    console.log( `${data} service created`)
+    console.log(`${data} blog creation`)
 
     if(editingId){
-      await updateService(editingId, data);
-      toast.success("Service updated successfully");
+      await updateBlog(editingId, data);
+      toast.success("Blog updated successfully");
     }else{
-      await createService(data);
-      toast.success("Service created successfully");
+      await createBlog(data);
+      toast.success("Blog created successfully");
     }
     reset();
-    router.push("/dashboard/services") 
+    router.push("/dashboard/blog") 
  }
- async function handleCreateMany(){
-    setIsLoading(true)
-     try {
-        await createManyServices()
-        setIsLoading(false);
-     } catch (error) {
-        console.log(error)
-     }
- }
+
     return (
         <div className="flex min-h-full  mx-auto border border-gray-200  max-w-xl flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-full">
              <div className="text-center ">
                  <div className="flex items-center justify-between">
                    <h1 className="font-bold text-1xl max-w-6xl">{title}</h1>
                    <Button type="button"  asChild variant={"outline"}>
-                       <Link href={"/dashboard/services"}>
+                       <Link href={"/dashboard/blog"}>
                          <X  className="w-4 h-4"     />
                        </Link>
                    </Button>
@@ -80,10 +79,15 @@ export default function ServiceForm({title, initialData}:{title:string, initialD
                  </div>
              </div>
              <form onSubmit={handleSubmit(onSubmit)} className="space-y-2" >
-                   {/* Also known as BIO */}
-                    <TextAreaInput 
-                    label="Service Title" 
+                <TextInput
+                    label="Subject" 
                     name="title"
+                    register={register}
+                    errors={errors}
+                    />
+                    <TextAreaInput 
+                    label="Content" 
+                    name="body"
                     register={register}
                     errors={errors}
                     />
@@ -92,17 +96,17 @@ export default function ServiceForm({title, initialData}:{title:string, initialD
                      label = "Profile Photo"
                      imageUrl = {imageUrl}
                      setImageUrl={setImageUrl}
-                     endpoint = "serviceImage"
+                     endpoint = "blogImage"
                   />
                  
                  <div className="mt-8 flex items-center justify-between gap-4">
                  <Button type="button"  asChild variant={"outline"}>
-                       <Link href={"/dashboard/services"}>
+                       <Link href={"/dashboard/blog"}>
                          Cancel
                        </Link>
                    </Button>
                     <SubmitButton 
-                     title={editingId ? "Update service": "Create service"}
+                     title={editingId ? "Update Blog": "Create Blog"}
                      buttonType="submit" loadingTitle="Please Wait..." isLoading={isLoading}   />
                 </div>
             </form>

@@ -145,6 +145,17 @@ model Inbox {
     
 }
 
+model Blog {
+    id   String  @id @default(auto()) @map("_id") @db.ObjectId
+    title String
+    imageUrl String
+    body String
+    slug String @unique
+    createdAt     DateTime  @default(now()) 
+    updatedAt     DateTime  @updatedAt
+    
+}
+
 enum AppointmentStatus {
   pending
   rejected

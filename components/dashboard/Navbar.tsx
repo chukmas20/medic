@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { usePathname, useRouter } from "next/navigation";
-import {  Badge, Bell, AlarmClock, Book, Calendar, CircleUser, Home,  LayoutGrid,  LineChart,  Mail,  Menu, Package, Package2, Ribbon, Search, Settings, ShieldPlus, ShoppingCart, Stethoscope, User, Users, Users2 } from "lucide-react";
+import {  Badge, Bell, AlarmClock, Book, Calendar, CircleUser, Home,  LayoutGrid,  LineChart,  Mail,  Menu, Package, Pen, Package2, Ribbon, Search, Settings, ShieldPlus, ShoppingCart, Stethoscope, User, Users, Users2 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
@@ -69,6 +69,7 @@ export default function Navbar({session}: {session: Session}) {
       {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
       {title: "Patients", path:"/dashboard/patients", icon: User},
       {title: "Profile", path:"/dashboard/profile", icon: Users2},
+      {title: "Blog", path:"/dashboard/blog", icon: Pen},
 
     ],
      DOCTOR:[

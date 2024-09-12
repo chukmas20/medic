@@ -2,6 +2,13 @@ import { AppointmentStatus, DoctorStatus } from "@prisma/client";
 
 export  type ServiceProps = {title: string; imageUrl:string; slug:string}
 
+export type BlogsProp = {
+    title: string;
+    imageUrl: string;
+    body: string;
+    slug: string;
+}
+
 export type RegisterInputProps = {
     firstName: string;
     lastName: string;

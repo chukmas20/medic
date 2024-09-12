@@ -1,5 +1,5 @@
 "use client";
-import { Badge, Bell, AlarmClock,  Book,  Calendar,  ExternalLink,  Home, LayoutGrid,  LogOut,  Mail, Package2, Ribbon, Settings, ShieldPlus, Stethoscope, User, Users2 } from "lucide-react";
+import { Badge, Bell, AlarmClock,  Book,  Calendar, Pen, ExternalLink,  Home, LayoutGrid,  LogOut,  Mail, Package2, Ribbon, Settings, ShieldPlus, Stethoscope, User, Users2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
@@ -43,6 +43,8 @@ export default  function SideBar({session}:{session:Session}) {
       {title: "Doctors", path:"/dashboard/doctors", icon: Stethoscope},
       {title: "Patients", path:"/dashboard/patients", icon: User},
       {title: "Profile", path:"/dashboard/profile", icon: Users2},
+      {title: "Blog", path:"/dashboard/blog", icon: Pen},
+
 
     ],
     

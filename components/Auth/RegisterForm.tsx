@@ -44,6 +44,8 @@ export default function RegisterForm(
         router.push(`/verify-account/${user.data?.id}`)
         console.log(user.data)
       }else{
+        toast.error("User with email already exists")
+        setIsLoading(false)
         console.log(user.error)
       }
      

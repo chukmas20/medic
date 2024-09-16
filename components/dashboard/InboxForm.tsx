@@ -101,10 +101,10 @@ export default function InboxForm({
                         setOption={setSelectedUser}
                       />
                      <TextInput 
-                    label="Subject" 
-                    name="subject"
-                    register={register}
-                    errors={errors}
+                      label="Subject" 
+                      name="subject"
+                      register={register}
+                      errors={errors}
                     />
                      <QuillEditor
                         label="Write Message Content"

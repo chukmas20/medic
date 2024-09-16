@@ -49,7 +49,7 @@ export default function BiodataForm({
   const defaultData = bioData || savedDbData;
 
 
-
+  console.log(savedDbData)
 
   const genderOptions = [
     {
@@ -81,10 +81,9 @@ export default function BiodataForm({
       middleName:doctorProfile.middleName|| savedDbData.middleName,
       trackingNumber:doctorProfile.trackingNumber || savedDbData.trackingNumber,
       gender:doctorProfile.gender || savedDbData.gender,
+      page:doctorProfile.page || savedDbData.page,
+      dob:doctorProfile.dob || savedDbData.dob,
 
-
-
-      // trackingNumber: ""
     }
   })
   console.log(trackingNumber)
@@ -104,16 +103,16 @@ export default function BiodataForm({
       console.log(data);
     try {
       if(formId){
-        const res   = await updateDoctorProfile(doctorProfile.id,data)
+        const res   = await updateDoctorProfile(formId,data)
         if(res && res.status === 201){
-          toast.success("Doctor Bio data updated successfully");
           setIsLoading(false);
+          toast.success("Doctor Bio data updated successfully");
           // const {data }= res
           setTrackingNumber(res.data?.trackingNumber ?? "")
           setDoctorProfileId(res.data?.id ?? "")
          
           //Route to next form
-          router.push( `/onboarding/${userId}?page=${nextPage}`);
+          router.push(`/onboarding/${userId}?page=${nextPage}`);
           console.log(res.data);
         }else{
           setIsLoading(false)
@@ -130,15 +129,13 @@ export default function BiodataForm({
           // const {data }= res
           setTrackingNumber(res.data?.trackingNumber ?? "")
           setDoctorProfileId(res.data?.id ?? "")
-         
-        
+               
           router.push(`${pathname}?page=${nextPage}`);
           console.log(res.data);
         }else{
           setIsLoading(false)
           throw new Error("Something went wrong");
          }  
-
       }
       //save data
      

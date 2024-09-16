@@ -22,8 +22,7 @@ const page =async ({
          </div> 
           <p><img src={blog?.data?.imageUrl} className='rounded-lg w-full h-60 '/></p>
           <p className='mt-8'>{blog?.data?.body}</p>
-     </div>
-    
+     </div>  
   )
 }
 

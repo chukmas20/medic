@@ -48,6 +48,8 @@ export default function LoginForm() {
           setIsLoading(false);
           toast.success("Login Successful");
           router.push(returnUrl);
+          // router.push("/dashboard")
+
         }
       } catch (error) {
         setIsLoading(false);

@@ -15,6 +15,14 @@ import toast from "react-hot-toast";
 import { Blog, } from "@prisma/client";
 import TextInput from "../FormInputs/TextInput";
 import { createBlog, updateBlog } from "@/actions/blog";
+import dynamic from "next/dynamic";
+
+const QuillEditor = dynamic(
+  () => import("@/components/FormInputs/QuillEditor"),
+  {
+    ssr: false,
+  }
+);
 
 
 
@@ -28,6 +36,8 @@ export default function BlogsForm({
   const [isLoading, setIsLoading] = useState(false)
   const initialImageUrl = initialData?.imageUrl || ""
   const [imageUrl, setImageUrl] = useState(initialImageUrl)
+  const [content, setContent] = useState("");
+
   
  const editingId  = initialData?.id || "";
 
@@ -50,6 +60,7 @@ export default function BlogsForm({
     const slug = generateSlug(data.title)
      data.imageUrl = imageUrl
      data.slug = slug
+      //data.body = content
     console.log(`${data} blog creation`)
 
     if(editingId){
@@ -91,6 +102,12 @@ export default function BlogsForm({
                     register={register}
                     errors={errors}
                     />
+                     {/* <QuillEditor
+                        label="Write Message Content"
+                        className=""
+                        value={content}
+                        onChange={setContent}
+                      /> */}
                   
                      <ImageInput 
                      label = "Profile Photo"

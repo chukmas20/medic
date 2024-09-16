@@ -11,16 +11,17 @@ import ProfileInfoForm from "./ProfileInfoForm";
 import PractiseInfoForm from "./PractiseInfoForm";
 import AdditionalInfo from "./AdditionalInfo";
 import { useOnboardingContext } from "@/context/context";
-import { DoctorProfile, Speciality } from "@prisma/client";
+import { DoctorProfile, Speciality, } from "@prisma/client";
 
 const OnboardingForm = ({
    id, 
    specialties,
-   doctorProfile
+   doctorProfile,
   }:{
   id :string,
   specialties:Speciality[],
-  doctorProfile:DoctorProfile
+  doctorProfile:DoctorProfile | any
+  
 }) => {
   const pathname = usePathname()
   const params = useSearchParams();

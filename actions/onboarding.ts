@@ -56,7 +56,7 @@ export async function createAvailability(data: any){
 
   return newAvail;
   } catch (error) {
-      console.log(`Availabilty Create Error${error}`)
+      console.log(`Availability Create Error${error}`)
       return {
           data: null,
           status: 500,
@@ -149,37 +149,7 @@ export async function getApplicationByTrack(trackingNumber: string){
   }
 }
 
-export async function getDoctorById(id: string){
-  if(id){
-    try {
-       const existingProfile = await prismaClient.doctorProfile.findUnique({
-           where:{
-               id
-           }
-       })
-       if(!existingProfile){
-        return {
-          data: null,
-          status: 404,
-          error: "Code does not exist"
-        }; 
-       }
-       return {
-        data: existingProfile,
-        status: 200,
-        error: null
-      }; 
-       
-    } catch (error) {
-       console.log(error)
-       return {
-        data: null,
-        status: 500,
-        error: " Something Went Wrong"
-    }
-    }
-  }
-}
+
 
 export async function completeProfile(id: string | undefined, data: any){
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -232,6 +202,76 @@ export async function completeProfile(id: string | undefined, data: any){
     }
   }
 }
+
+
+export async function getDoctorById(id: string){
+  if(id){
+    try {
+       const existingProfile = await prismaClient.doctorProfile.findUnique({
+           where:{
+               id
+           }
+       })
+       if(!existingProfile){
+        return {
+          data: null,
+          status: 404,
+          error: "Code does not exist"
+        }; 
+       }
+       return {
+        data: existingProfile,
+        status: 200,
+        error: null
+      }; 
+       
+    } catch (error) {
+       console.log(error)
+       return {
+        data: null,
+        status: 500,
+        error: " Something Went Wrong"
+    }
+    }
+  }
+}
+
+//Checking
+export async function getDoctorByUserId(userId: string | undefined){
+  if(userId || null){
+    try {
+       const existingProfile = await prismaClient.doctorProfile.findUnique({
+           where:{
+               userId
+           },
+           include:{
+            availability: true
+           }
+       })
+       if(!existingProfile){
+        return {
+          data: null,
+          status: 404,
+          error: "Code does not exist"
+        }; 
+       }
+       return {
+        data: existingProfile,
+        status: 200,
+        error: null
+      }; 
+       
+    } catch (error) {
+       console.log(error)
+       return {
+        data: null,
+        status: 500,
+        error: " Something Went Wrong"
+    }
+    }
+  }
+}
+
 
 export async function getDoctorProfileById(userId: string | undefined ){
   if(userId){

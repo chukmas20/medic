@@ -236,42 +236,6 @@ export async function getDoctorById(id: string){
   }
 }
 
-//Checking
-export async function getDoctorByUserId(userId: string | undefined){
-  if(userId || null){
-    try {
-       const existingProfile = await prismaClient.doctorProfile.findUnique({
-           where:{
-               userId
-           },
-           include:{
-            availability: true
-           }
-       })
-       if(!existingProfile){
-        return {
-          data: null,
-          status: 404,
-          error: "Code does not exist"
-        }; 
-       }
-       return {
-        data: existingProfile,
-        status: 200,
-        error: null
-      }; 
-       
-    } catch (error) {
-       console.log(error)
-       return {
-        data: null,
-        status: 500,
-        error: " Something Went Wrong"
-    }
-    }
-  }
-}
-
 
 export async function getDoctorProfileById(userId: string | undefined ){
   if(userId){

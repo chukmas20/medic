@@ -322,47 +322,47 @@ export async function getDoctorById(id:string){
 }
 
 
-// export async function getLoggedInUserId(id: string){
-//   const session = await getServerSession(authOptions);
+export async function getLoggedInUserId(id: string){
+  const session = await getServerSession(authOptions);
 
-//   if (!session || !session.user || !session.user.id) {
-//     throw new Error('No user logged in');
-//   }
+  if (!session || !session.user || !session.user.id) {
+    throw new Error('No user logged in');
+  }
   
-//     try {
-//        const user = await prismaClient.user.findUnique({
-//            where:{
-//             id: session.user.id,
-//            }
-//        })
-//        return user
-//     } catch (error) {
-//        console.log(error)
-//     }
+    try {
+       const user = await prismaClient.user.findUnique({
+           where:{
+            id: session.user.id,
+           }
+       })
+       return user
+    } catch (error) {
+       console.log(error)
+    }
   
-// }
+}
 
 
-// export async function updateLoggedInUser(data: UserProfile){
-//   const session = await getServerSession(authOptions);
+export async function updateLoggedInUser(data: UserProfile){
+  const session = await getServerSession(authOptions);
 
-//   if (!session || !session.user || !session.user.id) {
-//     throw new Error('No user logged in');
-//   }
-//     try {
-//       // Update the user profile in the database
-//        const updatedUser = await prismaClient.user.update({
-//        where: {
-//         id: session.user.id,
-//        },
-//       data,
-//    });
+  if (!session || !session.user || !session.user.id) {
+    throw new Error('No user logged in');
+  }
+    try {
+      // Update the user profile in the database
+       const updatedUser = await prismaClient.user.update({
+       where: {
+        id: session.user.id,
+       },
+      data,
+   });
 
-//   return updatedUser;
-//     } catch (error) {
-//        console.log(error)
-//     }
+  return updatedUser;
+    } catch (error) {
+       console.log(error)
+    }
   
-// }
+}
 
 

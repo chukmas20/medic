@@ -16,7 +16,7 @@ const HeroSection= () => {
              Simply create an account to find a doctor <br/> that is just a stone throw away
           </p>
            <div className='flex flex-col items-center lg:items-start'>
-           <Link href="/" className="bg-yellow-800  hover:bg-yellow-700  mt-6 text-white font-sm py-2 px-4 rounded-md">
+           <Link href="/login" className="bg-yellow-800  hover:bg-yellow-700  mt-6 text-white font-sm py-2 px-4 rounded-md">
                Get Started
             </Link>
            </div>
